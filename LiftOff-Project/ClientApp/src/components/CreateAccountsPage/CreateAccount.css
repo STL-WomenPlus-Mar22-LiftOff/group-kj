@@ -1,0 +1,15 @@
+.error {
+    color: red;
+}
+
+.format {
+    text-align: center;
+}
+
+h1 {
+    font-weight: bold;
+}
+
+input {
+    margin: 15px;
+}
