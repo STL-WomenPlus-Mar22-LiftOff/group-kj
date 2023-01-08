@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import './Home.css';
-import './DropDownBoxYear.js'
-import DropDownBoxYear from './DropDownBoxYear.js';
 
 export class Home extends Component {
   static displayName = Home.name;
@@ -35,9 +33,7 @@ export class Home extends Component {
                 </select>
                 <br /><br />
 
-                <DropDownBoxYear />
-
-                <input type="submit">
+                <input type="submit" />
 
         </form>
 
