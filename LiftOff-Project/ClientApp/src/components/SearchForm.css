@@ -1,15 +1,4 @@
-﻿body {
-}
-
-.gallery {
-    display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    grid-template-rows: auto;
-    grid-gap: 15px;
-    list-style-type: none;
-}
-
-.error {
+﻿.error {
     color: red;
     font-size: 14px;
     line-height: 0;
@@ -60,19 +49,4 @@
     font-weight: bold;
     margin-top: 10px;
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-}
-
-.lowerleft {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    max-width: 8%;
-    height: auto;
-}
-
-.right {
-    position: absolute;
-    right: 0px;
-    width: 300px;
-    padding: 10px;
 }
