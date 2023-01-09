@@ -1,9 +1,9 @@
 import { Counter } from "./components/Counter";
 import { FetchData } from "./components/FetchData";
 import { Home } from "./components/Home";
-import { CreateAccount } from "./components/CreateAccount";
+import { CreateAccount } from "./components/CreateAccountsPage/CreateAccount";
 import { LogIn } from "./components/LogIn";
-import { SearchResults } from "./components/SearchResults";
+import { SearchResults } from "./components/SearchResultsPage/SearchResults";
 
 const AppRoutes = [
   {
