@@ -5,7 +5,7 @@
     display: grid;
     grid-template-columns: repeat(8, 1fr);
     grid-template-rows: auto;
-    grid-gap: 15px;
+    grid-gap: 4px;
     list-style-type: none;
 }
 
@@ -63,6 +63,7 @@
 }
 
 .lowerleft {
+    float: left;
     position: absolute;
     left: 0;
     bottom: 0;
@@ -70,9 +71,19 @@
     height: auto;
 }
 
+.imgsize {
+    max-width: 70%;
+    height: auto;
+    border-radius: 95%;
+}
+
 .right {
     position: absolute;
     right: 0px;
     width: 300px;
     padding: 10px;
+}
+
+.clearleft {
+    clear: left;
 }
