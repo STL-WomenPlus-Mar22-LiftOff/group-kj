@@ -13,7 +13,7 @@ const MyWatchList = () => {
                 setItems(data);
             })
     }, [])
-    console.log("here");
+    
     return (
         <main>
             {

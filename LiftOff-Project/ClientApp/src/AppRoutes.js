@@ -20,8 +20,8 @@ const AppRoutes = [
     element: <FetchData />
   },
   {
-    path: '/create-account',
-    element: <CreateAccount />
+      path: '/create-account',
+      element: <CreateAccount />
     },
     {
         path: '/my-watch-list',
