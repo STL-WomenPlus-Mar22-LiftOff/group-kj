@@ -1,6 +1,6 @@
 import { Counter } from "./components/Counter";
 import { FetchData } from "./components/FetchData";
-import { Home } from "./components/Home";
+import { Home } from "./components/HomePage/Home";
 import { CreateAccount } from "./components/CreateAccountsPage/CreateAccount";
 import { LogIn } from "./components/LogIn";
 import { SearchResults } from "./components/SearchResultsPage/SearchResults";

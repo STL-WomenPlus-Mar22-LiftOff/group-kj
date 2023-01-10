@@ -1,0 +1,36 @@
+﻿.gallery {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: auto;
+    grid-gap: 4px;
+    list-style-type: none;
+}
+
+.h1 {
+    font-weight: 800;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    color: #CCCCCC;
+}
+
+.h2 {
+    color: #CCCCCC;
+}
+
+.lowerleft {
+    float: left;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    max-width: 8%;
+    height: auto;
+}
+
+.imgsize {
+    max-width: 70%;
+    height: auto;
+    border-radius: 95%;
+}
+
+.clearleft {
+    clear: left;
+}
