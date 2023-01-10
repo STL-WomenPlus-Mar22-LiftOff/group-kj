@@ -4,12 +4,12 @@ import * as yup from "yup";
 import Button from 'react-bootstrap/Button';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './SearchForm.css';
+import css from './SearchForm.module.css';
 
 export class SearchForm extends React.Component {
     render() {
       return (
-          <form class="right">
+          <form className={css.right}>
               <label>
                   Name:
               <input type="text" name="name" />
