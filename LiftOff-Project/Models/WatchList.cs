@@ -3,6 +3,7 @@
     public class WatchList
     {
         //This will be the final WatchList Model - it references our DB for a user's info, the User references it for the list of movies
+        //We Can easily update this information to be a one(user) to many(lists) instead of one-one. It could be on MVP. Currently it is a one-one.
         public int Id { get; set; }
 
         public string Name { get; set; }
