@@ -16,7 +16,11 @@ namespace LiftOff_Project.Data
         {
 
         }
-        //protected override void OnModelCreating() We'll need this fleshed out if we do multiple lists per user
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<WatchListMovieId>()
+                .HasKey(j => new { j.MovieId, j.WatchListId });
+        }
 
     }
 }
