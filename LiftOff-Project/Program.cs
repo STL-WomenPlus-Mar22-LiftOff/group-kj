@@ -1,6 +1,7 @@
 using LiftOff_Project.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -13,6 +14,9 @@ builder.Services.AddDbContext<NWDbContext>(options =>
 {
     options.UseMySql(connectionString, serverVersion);
 });
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<NWDbContext>();
 
 var app = builder.Build();
 
@@ -34,5 +38,6 @@ app.MapControllerRoute(
     pattern: "{controller}/{action=Index}/{id?}");
 
 app.MapFallbackToFile("index.html"); ;
+app.UseAuthentication();;
 
 app.Run();
