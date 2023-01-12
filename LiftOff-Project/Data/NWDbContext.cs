@@ -1,9 +1,11 @@
 ﻿using LiftOff_Project.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace LiftOff_Project.Data
 {
-    public class NWDbContext : DbContext
+    public class NWDbContext : IdentityDbContext<IdentityUser>
     {
 
         //Primary models - Movies may be defunct post-API
@@ -23,6 +25,7 @@ namespace LiftOff_Project.Data
         {
             modelBuilder.Entity<WatchListMovieId>()
                 .HasKey(j => new { j.MovieId, j.WatchListId });
+            base.OnModelCreating(modelBuilder);
         }
 
     }
