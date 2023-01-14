@@ -2,23 +2,34 @@ import React, { Component } from 'react';
 import { Collapse, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import './Global.css';
+import { LogInModal } from './LogIn/LogInModal';
 
 export class NavMenu extends Component {
   static displayName = NavMenu.name;
 
-  constructor (props) {
+  constructor(props) {
     super(props);
 
     this.toggleNavbar = this.toggleNavbar.bind(this);
+
     this.state = {
-      collapsed: true
+      collapsed: true,
+      modalOpen: false,
     };
   }
 
-  toggleNavbar () {
+  toggleNavbar() {
     this.setState({
       collapsed: !this.state.collapsed
     });
+  }
+
+  handleModalOpen = () => {
+    this.setState((prevState) => {
+      return {
+        modalOpen: !prevState.modalOpen
+      }
+    })
   }
 
   render() {
@@ -45,7 +56,7 @@ export class NavMenu extends Component {
                 <NavLink tag={Link} className="text-dark" to="/my-watch-list">My Watch List</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink tag={Link} className="text-dark" to="/log-in">Log In</NavLink>
+                <NavLink className="text-dark" onClick={this.handleModalOpen}>Log In</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink tag={Link} className="text-dark" to="/search-results">Search Results</NavLink>
@@ -56,6 +67,10 @@ export class NavMenu extends Component {
             </ul>
           </Collapse>
         </Navbar>
+        <LogInModal
+          modalOpen={this.state.modalOpen}
+          handleModalOpen={this.handleModalOpen}
+        />
       </header>
     );
   }
