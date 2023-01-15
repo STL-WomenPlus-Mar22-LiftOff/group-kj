@@ -23,3 +23,12 @@ html {
 body {
   background-color: #871F78;
 }
+
+.lowerleft {
+    float: left;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    max-width: 8%;
+    height: auto;
+}
