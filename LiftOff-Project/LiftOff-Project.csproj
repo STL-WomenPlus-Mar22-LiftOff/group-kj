@@ -24,6 +24,14 @@
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="ClientApp\lib\" />
+    <None Remove="ClientApp\lib\themoviedb\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ClientApp\lib\" />
+    <Folder Include="ClientApp\lib\themoviedb\" />
+  </ItemGroup>
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
     <!-- Ensure Node.js is installed -->
     <Exec Command="node --version" ContinueOnError="true">
