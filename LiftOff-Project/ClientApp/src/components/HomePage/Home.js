@@ -19,7 +19,10 @@ export class Home extends React.Component {
           <li><img src="https://www.citypng.com/public/uploads/preview/-11596295859szf5ufbz1h.png" className={css.imgsize} /></li>
         </ul>
 
-        <a href="/create-account">Sign up</a><br /><br />
+        <div className={css.upperRight}>
+          <a href="/LogIn">LogIn</a><br /><br />
+          <a href="/create-account">Sign up</a><br /><br />
+        </div>
 
         <SearchForm />
 

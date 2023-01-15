@@ -25,6 +25,15 @@
     height: auto;
 }
 
+.upperRight {
+    float: right;
+    position: absolute;
+    right: 5%;
+    top: 8%;
+    max-width: 8%;
+    height: auto;
+}
+
 .imgsize {
     max-width: 70%;
     height: auto;

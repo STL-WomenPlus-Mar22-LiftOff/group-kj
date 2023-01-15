@@ -11,16 +11,7 @@ namespace LiftOff_Project.Models
         //Will have auth in future, simple user exists for testing the User - WatchList hookup
         //public string Password { get; set; }
 
-        [Required(ErrorMessage = "enter your email")]
-        [EmailAddress(ErrorMessage = "pls entr ur valid email")]
-        [Display(Name = "email address")]
-        public string Email { get; set; }
-
-
-        [Required(ErrorMessage = "enter your pass")]
-        [Compare("ConfirmPassword", ErrorMessage = "pass dsnt match")]
-        [Display(Name = "Password")]
-        [DataType(DataType.Password)]
+        public string UserEmail { get; set; }
         public string Password { get; set; }
 
 
@@ -36,12 +27,13 @@ namespace LiftOff_Project.Models
             Id = id;
             UserName = userName;
             Password = password;
+            UserEmail = userEmail;
             WatchList = watchList;
         }
 
         public User () { }
 
-        public override bool Equals(object? obj)
+        public override bool Equals(object obj)
         {
             return obj is User user &&
                    Id == user.Id;
