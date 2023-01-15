@@ -16,10 +16,10 @@ html {
 
 .box-shadow {
   box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
-  background-color: white;
+  background-color: rgb(190, 224, 255);
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
 
-body {
-  background-color: #871F78;
+input::placeholder {
+  color: rgb(1, 1, 70);
 }
