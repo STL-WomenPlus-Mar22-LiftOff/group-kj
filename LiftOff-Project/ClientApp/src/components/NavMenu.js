@@ -10,12 +10,14 @@ export class NavMenu extends Component {
   constructor(props) {
     super(props);
 
-    this.toggleNavbar = this.toggleNavbar.bind(this);
-
     this.state = {
       collapsed: true,
-      modalOpen: false,
+      isModalOpen: false,
     };
+
+    this.toggleNavbar = this.toggleNavbar.bind(this);
+    this.handleModalOpen = this.handleModalOpen.bind(this);
+
   }
 
   toggleNavbar() {
@@ -24,11 +26,9 @@ export class NavMenu extends Component {
     });
   }
 
-  handleModalOpen = () => {
+  handleModalOpen() {
     this.setState((prevState) => {
-      return {
-        modalOpen: !prevState.modalOpen
-      }
+      return { isModalOpen: !prevState.isModalOpen }
     })
   }
 
@@ -53,10 +53,7 @@ export class NavMenu extends Component {
                 <NavLink tag={Link} className="text-dark" to="/create-account">Create Account</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink tag={Link} className="text-dark" to="/my-watch-list">My Watch List</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink className="text-dark" onClick={this.handleModalOpen}>Log In</NavLink>
+                <NavLink className="text-dark" onClick={this.handleModalOpen} style={{cursor: 'pointer'}}>Log In</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink tag={Link} className="text-dark" to="/search-results">Search Results</NavLink>
@@ -64,11 +61,14 @@ export class NavMenu extends Component {
               <NavItem>
                 <NavLink tag={Link} className="text-dark" to="/User-Profile">User Profile</NavLink>
               </NavItem>
+              <NavItem>
+                <NavLink tag={Link} className="text-dark" to="/my-watch-list">My Watch List</NavLink>
+              </NavItem>
             </ul>
           </Collapse>
         </Navbar>
         <LogInModal
-          modalOpen={this.state.modalOpen}
+          isModalOpen={this.state.isModalOpen}
           handleModalOpen={this.handleModalOpen}
         />
       </header>
