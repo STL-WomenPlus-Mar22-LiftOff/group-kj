@@ -22,9 +22,7 @@ export class Home extends React.Component {
 
         <a href="/create-account">Sign up</a><br /><br />
 
-            <SearchForm />
-            <BottomNavBar />
-
+      <SearchForm />
       </div>
     );
   }

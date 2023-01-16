@@ -9,7 +9,7 @@ export class SearchForm extends React.Component {
     render() {
         return (
             <form className={css.right}>
-                <label name='genre'>Select a genre: </label>
+                <label name='genre'>Select a genre: </label> <br />
                 <select name='genre' id='genre'>
                     <option value="action">Action</option>
                     <option value="adventure">Adventure</option>
@@ -32,7 +32,7 @@ export class SearchForm extends React.Component {
                     <option value="western">Western</option>
                 </select> <br />
 
-                <label name='year'>Select a year: </label><br/>
+                <label name='year'>Select a release year: </label><br/>
                 <Dropdown />
 
                 <label>Select your streaming services: </label> <br/>
