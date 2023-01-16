@@ -6,6 +6,7 @@ import { LogIn } from "./components/LogIn";
 import { SearchResults } from "./components/SearchResultsPage/SearchResults";
 import MyWatchList from "./components/MyWatchList";
 import { UserProfile } from "./components/UserProfile";
+import Users from "./components/Users";
 
 const AppRoutes = [
   {
@@ -24,9 +25,9 @@ const AppRoutes = [
     path: '/create-account',
     element: <CreateAccount />
     },
-    {
-        path: '/my-watch-list',
-        element: <MyWatchList />
+  {
+        path: '/user',
+        element: <Users />
     },
   {
     path: '/log-in',
@@ -39,7 +40,11 @@ const AppRoutes = [
   {
     path: '/User-Profile',
     element: <UserProfile />
-  }
+    },
+    {
+        path: '/my-watch-list',
+        element: <MyWatchList />
+    }
 
 ];
 

@@ -1,15 +1,18 @@
 ﻿import React, { useState, useEffect } from 'react';
 import { Table } from 'reactstrap';
-const MyWatchList = () => {
-    const [mywatchlist, setItems] = useState([]); //setting it to empty array.
-    const dataType = 1;
+
+const Users = () => {
+
+    const [userlist, setItems] = useState([]); //setting it to empty array.
+    
 
     useEffect(() => {
-        fetch(`mywatchlist/${dataType}`)
+        fetch(`user/`)
             .then((results) => {
                 return results.json();
             })
             .then(data => {
+                console.log(data);
                 setItems(data);
             })
     }, [])
@@ -17,15 +20,16 @@ const MyWatchList = () => {
     return (
         <main>
             {
-                (mywatchlist.length > 0) ? mywatchlist.map((item) =>
+                (userlist.length > 0) ? userlist.map((items) =>
                     <div>
                         <Table striped bordered hover>
                             <thead>
                                 <tr>
-                                    <th width="170">{item.title}</th>
-                                    <th width="170">{item.provider}</th>
+                                    <th width="170">There is some data available.</th>
+                                    
                                 </tr>
                             </thead>
+                            <button value="Submit"></button>
 
                         </Table> </div>) : <div>Loading...</div>
 
@@ -37,4 +41,4 @@ const MyWatchList = () => {
     )
 }
 
-export default MyWatchList;
+export default Users;
