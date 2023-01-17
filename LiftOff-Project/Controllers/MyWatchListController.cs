@@ -9,7 +9,7 @@ namespace LiftOff_Project.Controllers
     public class MyWatchListController : ControllerBase
     {
         private static readonly IEnumerable<MyWatchListModel> Items = new[]
-       {
+        {
             new MyWatchListModel{Id = 1 ,Title ="The GodFather"  ,Provider = "Disney", Rated =1 },
             new MyWatchListModel{Id = 2 ,Title ="The Highlander"  ,Provider = "HotStar",Rated = 1 },
             new MyWatchListModel{Id = 3 ,Title ="Highlander 2"  ,Provider = "Disney",Rated = 1 },

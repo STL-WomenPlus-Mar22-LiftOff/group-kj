@@ -12,6 +12,7 @@ var serverVersion = new MySqlServerVersion(new Version(8, 0, 31));
 builder.Services.AddDbContext<NWDbContext>(options =>
 {
     options.UseMySql(connectionString, serverVersion);
+    //options.UseMySql(builder.Configuration.GetConnectionString(""))
 });
 
 var app = builder.Build();

@@ -6,6 +6,8 @@ import { LogIn } from "./components/LogIn";
 import { SearchResults } from "./components/SearchResultsPage/SearchResults";
 import MyWatchList from "./components/MyWatchList";
 import { UserProfile } from "./components/UserProfile";
+import  AllMovies  from "./components/AllMovies";
+
 
 const AppRoutes = [
   {
@@ -39,6 +41,11 @@ const AppRoutes = [
   {
     path: '/User-Profile',
     element: <UserProfile />
+  },
+
+  {
+    path: '/AllMovies',
+    element: <AllMovies />
   }
 
 ];
