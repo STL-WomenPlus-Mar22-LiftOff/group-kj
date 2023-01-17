@@ -44,7 +44,7 @@ const AppRoutes = [
   },
 
   {
-    path: '/AllMovies',
+    path: '/All-Movies',
     element: <AllMovies />
   }
 

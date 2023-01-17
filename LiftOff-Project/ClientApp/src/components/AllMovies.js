@@ -1,44 +1,53 @@
-﻿import Card from 'react-bootstrap/Card';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
+﻿
 import React, { useState, useEffect } from 'react';
-import axios from "axios";
+import { Table } from 'reactstrap';
+
 
 const AllMovies = () => {
 
-    const [ValuesController, setMovie] = useState([]);
-    
-
-     useEffect (() => {
-        axios.get("http://localhost:43313")
-    .then((response) => {
-        setMovie((existingData)=> {
-            return response.data;
-        })
-    })
-    
-    }, []);
+    const [movielist, setItems] = useState([]); //setting it to empty array.
 
 
-    
+    useEffect(() => {
+        fetch(`values/`) //call the api controller
+            .then((results) => {
+                return results.json(); //fetch the results in json format
+            })
+            .then(data => {
+                console.log(data);
+                setItems(data); //set the userlist array to data
+            })
+    }, [])
+
+
+
     return (
-        <Row xs={1} md={3} className="g-4 mt-1">
-            {ValuesController.map((mv) => (
-                <Col key={mv.id}>
-                    <Card>
-                        <Card.Img variant="top" />
-                        <Card.Body>
-                            <Card.Title>{mv.Title}</Card.Title>
-                            <Card.Text>
-                                This is a longer card with supporting text below as a natural
-                                lead-in to additional content. This content is a little bit
-                                longer.
-                            </Card.Text>
-                        </Card.Body>
-                    </Card>
-                </Col>
-            ))}
-        </Row>
-    );
+
+
+        <main>
+            {
+
+                (movielist.length > 0) ? movielist.map(allmovies =>
+                    <div>
+                        <Table striped bordered hover>
+                            <thead>
+
+                                <tr>
+                                    <th width="170">{allmovies.Id}</th>
+                                    <th width="170">{allmovies.Title}</th>
+                                </tr>
+                            </thead>
+
+
+                        </Table> </div>
+                ) : <div>Loading...</div>
+
+            }
+        </main>
+
+    )
+
 }
+
+
 export default AllMovies;

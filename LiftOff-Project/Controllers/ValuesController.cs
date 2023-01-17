@@ -9,16 +9,27 @@ namespace LiftOff_Project.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        private readonly NWDbContext _dbcontext;
-        public ValuesController(NWDbContext dbcontext)
+        private  MovieData _movieData;
+        public ValuesController(MovieData movieData)
         {
-            _dbcontext = dbcontext;
+            _movieData = movieData;
         }
         [HttpGet]
-        public async Task<IActionResult>Get()
+
+        [HttpGet]
+        public IActionResult GetMovie()
         {
-            var movies = await _dbcontext.Movies.ToListAsync();
-            return Ok(movies);
+            return Ok(_movieData.GetMovies().ToArray());
+        }
+
+        [HttpPost]
+
+        public IActionResult GetMovie(int id)
+        {
+            var movie = _movieData.GetMovie(id);
+
+            return Ok(movie);
+
 
         }
     }
