@@ -59,6 +59,7 @@ const Users = () => {
                     <div>
                         <Table striped bordered hover>
                             <thead>
+                                
                                 <tr>
                                     <th width="170">{users.id}</th>
                                     <th width="170">{users.userName}</th>
@@ -66,7 +67,8 @@ const Users = () => {
                            </thead>
                             
 
-                        </Table> </div>) : <div>Loading...</div>
+                        </Table> </div>
+                ) : <div>Loading...</div>
 
             }
         </main>
