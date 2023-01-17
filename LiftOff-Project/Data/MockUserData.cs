@@ -6,15 +6,11 @@ namespace LiftOff_Project.Data
 
     public class MockUserData : IUserData
     {
-        private List<User> users = new List<User>()
+        private readonly NWDbContext _context;
+        public MockUserData(NWDbContext context)
         {
-            new User()
-            {
-                Id = 1,
-                UserName ="Priyanka"
-
-            } ,
-        };
+            _context = context;
+        }
         public User AddUser(User user)
         {
             throw new NotImplementedException();
@@ -37,7 +33,10 @@ namespace LiftOff_Project.Data
 
         public List<User> GetUsers()
         {
-            return users;
+
+            //This is pulling the data from the database.
+            return _context.Users.ToList();
+            //return users;
         }
     }
 }
