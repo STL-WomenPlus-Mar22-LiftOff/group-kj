@@ -2,6 +2,33 @@
 import React, { useState, useEffect } from 'react';
 import { Table } from 'reactstrap';
 import Button from 'react-bootstrap/Button';
+import { Component } from 'react';
+
+
+//class Users extends Component {
+//    constructor(props) {
+//        super(props)
+//        this.state = {
+//            users :[]
+//        }
+//    }
+//    componentDidMount() {
+//        
+//        console.log(this.state.users);
+//    }
+
+//    render() {
+//        return (
+//            <div>
+//                <ul>
+//                    {this.state.users.map((user) => (
+//                        <li key={user.id}>`{user.username}`</li>
+//                    ))}
+//                </ul>
+//                </div>
+//        )
+//    }
+//    }
 
 
 const Users = () => {
@@ -10,31 +37,34 @@ const Users = () => {
 
 
     useEffect(() => {
-        fetch(`user/`)
+        fetch(`user/`) //call the api controller
             .then((results) => {
-                return results.json();
+                return results.json(); //fetch the results in json format
             })
             .then(data => {
                 console.log(data);
-                setItems(data);
+                setItems(data); //set the userlist array to data
             })
     }, [])
 
 
-
-
+ 
     return (
+
+
         <main>
             {
-                (userlist.length > 0) ? userlist.map((items) =>
+                
+                (userlist.length > 0) ? userlist.map(users =>
                     <div>
                         <Table striped bordered hover>
                             <thead>
                                 <tr>
-                                    <th width="170">There is some data.</th>
+                                    <th width="170">{users.id}</th>
+                                    <th width="170">{users.userName}</th>
                                 </tr>
-                            </thead>
-                            <Button variant="primary" type="submit">Call API</Button>
+                           </thead>
+                            
 
                         </Table> </div>) : <div>Loading...</div>
 
@@ -42,6 +72,7 @@ const Users = () => {
         </main>
 
     )
+
 }
 
 //export class Users extends Component {
