@@ -1,10 +1,13 @@
-﻿import React, { useState, useEffect } from 'react';
+﻿
+import React, { useState, useEffect } from 'react';
 import { Table } from 'reactstrap';
+import Button from 'react-bootstrap/Button';
+
 
 const Users = () => {
 
     const [userlist, setItems] = useState([]); //setting it to empty array.
-    
+
 
     useEffect(() => {
         fetch(`user/`)
@@ -17,6 +20,9 @@ const Users = () => {
             })
     }, [])
 
+
+
+
     return (
         <main>
             {
@@ -25,20 +31,62 @@ const Users = () => {
                         <Table striped bordered hover>
                             <thead>
                                 <tr>
-                                    <th width="170">There is some data available.</th>
-                                    
+                                    <th width="170">There is some data.</th>
                                 </tr>
                             </thead>
-                            <button value="Submit"></button>
+                            <Button variant="primary" type="submit">Call API</Button>
 
                         </Table> </div>) : <div>Loading...</div>
 
-                //                (mywatchlist.length > 0) ? mywatchlist.map((item) => <div> <h3>Title : {item.title}</h3>  
-                //                  <h3>Provider :{ item.provider }</h3></div>) : <div>Loading...</div>
             }
         </main>
 
     )
 }
 
+//export class Users extends Component {
+    
+//    constructor(props) {
+//        super(props);
+//        this.state = { message: '' };
+//    };
+
+//    function onCreateUser() {
+//        let userInfo = {
+//            Id: this.ref.Id.value,
+//            UserName: this.ref.UserName.value
+//        };
+
+//        fetch(`user/`, {
+//            method: 'POST',
+//            headers: { 'content-type': 'application/json' },
+//            body: JSON.stringify(userInfo)
+
+//        }).then(r => r.json()).then(res => {
+//            if (res)
+//                this.setState({ message: 'New User is created' })
+//        })
+
+
+//};
+//    render() {
+//        return (
+//            <div>
+//                <form>
+//                    <div>
+//                        <Table striped bordered hover>
+//                            <thead>
+//                                <tr>
+//                                    <input type="text" ref="Id"></input>
+//                                    <input type="text" ref="UserName"></input>
+//                                </tr>
+//                            </thead>
+//                            <Button variant="primary" type="submit" onClick={onCreateUser}>Call API</Button>
+//                        </Table>
+//                    </div>
+//                </form>
+//            </div>
+//        );
+//    }
+//}
 export default Users;

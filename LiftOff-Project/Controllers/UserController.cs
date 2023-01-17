@@ -20,5 +20,16 @@ namespace LiftOff_Project.Controllers
         {
             return Ok(_userData.GetUsers().ToArray());
         }
+
+        [HttpPost]
+        
+        public IActionResult GetUser(int id)
+        {
+            var user = _userData.GetUser(id);
+            
+                return Ok(user);
+            
+            
+        }
     }
 }
