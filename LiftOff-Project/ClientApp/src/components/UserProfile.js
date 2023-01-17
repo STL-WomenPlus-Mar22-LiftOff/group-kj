@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { SearchTable } from "./SearchTable";
 
-export class SearchResults extends Component {
-  static displayName = SearchResults.name;
+import React, { Component } from 'react';
+
+export class UserProfile extends Component {
+  static displayName = UserProfile.name;
 
   componentDidMount() {
     document.body.style.background = "white";
@@ -11,7 +11,7 @@ export class SearchResults extends Component {
   render() {
     return (
       <div>
-        <SearchTable />
+        <h1>This is the user profile page</h1>
       </div>
     );
   }

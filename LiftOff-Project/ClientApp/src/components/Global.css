@@ -16,10 +16,11 @@ html {
 
 .box-shadow {
   box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
-  background-color: white;
+  background-color: rgb(190, 224, 255);
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
 
+<<<<<<< HEAD
 body {
   background-color: #871F78;
 }
@@ -31,4 +32,8 @@ body {
     bottom: 0;
     max-width: 8%;
     height: auto;
+=======
+input::placeholder {
+  color: rgb(1, 1, 70);
+>>>>>>> origin/main
 }

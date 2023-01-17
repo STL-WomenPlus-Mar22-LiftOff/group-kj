@@ -4,7 +4,9 @@ const MyWatchList = () => {
     const [mywatchlist, setItems] = useState([]); //setting it to empty array.
     const dataType = 1;
 
-    useEffect(() => {
+      useEffect(() => {
+        document.body.style.backgroundColor = "white";
+
         fetch(`mywatchlist/${dataType}`)
             .then((results) => {
                 return results.json();

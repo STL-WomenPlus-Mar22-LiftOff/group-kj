@@ -1,19 +1,19 @@
 ﻿.gallery {
     display: grid;
-    grid-template-columns: repeat(8, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     grid-template-rows: auto;
-    grid-gap: 4px;
+    grid-gap: 6px;
     list-style-type: none;
-}
-
-.h1 {
-    font-weight: 800;
-    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-    color: #CCCCCC;
+    padding-left: 0;
+    padding-bottom: 20px;
+    align-items: center;
 }
 
 .h2 {
-    color: #CCCCCC;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    color: black;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .lowerleft {
@@ -26,7 +26,33 @@
 }
 
 .imgsize {
-    max-width: 70%;
+    max-width: 85%;
     height: auto;
     border-radius: 95%;
+<<<<<<< HEAD
+=======
+}
+
+.clearleft {
+    clear: left;
+}
+
+body {
+    background-image: url("./movies.jpg");
+    background-size: cover;
+}
+
+.box {
+    margin-top: 50px;
+    background-color: rgb(190, 224, 255);
+    border: 6px solid black;
+    border-radius: 10px;
+    padding-bottom: 30px;
+    padding-left: 40px;
+}
+
+.click {
+    font-weight: bold;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+>>>>>>> origin/main
 }

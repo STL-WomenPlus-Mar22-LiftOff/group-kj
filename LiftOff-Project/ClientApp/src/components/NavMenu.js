@@ -6,7 +6,7 @@ import './Global.css';
 export class NavMenu extends Component {
   static displayName = NavMenu.name;
 
-  constructor (props) {
+  constructor(props) {
     super(props);
 
     this.toggleNavbar = this.toggleNavbar.bind(this);
@@ -15,7 +15,7 @@ export class NavMenu extends Component {
     };
   }
 
-  toggleNavbar () {
+  toggleNavbar() {
     this.setState({
       collapsed: !this.state.collapsed
     });
@@ -32,6 +32,15 @@ export class NavMenu extends Component {
               <NavItem>
                 <NavLink tag={Link} className="text-dark" to="/">Home</NavLink>
               </NavItem>
+<<<<<<< HEAD
+=======
+              {/*<NavItem>
+                <NavLink tag={Link} className="text-dark" to="/counter">Counter</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink tag={Link} className="text-dark" to="/fetch-data">Fetch data</NavLink>
+              </NavItem>*/}
+>>>>>>> origin/main
               <NavItem>
                 <NavLink tag={Link} className="text-dark" to="/create-account">Create Account</NavLink>
               </NavItem>
@@ -43,6 +52,9 @@ export class NavMenu extends Component {
               </NavItem>
               <NavItem>
                 <NavLink tag={Link} className="text-dark" to="/search-results">Search Results</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink tag={Link} className="text-dark" to="/User-Profile">User Profile</NavLink>
               </NavItem>
             </ul>
           </Collapse>
