@@ -29,30 +29,4 @@
     max-width: 85%;
     height: auto;
     border-radius: 95%;
-<<<<<<< HEAD
-=======
-}
-
-.clearleft {
-    clear: left;
-}
-
-body {
-    background-image: url("./movies.jpg");
-    background-size: cover;
-}
-
-.box {
-    margin-top: 50px;
-    background-color: rgb(190, 224, 255);
-    border: 6px solid black;
-    border-radius: 10px;
-    padding-bottom: 30px;
-    padding-left: 40px;
-}
-
-.click {
-    font-weight: bold;
-    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
->>>>>>> origin/main
 }

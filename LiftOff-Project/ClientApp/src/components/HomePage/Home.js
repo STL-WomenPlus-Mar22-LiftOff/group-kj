@@ -50,13 +50,8 @@ export class Home extends React.Component {
             <p className={css.clearleft}>Credit: This product uses the TMDB API but is not endorsed or certified by TMDB.</p>
           </div>
 
-<<<<<<< HEAD
-      <SearchForm />
-      </div>
-=======
         </Row>
       </Container >
->>>>>>> origin/main
     );
   }
 }

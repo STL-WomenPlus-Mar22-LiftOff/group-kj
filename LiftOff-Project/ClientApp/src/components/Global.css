@@ -20,20 +20,6 @@ html {
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
 
-<<<<<<< HEAD
-body {
-  background-color: #871F78;
-}
-
-.lowerleft {
-    float: left;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    max-width: 8%;
-    height: auto;
-=======
 input::placeholder {
   color: rgb(1, 1, 70);
->>>>>>> origin/main
 }
