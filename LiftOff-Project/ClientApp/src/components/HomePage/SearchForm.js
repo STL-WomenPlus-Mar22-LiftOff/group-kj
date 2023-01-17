@@ -8,7 +8,9 @@ export class SearchForm extends React.Component {
 
     render() {
         return (
-            <form className={css.right}>
+            <div>
+                <h1 className={css.h3}>Search for your NextWatch </h1>
+                <form className={css.searchFormFormatting}>
                 <label name='genre'>Select a genre: </label> <br />
                 <select name='genre' id='genre'>
                     <option value="action">Action</option>
@@ -48,7 +50,8 @@ export class SearchForm extends React.Component {
                 <label for="amazonprime"> Amazon Prime</label><br />
 
                 <input type="submit" value="Submit" />
-            </form>
+                </form>
+            </div>
         );
     }
 }
