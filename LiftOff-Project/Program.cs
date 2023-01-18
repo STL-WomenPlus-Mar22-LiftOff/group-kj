@@ -11,7 +11,7 @@ builder.Services.AddControllersWithViews();
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 var serverVersion = new MySqlServerVersion(new Version(8, 0, 31));
 
-builder.Services.AddDbContext<NWDbContext>(options =>
+builder.Services.AddDbContextPool<NWDbContext>(options =>
 {
     options.UseMySql(connectionString, serverVersion);
     //options.UseMySql(builder.Configuration.GetConnectionString(""))

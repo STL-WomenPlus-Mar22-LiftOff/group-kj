@@ -14,7 +14,7 @@ namespace LiftOff_Project.Controllers
         {
             _movieData = movieData;
         }
-        [HttpGet]
+        //[HttpGet]
 
         [HttpGet]
         public IActionResult GetMovie()
