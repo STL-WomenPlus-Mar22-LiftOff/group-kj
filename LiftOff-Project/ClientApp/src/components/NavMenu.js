@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Collapse, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import './Global.css';
+import { LogInModal } from './LogIn/LogInModal';
 
 export class NavMenu extends Component {
   static displayName = NavMenu.name;
@@ -9,16 +10,26 @@ export class NavMenu extends Component {
   constructor(props) {
     super(props);
 
-    this.toggleNavbar = this.toggleNavbar.bind(this);
     this.state = {
-      collapsed: true
+      collapsed: true,
+      isModalOpen: false,
     };
+
+    this.toggleNavbar = this.toggleNavbar.bind(this);
+    this.handleModalOpen = this.handleModalOpen.bind(this);
+
   }
 
   toggleNavbar() {
     this.setState({
       collapsed: !this.state.collapsed
     });
+  }
+
+  handleModalOpen() {
+    this.setState((prevState) => {
+      return { isModalOpen: !prevState.isModalOpen }
+    })
   }
 
   render() {
@@ -42,10 +53,7 @@ export class NavMenu extends Component {
                 <NavLink tag={Link} className="text-dark" to="/create-account">Create Account</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink tag={Link} className="text-dark" to="/my-watch-list">My Watch List</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink tag={Link} className="text-dark" to="/log-in">Log In</NavLink>
+                <NavLink className="text-dark" onClick={this.handleModalOpen} style={{cursor: 'pointer'}}>Log In</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink tag={Link} className="text-dark" to="/search-results">Search Results</NavLink>
@@ -53,9 +61,16 @@ export class NavMenu extends Component {
               <NavItem>
                 <NavLink tag={Link} className="text-dark" to="/User-Profile">User Profile</NavLink>
               </NavItem>
+              <NavItem>
+                <NavLink tag={Link} className="text-dark" to="/my-watch-list">My Watch List</NavLink>
+              </NavItem>
             </ul>
           </Collapse>
         </Navbar>
+        <LogInModal
+          isModalOpen={this.state.isModalOpen}
+          handleModalOpen={this.handleModalOpen}
+        />
       </header>
     );
   }
