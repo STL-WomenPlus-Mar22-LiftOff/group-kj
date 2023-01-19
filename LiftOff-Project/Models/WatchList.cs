@@ -7,6 +7,7 @@
         public int Id { get; set; }
 
         public string Name { get; set; }
+        //A watchlist points to the User, when user clicks "my watch list" it will query for watchlist WHERE userId = etc.
         public User User { get; set; }
         public int UserId { get; set; }
         public List<WatchListMovieId> MovieIds { get; set; }
