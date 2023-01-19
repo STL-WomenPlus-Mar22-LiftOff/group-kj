@@ -2,7 +2,6 @@ import { Counter } from "./components/Counter";
 import { FetchData } from "./components/FetchData";
 import { Home } from "./components/HomePage/Home";
 import { CreateAccount } from "./components/CreateAccountsPage/CreateAccount";
-import { LogIn } from "./components/LogIn";
 import { SearchResults } from "./components/SearchResultsPage/SearchResults";
 import MyWatchList from "./components/MyWatchList";
 import { UserProfile } from "./components/UserProfile";
@@ -24,14 +23,14 @@ const AppRoutes = [
   {
     path: '/create-account',
     element: <CreateAccount />
-    },
+  },
   {
-        path: '/user',
-        element: <Users />
-    },
+     path: '/user',
+     element: <Users />
+  },
   {
-    path: '/log-in',
-    element: <LogIn />
+    path: '/my-watch-list',
+    element: <MyWatchList />
   },
   {
     path: '/search-results',
