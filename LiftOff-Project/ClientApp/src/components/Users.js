@@ -45,6 +45,7 @@ const Users = () => {
                 console.log(data);
                 setItems(data); //set the userlist array to data
             })
+            document.body.style.background = "white";
     }, [])
 
 
