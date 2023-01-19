@@ -25,8 +25,8 @@ const AppRoutes = [
     element: <CreateAccount />
   },
   {
-     path: '/user',
-     element: <Users />
+    path: '/user',
+    element: <Users />
   },
   {
     path: '/my-watch-list',
@@ -37,13 +37,9 @@ const AppRoutes = [
     element: <SearchResults />
   },
   {
-    path: '/User-Profile',
+    path: '/user-profile',
     element: <UserProfile />
-    },
-    {
-        path: '/my-watch-list',
-        element: <MyWatchList />
-    }
+  },
 
 ];
 
