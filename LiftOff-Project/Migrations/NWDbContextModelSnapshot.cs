@@ -30,7 +30,7 @@ namespace LiftOff_Project.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Movie");
+                    b.ToTable("Movies");
                 });
 
             modelBuilder.Entity("LiftOff_Project.Models.MyWatchListModel", b =>
@@ -122,7 +122,7 @@ namespace LiftOff_Project.Migrations
 
                     b.HasIndex("WatchListId");
 
-                    b.ToTable("WatchListMovieId");
+                    b.ToTable("WatchListMovies");
                 });
 
             modelBuilder.Entity("LiftOff_Project.Models.WatchList", b =>
