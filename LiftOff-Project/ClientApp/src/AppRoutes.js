@@ -5,6 +5,7 @@ import { CreateAccount } from "./components/CreateAccountsPage/CreateAccount";
 import { SearchResults } from "./components/SearchResultsPage/SearchResults";
 import MyWatchList from "./components/MyWatchList";
 import { UserProfile } from "./components/UserProfile";
+import Users from "./components/Users";
 
 const AppRoutes = [
   {
@@ -24,6 +25,10 @@ const AppRoutes = [
     element: <CreateAccount />
   },
   {
+     path: '/user',
+     element: <Users />
+  },
+  {
     path: '/my-watch-list',
     element: <MyWatchList />
   },
@@ -34,7 +39,11 @@ const AppRoutes = [
   {
     path: '/User-Profile',
     element: <UserProfile />
-  }
+    },
+    {
+        path: '/my-watch-list',
+        element: <MyWatchList />
+    }
 
 ];
 
