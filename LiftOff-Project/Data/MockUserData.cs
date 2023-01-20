@@ -11,6 +11,13 @@ namespace LiftOff_Project.Data
         {
             _context = context;
         }
+        //create new user
+        public User Create(User user)
+        {
+            _context.Users.Add(user);
+           user.Id = _context.SaveChanges();
+            return user;
+        }
         public User AddUser(User user)
         {
             throw new NotImplementedException();
@@ -30,7 +37,10 @@ namespace LiftOff_Project.Data
         {
             throw new NotImplementedException();
         }
-
+        public User GetUser(string email)
+        {
+            throw new NotImplementedException();
+        }
         public List<User> GetUsers()
         {
 

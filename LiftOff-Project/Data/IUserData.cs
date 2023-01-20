@@ -7,12 +7,13 @@ namespace LiftOff_Project.Data
         List<User> GetUsers(); //Get the list of all the users
 
         User GetUser(int id); //Get a Single User
+        User GetUser(string email);
 
         User AddUser(User user); //Add user to the database
 
         void DeleteUser(User user); // Delete the user.
 
         User EditUser(User user); //Edit the user data.
-
+        User Create(User user);
     }
 }
