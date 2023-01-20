@@ -25,7 +25,7 @@ export class SearchTable extends React.Component {
     let searchString = "shrek";
 
     Axios.all([
-      Axios.get(`${apiUrl}${searchMovies}${apiKey}${andQuer}${searchString}${andPage}${pagenumber}`,
+      Axios.get(`${apiUrl}${searchMovies}${apiKey}${andQuer}${searchString}${andPage}1`,
         config
       ),
       Axios.get(`${apiUrl}${genreList}${apiKey}`,
@@ -35,6 +35,8 @@ export class SearchTable extends React.Component {
       .then((responseArr) => {
         this.setState({ posts: [responseArr[0].data, responseArr[1].data] });
       });
+      
+    if (!this.state.posts) {return null}
 
   }
 
@@ -53,6 +55,7 @@ export class SearchTable extends React.Component {
     else {
       console.log(this.state.posts[0])
       console.log(this.state.posts[1])
+      
       return (
         <div>
           {this.state.posts.map(post =>
