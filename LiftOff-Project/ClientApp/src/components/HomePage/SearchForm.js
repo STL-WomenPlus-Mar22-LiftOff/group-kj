@@ -9,75 +9,66 @@ export class SearchForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            genre: '',
-            releaseDate: '',
-            streamingService: ''
         };
 
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
-
-    handleSubmit(event) {
-        const target = event.target;
-        const value = target.value;
-        const name = target.name;
-
-        this.setState({
-            [name]: value
-        });
+        this.handleClick = this.handleClick.bind(this);
     }
 
 
+    handleClick(event) {
+        alert("Successfully submitted!")
+    }
 
     render() {
 
         return (
             <div>
                 <h1 className={css.h3}>Search for your NextWatch </h1>
-                <form className={css.searchFormFormatting}>
-                <label name="genre">Select a genre: </label> <br />
-                    <select value={this.state.genre} id="genre" selected="action" onChange={this.handleSubmit}>
-                        <option value={this.state.genre} name="action">Action</option>
-                        <option value={this.state.genre} name="adventure">Adventure</option>
-                        <option value={this.state.genre} name="animation">Animation</option>
-                        <option value={this.state.genre} name="comedy">Comedy</option>
-                        <option value={this.state.genre} name="crime">Crime</option>
-                        <option value={this.state.genre} name="documentary">Documentary</option>
-                        <option value={this.state.genre} name="drama">Drama</option>
-                        <option value={this.state.genre} name="family">Family</option>
-                        <option value={this.state.genre} name="fantasy">Fantasy</option>
-                        <option value={this.state.genre} name="history">History</option>
-                        <option value={this.state.genre} name="horror">Horror</option>
-                        <option value={this.state.genre} name="music">Music</option>
-                        <option value={this.state.genre} name="mystery">Mystery</option>
-                        <option value={this.state.genre} name="romance">Romance</option>
-                        <option value={this.state.genre} name="scienceFiction">Science Fiction</option>
-                        <option value={this.state.genre} name="thriller">Thriller</option>
-                        <option value={this.state.genre} name="tvMovie">TV Movie</option>
-                        <option value={this.state.genre} name="war">War</option>
-                        <option value={this.state.genre} name="western">Western</option>
+                <form className={css.searchFormFormatting} action="/search-results">
+                    <label name="genre">Select a genre: </label> <br />
+                    <select name="genre" id="genre" onChange={(e) => this.setState({ genre: e.target.value })} defaultValue="action">
+                        <option value="action">Action</option>
+                        <option value="adventure">Adventure</option>
+                        <option value="animation">Animation</option>
+                        <option value="comedy">Comedy</option>
+                        <option value="crime">Crime</option>
+                        <option value="documentary">Documentary</option>
+                        <option value="drama">Drama</option>
+                        <option value="family">Family</option>
+                        <option value="fantasy">Fantasy</option>
+                        <option value="history">History</option>
+                        <option value="horror">Horror</option>
+                        <option value="music">Music</option>
+                        <option value="mystery">Mystery</option>
+                        <option value="romance">Romance</option>
+                        <option value="scienceFiction">Science Fiction</option>
+                        <option value="thriller">Thriller</option>
+                        <option value="tvMovie">TV Movie</option>
+                        <option value="war">War</option>
+                        <option value="western">Western</option>
                     </select> <br />
 
-                    <label value={this.state.releaseDate} onChange={this.handleSubmit}>Select a release date:
+                    <label name={this.state.releaseDate} onChange={(e) => this.setState({ releaseDate: e.target.value })}>
+                        Select a release date:
                     <Dropdown />
                     </label>
 
 
-                    <div value={this.state.streamingService} onChange={this.handleSubmit}>
+                    <div name="streamingService" onChange={(e) => this.setState({ streamingService: e.target.value })}>
                         <label>Select your streaming services: </label> <br />
-                        <input type="checkbox" id="streamingService" name="netflix" value="streamingService" />
-                        <label for="netflix"> Netflix</label><br />
-                        <input type="checkbox" id="streamingService" name="hulu" value="streamingService" />
-                        <label for="hulu"> Hulu</label><br />
-                        <input type="checkbox" id="streamingService" name="disneyplus" value="streamingService" />
-                        <label for="disneyplus"> Disney+</label><br />
-                        <input type="checkbox" id="streamingService" name="hbomax" value="streamingService" />
-                        <label for="hbomax"> HBO Max</label><br />
-                        <input type="checkbox" id="streamingService" name="amazonprime" value="streamingService" />
-                        <label for="amazonprime"> Amazon Prime</label><br />
+                        <input type="checkbox" name="streamingService" value="netflix" />
+                        <label for="streamingService"> Netflix</label><br />
+                        <input type="checkbox" name="streamingService" value="hulu" />
+                        <label for="streamingService"> Hulu</label><br />
+                        <input type="checkbox" name="streamingService" value="disneyplus" />
+                        <label for="streamingService"> Disney+</label><br />
+                        <input type="checkbox" name="streamingService" value="hbomax" />
+                        <label for="streamingService"> HBO Max</label><br />
+                        <input type="checkbox" name="streamingService" value="amazonprime" />
+                        <label for="streamingService"> Amazon Prime</label><br />
                     </div>
 
-                    <input type="submit" value="Submit" />
+                    <input type="submit" value="Submit" onClick={this.handleClick} />
                 </form>
             </div>
         );
