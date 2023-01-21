@@ -12,16 +12,28 @@ namespace LiftOff_Project.Data
             _context = context;
         }
         //create new user
-        public User Create(User user)
+        /*public User Create(User user)
+        {
+            _context.Users.Add(user);
+           user.Id = _context.SaveChanges();
+            return user;
+        }*/
+        public User AddUser(User user)
         {
             _context.Users.Add(user);
            user.Id = _context.SaveChanges();
             return user;
         }
-        public User AddUser(User user)
+
+        public User Create(User user)
         {
             throw new NotImplementedException();
         }
+
+        /*public User AddUser(User user)
+        {
+        throw new NotImplementedException();
+        }*/
 
         public void DeleteUser(User user)
         {

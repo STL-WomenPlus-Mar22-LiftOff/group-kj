@@ -1,35 +1,65 @@
-﻿
+﻿//import React, { useState, useEffect, Fragment } from "react";
+import React,{useState, useEffect, Fragment} from "react";
+
+import Table from 'react-bootstrap/Table';
+
+const Users = () =>{
+    const userData = [
+        {
+            id : 1,
+            userName : 'Happy',
+            email : "happy@email.com",
+
+        },
+        {
+            id : 2,
+            userName : 'Priyanka',
+            email : "priyanka@email.com",
+        }
+    ]
+    const [data, setData]= useState([]);
+    useEffect(()=>{
+        setData(userData)
+    },[userData])
+    return(
+        <Fragment>
+            <Table striped bordered hover>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>ID</th>
+          <th>UserName</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+            data && data.length > 0 ?
+            data.map((item, index) => {
+                return (
+                    <tr key={index}>
+                        <td>{item+ 1}</td>
+                        <td>{item.id}</td>
+                        <td>{item.userName}</td>
+                        <td>{item.email}</td>
+                    </tr>
+
+                )
+            }) : 'Loading..'
+
+        }
+        
+      </tbody>
+    </Table>
+
+        </Fragment>
+    )
+}
+/*
 import React, { useState, useEffect } from 'react';
 import { Table } from 'reactstrap';
 import Button from 'react-bootstrap/Button';
 import { Component } from 'react';
-
-
-//class Users extends Component {
-//    constructor(props) {
-//        super(props)
-//        this.state = {
-//            users :[]
-//        }
-//    }
-//    componentDidMount() {
-//        
-//        console.log(this.state.users);
-//    }
-
-//    render() {
-//        return (
-//            <div>
-//                <ul>
-//                    {this.state.users.map((user) => (
-//                        <li key={user.id}>`{user.username}`</li>
-//                    ))}
-//                </ul>
-//                </div>
-//        )
-//    }
-//    }
-
 
 const Users = () => {
 
@@ -77,50 +107,6 @@ const Users = () => {
     )
 
 }
+*/
 
-//export class Users extends Component {
-    
-//    constructor(props) {
-//        super(props);
-//        this.state = { message: '' };
-//    };
-
-//    function onCreateUser() {
-//        let userInfo = {
-//            Id: this.ref.Id.value,
-//            UserName: this.ref.UserName.value
-//        };
-
-//        fetch(`user/`, {
-//            method: 'POST',
-//            headers: { 'content-type': 'application/json' },
-//            body: JSON.stringify(userInfo)
-
-//        }).then(r => r.json()).then(res => {
-//            if (res)
-//                this.setState({ message: 'New User is created' })
-//        })
-
-
-//};
-//    render() {
-//        return (
-//            <div>
-//                <form>
-//                    <div>
-//                        <Table striped bordered hover>
-//                            <thead>
-//                                <tr>
-//                                    <input type="text" ref="Id"></input>
-//                                    <input type="text" ref="UserName"></input>
-//                                </tr>
-//                            </thead>
-//                            <Button variant="primary" type="submit" onClick={onCreateUser}>Call API</Button>
-//                        </Table>
-//                    </div>
-//                </form>
-//            </div>
-//        );
-//    }
-//}
 export default Users;

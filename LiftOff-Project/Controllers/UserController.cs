@@ -23,13 +23,16 @@ namespace LiftOff_Project.Controllers
 
         [HttpPost]
         
-        public IActionResult GetUser(int id)
+        public IActionResult AddUser(int id)
         {
-            var user = _userData.GetUser(id);
+            //var user = _userData.GetUser(id);
             
-                return Ok(user);
+                //return Ok(user);
+                return Ok(id);
             
             
         }
+
+
     }
 }
