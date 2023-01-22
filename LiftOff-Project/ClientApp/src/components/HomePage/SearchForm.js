@@ -2,7 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import css from './SearchForm.module.css';
-import { Dropdown } from "./Dropdown";
+import DatePicker from 'react-date-picker';
 
 export class SearchForm extends React.Component {
 
@@ -48,11 +48,11 @@ export class SearchForm extends React.Component {
                         <option value="western">Western</option>
                     </select> <br />
 
-                    <label name={this.state.releaseDate} onChange={(e) => this.setState({ releaseDate: e.target.value })}>
-                        Select a release date:
-                    <Dropdown />
-                    </label>
-
+                    <label name="releaseDate">Select a release date: </label>
+                    <DatePicker
+                        name="releaseDate "
+                        onChange={(e) => this.setState({ releaseDate: e.target.value })}
+                    />
 
                     <div name="streamingService" onChange={(e) => this.setState({ streamingService: e.target.value })}>
                         <label>Select your streaming services: </label> <br />

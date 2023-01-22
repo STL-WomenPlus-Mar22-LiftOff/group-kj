@@ -30,13 +30,8 @@
 
 //                    b.HasKey("Id");
 
-<<<<<<< HEAD
-//                    b.ToTable("Movies");
-//                });
-=======
-                    b.ToTable("Movies");
-                });
->>>>>>> origin
+                //    b.ToTable("Movies");
+                //});
 
 //            modelBuilder.Entity("LiftOff_Project.Models.MyWatchListModel", b =>
 //                {
@@ -127,13 +122,9 @@
 
 //                    b.HasIndex("WatchListId");
 
-<<<<<<< HEAD
-//                    b.ToTable("WatchListMovies");
-//                });
-=======
-                    b.ToTable("WatchListMovies");
-                });
->>>>>>> origin
+
+                //    b.ToTable("WatchListMovies");
+                //});
 
 //            modelBuilder.Entity("LiftOff_Project.Models.WatchList", b =>
 //                {
