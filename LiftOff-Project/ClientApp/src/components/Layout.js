@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container } from 'reactstrap';
-import { BottomNavBar } from './BottomNavBar';
+import { BottomNavBar } from './HomePage/BottomNavBar';
 import { NavMenu } from './NavMenu';
 
 export class Layout extends Component {
@@ -13,6 +13,7 @@ export class Layout extends Component {
         <Container>
           {this.props.children}
             </Container>
+        <BottomNavBar />
       </div>
     );
   }
