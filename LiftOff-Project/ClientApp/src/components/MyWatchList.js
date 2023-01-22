@@ -2,30 +2,38 @@
 import { Table } from 'reactstrap';
 const MyWatchList = () => {
     const [mywatchlist, setItems] = useState([]); //setting it to empty array.
-    const dataType = 1;
+    const UserId = 1;
 
       useEffect(() => {
-        document.body.style.backgroundColor = "white";
+          const fetchData = async () => {
+              const result = await fetch(`mywatchlist/${UserId}`)
+              console.log("here");
+              const jsonResult = await result.json();
+              setItems(jsonResult);
+          }
 
-        fetch(`mywatchlist/${dataType}`)
+        /*fetch(`mywatchlist/${UserId}`)
             .then((results) => {
                 return results.json();
             })
             .then(data => {
+                
                 setItems(data);
-            })
+                console.log(data);
+            })*/
+          fetchData();
     }, [])
 
     return (
         <main>
             {
-                (mywatchlist.length > 0) ? mywatchlist.map((item) =>
+                (mywatchlist.length > 0) ? mywatchlist.map(item =>
                     <div>
                         <Table striped bordered hover>
                             <thead>
                                 <tr>
-                                    <th width="170">{item.title}</th>
-                                    <th width="170">{item.provider}</th>
+                                    <th width="170">{item.id}</th>
+                                    <th width="170">{item.name}</th>
                                 </tr>
                             </thead>
 

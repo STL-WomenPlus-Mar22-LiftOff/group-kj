@@ -1,4 +1,5 @@
 ﻿using LiftOff_Project.Data;
+using LiftOff_Project.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,15 +22,7 @@ namespace LiftOff_Project.Controllers
             return Ok(_userData.GetUsers().ToArray());
         }
 
-        [HttpPost]
+
         
-        public IActionResult GetUser(int id)
-        {
-            var user = _userData.GetUser(id);
-            
-                return Ok(user);
-            
-            
-        }
     }
 }

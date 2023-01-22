@@ -1,125 +1,62 @@
 ﻿
-import React, { useState, useEffect } from 'react';
-import { Table } from 'reactstrap';
-import Button from 'react-bootstrap/Button';
-import { Component } from 'react';
+import React from 'react';
 
 
-//class Users extends Component {
-//    constructor(props) {
-//        super(props)
-//        this.state = {
-//            users :[]
-//        }
-//    }
-//    componentDidMount() {
-//        
-//        console.log(this.state.users);
-//    }
-
-//    render() {
-//        return (
-//            <div>
-//                <ul>
-//                    {this.state.users.map((user) => (
-//                        <li key={user.id}>`{user.username}`</li>
-//                    ))}
-//                </ul>
-//                </div>
-//        )
-//    }
-//    }
-
-
-const Users = () => {
-
-    const [userlist, setItems] = useState([]); //setting it to empty array.
-
-
-    useEffect(() => {
-        fetch(`user/`) //call the api controller
-            .then((results) => {
-                return results.json(); //fetch the results in json format
-            })
-            .then(data => {
-                console.log(data);
-                setItems(data); //set the userlist array to data
-            })
-    }, [])
-
-
- 
-    return (
-
-
-        <main>
-            {
-                
-                (userlist.length > 0) ? userlist.map(users =>
-                    <div>
-                        <Table striped bordered hover>
-                            <thead>
-                                
-                                <tr>
-                                    <th width="170">{users.id}</th>
-                                    <th width="170">{users.userName}</th>
-                                </tr>
-                           </thead>
-                            
-
-                        </Table> </div>
-                ) : <div>Loading...</div>
-
-            }
-        </main>
-
-    )
-
-}
-
-//export class Users extends Component {
+class Users extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            message: '',
+            UserId : 1
+        }
+    };
     
-//    constructor(props) {
-//        super(props);
-//        this.state = { message: '' };
-//    };
+    onCreateUser = () => {
+        alert('sign up clicked'); //this is working fine.
 
-//    function onCreateUser() {
-//        let userInfo = {
-//            Id: this.ref.Id.value,
-//            UserName: this.ref.UserName.value
-//        };
+        let userInfo = {
+            Id : this.refs.Id.value,
+            UserName : this.refs.firstname.value,
+            Password: this.refs.password.value
+        };
 
-//        fetch(`user/`, {
-//            method: 'POST',
-//            headers: { 'content-type': 'application/json' },
-//            body: JSON.stringify(userInfo)
+        console.log(userInfo);
 
-//        }).then(r => r.json()).then(res => {
-//            if (res)
-//                this.setState({ message: 'New User is created' })
-//        })
+        fetch(`user/`, {
+            method: 'POST',
+            headers: { 'Content-type': 'application/json' },
+            body: JSON.stringify(userInfo)
+            
+        }).then(r => r.json()).then(res => {
+            if (res) {
+                this.setState({message : 'User created!'})
+            }
+        })
+      
+    }
 
+    render() {
+        return (
+            <div>
+                <p>
+                    <label>Id : <input type="text" ref="Id"/></label>
+                </p>
+                <p>
+                    <label>First Name : <input type="text" ref="firstname" /></label>
+                </p>
+                <p>
+                    <label>Last Name : <input type="text" ref="lastname" /></label>
+                </p>
+                <p>
+                    <label>Password : <input type="text" ref="password" /></label>
+                </p>
+                <p>
+                    <label>Confirm Password : <input type="text" ref="confirmpassword" /></label>
+                </p>
+                <button onClick={this.onCreateUser}>Sign up!</button>
+            </div>
 
-//};
-//    render() {
-//        return (
-//            <div>
-//                <form>
-//                    <div>
-//                        <Table striped bordered hover>
-//                            <thead>
-//                                <tr>
-//                                    <input type="text" ref="Id"></input>
-//                                    <input type="text" ref="UserName"></input>
-//                                </tr>
-//                            </thead>
-//                            <Button variant="primary" type="submit" onClick={onCreateUser}>Call API</Button>
-//                        </Table>
-//                    </div>
-//                </form>
-//            </div>
-//        );
-//    }
-//}
+            )
+    }
+}
 export default Users;

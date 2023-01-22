@@ -1,4 +1,5 @@
 ﻿using LiftOff_Project.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace LiftOff_Project.Data
 {
@@ -13,7 +14,9 @@ namespace LiftOff_Project.Data
         }
         public User AddUser(User user)
         {
-            throw new NotImplementedException();
+            _context.Users.Add(user);
+            _context.SaveChanges();
+            return user;
         }
 
         public void DeleteUser(User user)
@@ -36,7 +39,28 @@ namespace LiftOff_Project.Data
 
             //This is pulling the data from the database.
             return _context.Users.ToList();
+            
             //return users;
         }
+
+        public IEnumerable<WatchListMovieId> GetWatchListByUserId(int userid)
+        {
+            /*List<WatchList> MyWatchList =_context.WatchLists
+                .Where(js => js.UserId == userid)
+                .ToList();*/
+
+            List<WatchListMovieId> MyWatchList = _context.WatchListMovieId
+                .Where(js => js.WatchListId == userid)
+            .Include(js => js.Movie)             
+                .Include(js => js.WatchList)
+                .ToList();
+            return MyWatchList;
+        }
+        //public virtual IEnumerable<WatchList> FindWatchListByUser(int id)
+        //{
+            //return _context.WatchLists
+            //    .Where(js => js.UserId == id)
+            //    .ToList();
+     //   }
     }
 }

@@ -6,6 +6,9 @@ namespace LiftOff_Project.Data
 
         List<User> GetUsers(); //Get the list of all the users
 
+        //List<WatchList> GetWatchListByUserId(int userid); // Get the watch list for the user
+
+        IEnumerable<WatchListMovieId> GetWatchListByUserId(int userid);
         User GetUser(int id); //Get a Single User
 
         User AddUser(User user); //Add user to the database
@@ -13,6 +16,8 @@ namespace LiftOff_Project.Data
         void DeleteUser(User user); // Delete the user.
 
         User EditUser(User user); //Edit the user data.
+
+//        IEnumerable<WatchList> FindWatchListByUser(int id);
 
     }
 }
