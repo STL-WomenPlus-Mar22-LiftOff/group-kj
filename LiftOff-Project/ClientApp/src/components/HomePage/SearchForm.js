@@ -20,7 +20,7 @@ export class SearchForm extends React.Component {
     }
 
     handleClick(event) {
-        alert(`Successfully submitted! ${this.state.genre}`)
+        alert(`Successfully submitted!`)
     }
 
     handleDateChange(selectedDate) {
