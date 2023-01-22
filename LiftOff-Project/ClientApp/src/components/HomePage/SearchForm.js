@@ -9,14 +9,27 @@ export class SearchForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            formData: {
+                releaseDate: '',
+                
+            },
         };
 
         this.handleClick = this.handleClick.bind(this);
+        this.handleDateChange = this.handleDateChange.bind(this);
     }
 
-
     handleClick(event) {
-        alert("Successfully submitted!")
+        alert(`Successfully submitted! ${this.state.genre}`)
+    }
+
+    handleDateChange(selectedDate) {
+        this.setState(prevState => ({
+            formData: {
+                ...prevState.formData,
+                releaseDate: selectedDate
+            }
+        }));
     }
 
     render() {
@@ -48,11 +61,13 @@ export class SearchForm extends React.Component {
                         <option value="western">Western</option>
                     </select> <br />
 
-                    <label name="releaseDate">Select a release date: </label>
-                    <DatePicker
-                        name="releaseDate "
-                        onChange={(e) => this.setState({ releaseDate: e.target.value })}
-                    />
+                    <label name="releaseDate">Select a release date:
+                        <DatePicker
+                            name="releaseDate"
+                            value={this.state.formData.releaseDate}
+                            onChange={this.handleDateChange}
+                        />
+                    </label>
 
                     <div name="streamingService" onChange={(e) => this.setState({ streamingService: e.target.value })}>
                         <label>Select your streaming services: </label> <br />
