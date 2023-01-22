@@ -7,6 +7,8 @@ namespace LiftOff_Project.Data
     {
 
         //Primary models - Movies may be defunct post-API
+
+        //These are all the tables in our database.
         public DbSet<User> Users { get; set; }
         public DbSet<WatchList> WatchLists { get; set; }
         public DbSet<Movie> Movies { get; set; }

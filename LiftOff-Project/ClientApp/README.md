@@ -2226,3 +2226,6 @@ In the future, we might start automatically compiling incompatible third-party m
 ## Something Missing?
 
 If you have ideas for more “How To” recipes that should be on this page, [let us know](https://github.com/facebookincubator/create-react-app/issues) or [contribute some!](https://github.com/facebookincubator/create-react-app/edit/master/packages/react-scripts/template/README.md)
+API-Key : https://api.themoviedb.org/3/movie/550?api_key=627127f14caca839ef42d22a23dcefde
+API-IMAGE : https://image.tmdb.org/t/p/w500
+API_SEARCH : http://ap.themoviedb.org/3/search/movie?api_key&query

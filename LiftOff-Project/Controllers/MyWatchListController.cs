@@ -25,6 +25,7 @@ namespace LiftOff_Project.Controllers
         [HttpGet("{Rated:int}")]
         public MyWatchListModel[] Get(int rated)
         {
+            
             MyWatchListModel[] items = Items.Where(i => i.Rated == rated).ToArray();
             Console.Write(items);
             System.Threading.Thread.Sleep(2000);
