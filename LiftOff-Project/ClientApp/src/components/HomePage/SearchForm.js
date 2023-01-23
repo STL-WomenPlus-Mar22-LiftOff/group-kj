@@ -30,12 +30,11 @@ export class SearchForm extends React.Component {
     }
 
     render() {
-
         return (
             <div>
-                <h1 className={css.h3}>Search for your NextWatch </h1>
+                <h2 className={css.h2}>Search for your NextWatch!</h2>
                 <form className={css.searchFormFormatting} action="/search-results">
-                    <label name="genre">Select a genre: </label> <br />
+                    <label name="genre">Select a genre: &nbsp; </label>
                     <select name="genre" id="genre" onChange={(e) => this.setState({ genre: e.target.value })} defaultValue="action">
                         <option value="action">Action</option>
                         <option value="adventure">Adventure</option>
@@ -58,8 +57,8 @@ export class SearchForm extends React.Component {
                         <option value="western">Western</option>
                     </select> <br />
 
-                    <label name="releaseDate">Select a release date:
-                        <DatePicker
+                    <label name="releaseDate">Select a release date: &nbsp;
+                        <DatePicker className={css.picker}
                             name="releaseDate"
                             value={this.state.formData.releaseDate}
                             onChange={this.handleDateChange}
@@ -67,20 +66,22 @@ export class SearchForm extends React.Component {
                     </label>
 
                     <div name="streamingService" onChange={(e) => this.setState({ streamingService: e.target.value })}>
-                        <label>Select your streaming services: </label> <br />
-                        <input type="checkbox" name="streamingService" value="netflix" />
-                        <label for="streamingService"> Netflix</label><br />
-                        <input type="checkbox" name="streamingService" value="hulu" />
-                        <label for="streamingService"> Hulu</label><br />
-                        <input type="checkbox" name="streamingService" value="disneyplus" />
-                        <label for="streamingService"> Disney+</label><br />
-                        <input type="checkbox" name="streamingService" value="hbomax" />
-                        <label for="streamingService"> HBO Max</label><br />
-                        <input type="checkbox" name="streamingService" value="amazonprime" />
-                        <label for="streamingService"> Amazon Prime</label><br />
+                        <label>Select your streaming service(s): </label> <br />
+                        <div className={css.checkboxes}>
+                            <input type="checkbox" name="streamingService" value="netflix" />
+                            <label for="streamingService"> Netflix</label><br />
+                            <input type="checkbox" name="streamingService" value="hulu" />
+                            <label for="streamingService"> Hulu</label><br />
+                            <input type="checkbox" name="streamingService" value="disneyplus" />
+                            <label for="streamingService"> Disney+</label><br />
+                            <input type="checkbox" name="streamingService" value="hbomax" />
+                            <label for="streamingService"> HBO Max</label><br />
+                            <input type="checkbox" name="streamingService" value="amazonprime" />
+                            <label for="streamingService"> Amazon Prime</label><br />
+                        </div>
                     </div>
 
-                    <input type="submit" value="Submit" onClick={this.handleClick} />
+                    <input type="submit" value="Submit" className={css.sub} onClick={this.handleClick} />
                 </form>
             </div>
         );

@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 
 const homeBackground = {
-  backgroundImage: "url('./movies.jpg;)",
+  backgroundImage: "url('./movies.jpg')",
   backgroundSize: 'cover',
 }
 
@@ -40,11 +40,13 @@ export class Home extends React.Component {
           </Col>
 
           <Col>
-            <SearchForm />
+            <div className={css.box}>
+              <SearchForm />
+            </div>
           </Col>
 
         </Row>
-      </Container >
+      </Container>
     );
   }
 }

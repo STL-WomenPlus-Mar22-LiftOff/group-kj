@@ -11,22 +11,39 @@
 
 .h2 {
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 34px;
     color: black;
     padding-top: 20px;
     padding-bottom: 20px;
-}
-
-.lowerleft {
-    float: left;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    max-width: 8%;
-    height: auto;
+    padding-right: 20px;
 }
 
 .imgsize {
     max-width: 85%;
     height: auto;
     border-radius: 95%;
+    margin-top: 10px;
+}
+
+body {
+    background-image: url("./movies.jpg");
+    background-size: cover;
+}
+
+.box {
+    margin-top: 50px;
+    background-color: rgb(190, 224, 255);
+    border: 6px solid black;
+    border-radius: 10px;
+    padding-bottom: 20px;
+    padding-left: 30px;
+    margin-right: 45px;
+    margin-left: 45px;
+}
+
+.click {
+    font-weight: bold;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    margin-top: 4px;
+    margin-bottom: 4px;
 }

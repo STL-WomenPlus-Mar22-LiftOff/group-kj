@@ -1,15 +1,23 @@
-﻿.h3 {
-    font-weight: bold;
+﻿.h2 {
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 34px;
+    color: black;
+    padding-top: 20px;
 }
 
 .searchFormFormatting {
-    font-size: 20px;
+    font-size: 18px;
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-    font-weight: 300;
-    padding: 10px;
-    margin: 10px;
-    line-height: 1;
-    width: 80%;
-    border-radius: 5px;
+}
+
+.picker {
+    background-color: white;
+}
+
+.sub {
+    margin-top: 12px;
+}
+
+.checkboxes label {
+    margin-left: 8px;
 }
