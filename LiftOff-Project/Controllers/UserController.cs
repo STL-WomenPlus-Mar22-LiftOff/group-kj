@@ -52,8 +52,10 @@ namespace LiftOff_Project.Controllers
 
             //return Ok(user);
             _userContext.Users.Add(user);
+            //_userContext.SaveChanges();
             await _userContext.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetUsers), new { id = user.Id }, user);
+            return Ok();
+         //   return CreatedAtAction(nameof(GetUsers), new { id = user.Id }, user);
 
         }
 

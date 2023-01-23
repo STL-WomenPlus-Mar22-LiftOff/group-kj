@@ -1,186 +1,59 @@
-﻿//import React, { useState, useEffect, Fragment } from "react";
-import React,{useState, useEffect, Fragment} from "react";
-
-import Table from 'react-bootstrap/Table';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Container from 'react-bootstrap/Container';
+﻿
 
 
-const Users = () => {
-
-    const [show, setShow] = useState(false);
-
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-
-    const [id, setId] = useState('')
-    const [userName, setUserName] = useState('')
-    const [email, setEmail] = useState('')
-
-    const [editId, setEditId] = useState('')
-    const [editUserName, setEditUserName] = useState('')
-    const [editEmail, setEditEmail] = useState('')
-
-
-
-    const userData = [
-        {
-            id : 1,
-            userName : 'Happy',
-            email : "happy@email.com",
-
-        },
-        {
-            id : 2,
-            userName : 'Priyanka',
-            email : "priyanka@email.com",
-        }
-    ]
-    const [data, setData]= useState([]);
-    useEffect(()=>{
-        setData(userData)
-    }, [userData])
-
-    const handleEdit = (id) => {
-            //alert(id);
-        handleShow();
-        
-        
-    }
-    const handleDelete = (id) => {
-        
-            alert(id);
-
-    }
-
-    const handleUpdate = () => {
-
-    }
-
-    return(
-        <Fragment>
-            <Container>
-                <Row>
-                    <Col><input type="number" className="form-control" placeholder="Enter Id" value={id} onChange={(e)=> setId(e.target.value)} /></Col>
-                    <Col><input type="text" className="form-control" placeholder="Enter Name" value={userName} onChange={(e) => setUserName(e.target.value)} /></Col>
-                    <Col><input type="text" className="form-control" placeholder="Enter Email" value={email} onChange={(e) => setEmail(e.target.value)} /></Col>
-                </Row>
-            </Container>
-
-            <Table striped bordered hover>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>ID</th>
-          <th>UserName</th>
-          <th>Email</th>
-          <th >Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        {
-            data && data.length > 0 ?
-            data.map((item, index) => {
-                return (
-                    <tr key={index}>
-                        <td>{index+ 1}</td>
-                        <td>{item.id}</td>
-                        <td>{item.userName}</td>
-                        <td>{item.email}</td>
-                        <td colSpan={2}>
-                            <button className="btn btn-primary" onClick={() => handleEdit(item.id)}>Edit</button> &nbsp;
-                            <button className="btn btn-danger" onClick={() => handleDelete(item.id)}>Delete</button>
-                        </td>
-                    </tr>
-
-                )
-            }) : 'Loading..'
-
-        }
-        
-      </tbody>
-    </Table>
-            <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Modify / Update User</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <Row>
-                        <Col><input type="number" className="form-control" placeholder="Enter Id" value={editId} onChange={(e) => setEditId(e.target.value)} /></Col>
-                        <Col><input type="text" className="form-control" placeholder="Enter Name" value={editUserName} onChange={(e) => setEditUserName(e.target.value)} /></Col>
-                        <Col><input type="text" className="form-control" placeholder="Enter Email" value={editEmail} onChange={(e) => setEditEmail(e.target.value)} /></Col>
-                        <col>
-                            <button className="btn btn-primary">Update</button>
-                        </col>
-                    </Row>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Close
-                    </Button>
-                    <Button variant="primary" onClick={handleUpdate}>
-                        Save Changes
-                    </Button>
-                </Modal.Footer>
-            </Modal>
-        </Fragment>
-    )
-}
-/*
 import React, { useState, useEffect } from 'react';
 import { Table } from 'reactstrap';
 import Button from 'react-bootstrap/Button';
 import { Component } from 'react';
+import axios from "axios";
+class Users extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            message: ''
+        }
+    };
+    handleSave = () => {
+        const url = 'https://localhost:44413/user';
+      
+        let userInfo = {
 
-const Users = () => {
-
-    const [userlist, setItems] = useState([]); //setting it to empty array.
-
-
-    useEffect(() => {
-        fetch(`user/`) //call the api controller
-            .then((results) => {
-                return results.json(); //fetch the results in json format
+            UserName: this.refs.firstname.value + ' ' + this.refs.lastname.value,
+            Password: this.refs.password.value,
+            Email: this.refs.email.value
+        };
+        axios.post(url, userInfo)
+            .then((result) => {
+                if (result) {
+                    this.setState({ message: 'User created!' })
+                }
             })
-            .then(data => {
-                console.log(data);
-                setItems(data); //set the userlist array to data
-            })
-            document.body.style.background = "white";
-    }, [])
-
-
- 
-    return (
-
-
-        <main>
-            {
+        alert('User created successfully!')
+    }
+   
+    render() {
+        return (
+            <div>
                 
-                (userlist.length > 0) ? userlist.map(users =>
-                    <div>
-                        <Table striped bordered hover>
-                            <thead>
-                                
-                                <tr>
-                                    <th width="170">{users.id}</th>
-                                    <th width="170">{users.userName}</th>
-                                </tr>
-                           </thead>
-                            
-
-                        </Table> </div>
-                ) : <div>Loading...</div>
-
-            }
-        </main>
-
-    )
-
+                <p>
+                    <label>First Name : <input type="text" ref="firstname" /></label>
+                </p>
+                <p>
+                    <label>Last Name : <input type="text" ref="lastname" /></label>
+                </p>
+                <p>
+                    <label>Email : <input type="text" ref="email" /></label>
+                </p>
+                <p>
+                    <label>Password : <input type="text" ref="password" /></label>
+                </p>
+                <p>
+                    <label>Confirm Password : <input type="text" ref="confirmpassword" /></label>
+                </p>
+                <button onClick={this.handleSave}>Sign up!</button>
+              
+            </div>
+        )
+    }
 }
-*/
-
 export default Users;
