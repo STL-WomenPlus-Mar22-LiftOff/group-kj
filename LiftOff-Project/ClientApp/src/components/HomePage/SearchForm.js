@@ -1,6 +1,4 @@
-﻿import Button from 'react-bootstrap/Button';
-import React from 'react';
-import ReactDOM from 'react-dom';
+﻿import React from 'react';
 import css from './SearchForm.module.css';
 import DatePicker from 'react-date-picker';
 
@@ -11,7 +9,6 @@ export class SearchForm extends React.Component {
         this.state = {
             formData: {
                 releaseDate: '',
-                
             },
         };
 
