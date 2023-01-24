@@ -6,7 +6,8 @@ export class SearchTable extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { posts: [] }
+    this.state = { movies: [] }
+    this.state = { genres: [] }
   }
 
   async componentDidMount() {
@@ -19,6 +20,9 @@ export class SearchTable extends React.Component {
     const andPage = "&page=";
     const apiKey = "?api_key=627127f14caca839ef42d22a23dcefde";
     const genreList = "genre/movie/list";
+
+
+
     const config = {
       headers: { Authorization: `Bearer ${bearer}` }
     }
@@ -33,10 +37,14 @@ export class SearchTable extends React.Component {
       )
     ])
       .then((responseArr) => {
-        this.setState({ posts: [responseArr[0].data, responseArr[1].data] });
+        this.setState({
+          movies: responseArr[0].data,
+          genres: responseArr[1].data
+        });
       });
-      
-    if (!this.state.posts) {return null}
+     // Axios.get(`${apiUrl}${}`)
+
+    if (!this.state.movies || !this.state.genres) { return null }
 
   }
 
@@ -44,7 +52,7 @@ export class SearchTable extends React.Component {
 
   render() {
 
-    if (this.state.posts === null) {
+    if (this.state.movies === undefined || this.state.genres === undefined) {
       return (
         <div>
           <h1>Loading...</h1>
@@ -53,17 +61,11 @@ export class SearchTable extends React.Component {
     }
 
     else {
-      console.log(this.state.posts[0])
-      console.log(this.state.posts[1])
-      
+      console.log(this.state.movies);
+      console.log(this.state.movies.results)
+
       return (
         <div>
-          {this.state.posts.map(post =>
-
-            <div>
-              <script>console.log(post)</script>
-            </div>
-          )}
           <Table striped bordered hover>
             <thead>
               <tr>
@@ -72,13 +74,28 @@ export class SearchTable extends React.Component {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>:(</td>
-              </tr>
+
+              {this.state.movies.results.map(movieHit => {
+                let thisHitsGenres = [];
+                console.log(thisHitsGenres)
+                for (let i = 0; i < movieHit.genre_ids.length; i++) {
+                  for (let j = 0; j < this.state.genres.genres.length; j++){
+                    if (movieHit.genre_ids[i] === this.state.genres.genres[j].id) {
+                      thisHitsGenres.push(`${this.state.genres.genres[j].name} `);
+                    }
+                  }
+                } console.log(thisHitsGenres)
+                return (
+                  <tr key={movieHit.id}>
+                    <td key={`${movieHit.id}title`}>{movieHit.title}</td>
+                    <td key={`${movieHit.id}genre`}>{thisHitsGenres}</td>
+                  </tr>
+                )
+              })}
             </tbody>
           </Table>
         </div>
-      );
+      )
     }
   }
 }
