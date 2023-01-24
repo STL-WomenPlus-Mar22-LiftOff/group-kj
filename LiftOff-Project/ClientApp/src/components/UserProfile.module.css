@@ -1,12 +1,4 @@
-﻿.gallery {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: auto;
-    grid-gap: 6px;
-    list-style-type: none;
-    padding-left: 0;
-    padding-bottom: 20px;
-    align-items: center;
+﻿body {
 }
 
 .h2 {
@@ -16,22 +8,15 @@
     padding-bottom: 20px;
 }
 
-
 .imgsize {
     max-width: 85%;
     height: auto;
     border-radius: 95%;
 }
 
-body {
-    background-image: url("./movies.jpg");
-    background-size: cover;
-}
-
 .box {
-    margin-top: 50px;
-    background-color: rgb(190, 224, 255);
-    border: 6px solid black;
+    background-color: lightgray;
+    border: 2px solid black;
     border-radius: 10px;
     padding-bottom: 30px;
     padding-left: 40px;

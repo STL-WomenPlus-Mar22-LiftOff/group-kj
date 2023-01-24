@@ -1,7 +1,13 @@
+import React from 'react';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import { SearchForm } from "./HomePage/SearchForm";
+import { Link } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
+import css from './UserProfile.module.css';
 
-import React, { Component } from 'react';
-
-export class UserProfile extends Component {
+export class UserProfile extends React.Component {
   static displayName = UserProfile.name;
 
   componentDidMount() {
@@ -9,10 +15,27 @@ export class UserProfile extends Component {
   }
 
   render() {
-    return (
-      <div>
-        <h1>This is the user profile page</h1>
-      </div>
-    );
+      return (
+          <Container>
+
+              <Row>
+
+                  <Col>
+                      <div className={css.box}>
+                          <h2 className={css.h2}>Hello Username!</h2>
+                          <h3 className={css.h3}>Let's find your next favorite movie.</h3>
+                      </div>
+                  </Col>
+
+                  <Col>
+
+                      <SearchForm />
+
+                  </Col>
+
+              </Row>
+
+          </Container >
+      );
   }
 }
