@@ -1,10 +1,4 @@
-﻿
-
-
-import React, { useState, useEffect } from 'react';
-import { Table } from 'reactstrap';
-import Button from 'react-bootstrap/Button';
-import { Component } from 'react';
+﻿import React from 'react';
 import axios from "axios";
 class Users extends React.Component {
     constructor(props) {
