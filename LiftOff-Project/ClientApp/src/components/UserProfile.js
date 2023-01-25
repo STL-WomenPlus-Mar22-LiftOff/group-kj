@@ -7,8 +7,14 @@ import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import css from './UserProfile.module.css';
 
+const homeBackground = {
+    backgroundImage: "url('./movies.jpg;)",
+    backgroundSize: 'cover',
+}
+
 export class UserProfile extends React.Component {
-  static displayName = UserProfile.name;
+    static displayName = UserProfile.name;
+
 
   componentDidMount() {
     document.body.style.background = "white";
@@ -29,6 +35,12 @@ export class UserProfile extends React.Component {
                       <br />
                       <div className={css.box}>
                           <SearchForm />
+                      </div>
+                  </Col>
+
+                  <Col>
+                      <div className={css.box}>
+                          <Link to="/my-watch-list">Check out your watch list</Link>
                       </div>
                   </Col>
 
