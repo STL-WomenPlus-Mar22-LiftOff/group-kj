@@ -12,7 +12,7 @@ export class SearchForm extends React.Component {
                 releaseDate: '',
                 movies: [],
                 genres: [],
-                genreID: 0,
+                genreName: '',
             },
 
             loading: true
@@ -75,7 +75,7 @@ export class SearchForm extends React.Component {
         this.setState(prevState => ({
             formData: {
                 ...prevState.formData,
-                genreID: selectedGenre
+                genreName: selectedGenre
             }
         }));
     }
@@ -88,10 +88,10 @@ export class SearchForm extends React.Component {
             <div>
                 <h2 className={css.h2}>Search for your NextWatch!</h2>
                 <form className={css.searchFormFormatting} action="/search-results">
-                    <label name="genreID">Select a genre: &nbsp; </label>
-                    <select name="genreID" value={this.state.formData.genreID} onChange={(event) => this.handleGenreChange(event.target.value)}>
+                    <label name="genreName">Select a genre: &nbsp; </label>
+                    <select name="genreName" value={this.state.formData.genreName} onChange={(event) => this.handleGenreChange(event.target.value)}>
                         {this.state.genres.genres.map(genre => (
-                            <option key={genre.id} value={genre.id}>
+                            <option key={genre.id} value={genre.name}>
                                 {genre.name}
                             </option>
                         ))}
