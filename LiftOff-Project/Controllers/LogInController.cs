@@ -17,7 +17,7 @@ namespace LiftOff_Project.Controllers
         }
 
 
-        [HttpPost("{UserId:int}")]
+        [HttpGet("{UserId:int}")]
         public IActionResult GetUsers(int userid)
         {
 

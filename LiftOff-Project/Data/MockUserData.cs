@@ -42,18 +42,27 @@ namespace LiftOff_Project.Data
             
             //return users;
         }
-        public IEnumerable<User> GetUserbyID(int userid)
+        /*public IEnumerable<User> GetUserbyID(string username,string password)
         {
 
             //This is pulling the data from the database.
             IEnumerable<User> User =_context.Users
-                  .Where(js => js.UserName == "Priyanka")
-                  .Where(js => js.Password == "1235")
+                  .Where(js => js.UserName == username)
+                  .Where(js => js.Password == password)
                   .ToList();
             return User;
                 //return users;
-        }
+        }*/
+        public IEnumerable<User> GetUserbyID(int userid)
+        {
 
+            //This is pulling the data from the database.
+            IEnumerable<User> User = _context.Users
+                  .Where(js => js.Id == userid)
+                  .ToList();
+            return User;
+            //return users;
+        }
         public IEnumerable<WatchList> GetWatchListByUserId(int userid)
         {
             /* List<WatchList> MyWatchList =_context.WatchLists
