@@ -1,6 +1,7 @@
 ﻿import React from 'react';
 import css from './SearchForm.module.css';
 import DatePicker from 'react-date-picker';
+import Axios from 'axios';
 
 export class SearchForm extends React.Component {
 
@@ -9,12 +10,53 @@ export class SearchForm extends React.Component {
         this.state = {
             formData: {
                 releaseDate: '',
+                movies: [],
+                genres: [],
+                genreID: 0,
             },
+
+            loading: true
         };
 
         this.handleClick = this.handleClick.bind(this);
         this.handleDateChange = this.handleDateChange.bind(this);
     }
+
+async componentDidMount() {
+    //const [Post, setPost] = React.useState(null);
+    document.body.style.background = "white";
+    const bearer = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2MjcxMjdmMTRjYWNhODM5ZWY0MmQyMmEyM2RjZWZkZSIsInN1YiI6IjYzYWI5MTU3Njk5ZmI3MDBhNzU0NDEyNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.wMsItq5wH6JD3RkfdsW-zCVPjOCrLjY-NcQXfkirVD4";
+    const apiUrl = "https://api.themoviedb.org/3/";
+    const searchMovies = "search/movie";
+    const andQuer = "&query=";
+    const andPage = "&page=";
+    const apiKey = "?api_key=627127f14caca839ef42d22a23dcefde";
+    const genreList = "genre/movie/list";
+
+    const config = {
+      headers: { Authorization: `Bearer ${bearer}` }
+    }
+    let searchString = "shrek";
+
+    Axios.all([
+        Axios.get(`${apiUrl}${searchMovies}${apiKey}${andQuer}${searchString}${andPage}1`,
+            config
+        ),
+        Axios.get(`${apiUrl}${genreList}${apiKey}`,
+            config
+        )
+    ])
+        .then((responseArr) => {
+            this.setState({
+                genres: responseArr[1].data,
+                loading: false
+            });
+        });
+    // Axios.get(`${apiUrl}${}`)
+
+    if (!this.state.genres) { return null }
+
+}
 
     handleClick(event) {
         alert(`Successfully submitted!`)
@@ -29,33 +71,33 @@ export class SearchForm extends React.Component {
         }));
     }
 
+    handleGenreChange(selectedGenre) {
+        this.setState(prevState => ({
+            formData: {
+                ...prevState.formData,
+                genreID: selectedGenre
+            }
+        }));
+    }
+
     render() {
+        if (this.state.loading) {
+            return <div>Loading...</div>;
+        }
         return (
             <div>
                 <h2 className={css.h2}>Search for your NextWatch!</h2>
                 <form className={css.searchFormFormatting} action="/search-results">
                     <label name="genre">Select a genre: &nbsp; </label>
-                    <select name="genre" id="genre" onChange={(e) => this.setState({ genre: e.target.value })} defaultValue="action">
-                        <option value="action">Action</option>
-                        <option value="adventure">Adventure</option>
-                        <option value="animation">Animation</option>
-                        <option value="comedy">Comedy</option>
-                        <option value="crime">Crime</option>
-                        <option value="documentary">Documentary</option>
-                        <option value="drama">Drama</option>
-                        <option value="family">Family</option>
-                        <option value="fantasy">Fantasy</option>
-                        <option value="history">History</option>
-                        <option value="horror">Horror</option>
-                        <option value="music">Music</option>
-                        <option value="mystery">Mystery</option>
-                        <option value="romance">Romance</option>
-                        <option value="scienceFiction">Science Fiction</option>
-                        <option value="thriller">Thriller</option>
-                        <option value="tvMovie">TV Movie</option>
-                        <option value="war">War</option>
-                        <option value="western">Western</option>
-                    </select> <br />
+                    <select name="genre"
+                        value={this.state.formData.genreID}>
+                        onChange={this.handleDateChange}
+                        {this.state.genres.genres.map(genre => (
+                            <option key={genre.id} value={genre.id}>
+                                {genre.name}
+                            </option>
+                        ))}
+                    </select>
 
                     <label name="releaseDate">Select a release date: &nbsp;
                         <DatePicker className={css.picker}
@@ -97,3 +139,26 @@ export class SearchForm extends React.Component {
 //    <option value="nc17">NC-17</option>
 //    <option value="nr">Not Rated (NR)</option>
 //</select> <br />
+
+//<label name="genre">Select a genre: &nbsp; </label>
+//                    <select name="genre" id="genre" onChange={(e) => this.setState({ genre: e.target.value })} defaultValue="action">
+//                        <option value="action">Action</option>
+//                        <option value="adventure">Adventure</option>
+//                        <option value="animation">Animation</option>
+//                        <option value="comedy">Comedy</option>
+//                        <option value="crime">Crime</option>
+//                        <option value="documentary">Documentary</option>
+//                        <option value="drama">Drama</option>
+//                        <option value="family">Family</option>
+//                        <option value="fantasy">Fantasy</option>
+//                        <option value="history">History</option>
+//                        <option value="horror">Horror</option>
+//                        <option value="music">Music</option>
+//                        <option value="mystery">Mystery</option>
+//                        <option value="romance">Romance</option>
+//                        <option value="scienceFiction">Science Fiction</option>
+//                        <option value="thriller">Thriller</option>
+//                        <option value="tvMovie">TV Movie</option>
+//                        <option value="war">War</option>
+//                        <option value="western">Western</option>
+//                    </select> <br />
