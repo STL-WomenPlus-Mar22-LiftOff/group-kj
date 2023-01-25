@@ -147,23 +147,28 @@ export class SearchTable extends React.Component {
                     }
                   }
                 }
-                /*this.state.moviesAttachedToStreamers.forEach(serviceFull => {
+                this.state.moviesAttachedToStreamers.forEach(serviceFull => {
                   if (serviceFull.id === movieHit.id) {
-                    if (serviceFull.results.US.flatrate) {
-                      serviceFull.results.US.flatrate.forEach(service => {
-                        thisHitsStreamingServices.push(service.provider_name)
-                      })
-                    } if (!serviceFull.results.US.flatrate) {
-                      thisHitsStreamingServices.push("No streaming found")
-                    } if (serviceFull.results.US.rent) {
-                      for (let i = 0; i < 3 && i < serviceFull.results.US.rent.length; i++) {
-                        thisHitsRentals.push(serviceFull.results.US.rent[i].provider_name)
+                    if (serviceFull.results.US && (serviceFull.results.US.flatrate || serviceFull.results.US.rent)) {
+                      if (serviceFull.results.US.flatrate) {
+                        serviceFull.results.US.flatrate.forEach(service => {
+                          thisHitsStreamingServices.push(service.provider_name);
+                        })
+                      } if (!serviceFull.results.US.flatrate) {
+                        thisHitsStreamingServices.push("No streaming found");
+                      } if (serviceFull.results.US.rent) {
+                        for (let i = 0; i < 3 && i < serviceFull.results.US.rent.length; i++) {
+                          thisHitsRentals.push(serviceFull.results.US.rent[i].provider_name);
+                        }
+                      } if (!serviceFull.results.US.rent) {
+                        thisHitsRentals.push("No rentals available");
                       }
-                    } if (!serviceFull.results.US.rent) {
-                      thisHitsRentals.push("No rentals available")
+                    } else {
+                      thisHitsStreamingServices.push("No streaming found");
+                      thisHitsRentals.push("No rentals available");
                     }
                   }
-                })*/
+                })
                 return (
                   <tr key={movieHit.id}>
                     <td key={`${movieHit.id}title`}>{movieHit.title}</td>
