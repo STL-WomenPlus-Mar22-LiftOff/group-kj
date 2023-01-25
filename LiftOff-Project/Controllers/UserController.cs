@@ -1,4 +1,77 @@
-﻿using LiftOff_Project.Data;
+﻿/*
+using LiftOff_Project.Data;
+using LiftOff_Project.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+
+namespace LiftOff_Project.Controllers
+{
+    [Route("[controller]")]
+    [ApiController]
+    public class UserController : ControllerBase
+    {
+        private IUserData _userData;
+        public UserController(IUserData userdata)
+        {
+            _userData = userdata;
+        }
+
+
+        [HttpGet]
+        public IActionResult GetUsers()
+        {
+            return Ok(_userData.GetUsers().ToArray());
+        }
+
+        [HttpPost]
+
+        public IActionResult AddUser(User user)
+        {
+            //var user = _userData.GetUser(id);
+
+            //return Ok(user);
+
+            _userData.AddUser(user);
+            return Ok(new { message = "success" });
+
+
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<User>>> GetUser()
+        {
+            if (_userData.Users == null)
+            {
+                return NotFound();
+            }
+            return await _userData.Users.ToListAsync();
+
+        }
+
+
+        [HttpPost]
+
+        public async Task<ActionResult<User>> PostUser(User user)
+        {
+            /var user = _userData.GetUser(id);
+
+            //return Ok(user);
+            _userData.GetUsers.Add(user);
+            //_userContext.SaveChanges();
+            await _userData.SaveChangesAsync();
+            return Ok();
+            //   return CreatedAtAction(nameof(GetUsers), new { id = user.Id }, user);
+
+        }
+
+
+    }
+}
+*/
+
+
+
+using LiftOff_Project.Data;
 using LiftOff_Project.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
