@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
+import { redirect } from 'react-router-dom';
 
 export class LogIn extends Component {
     static displayName = LogIn.name;
-  
+
+    onLogIn = () => {
+        alert('Log in clicked!');
+        
+    }
+
     render() {
       return (
-        <div>
-            <h1>This is the log in page</h1>
-        </div>
+          
+            <h1><button type="submit">Log in</button></h1>
+      
       );
     }
   }

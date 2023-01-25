@@ -2,13 +2,15 @@
 import { Table } from 'reactstrap';
 const MyWatchList = () => {
     const [mywatchlist, setItems] = useState([]); //setting it to empty array.
-    const UserId = 1;
+    const UserId = 2;
 
       useEffect(() => {
           const fetchData = async () => {
               const result = await fetch(`mywatchlist/${UserId}`)
               console.log("here");
+              console.log(result);
               const jsonResult = await result.json();
+              console.log(jsonResult);
               setItems(jsonResult);
           }
 
@@ -26,7 +28,8 @@ const MyWatchList = () => {
 
     return (
         <main>
-            {
+            <h1>{window.username}</h1>
+          {
                 (mywatchlist.length > 0) ? mywatchlist.map(item =>
                     <div>
                         <Table striped bordered hover>

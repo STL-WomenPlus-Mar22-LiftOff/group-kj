@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LiftOff_Project.Data
 {
-    
+
 
     public class MockUserData : IUserData
     {
@@ -43,24 +43,24 @@ namespace LiftOff_Project.Data
             //return users;
         }
 
-        public IEnumerable<WatchListMovieId> GetWatchListByUserId(int userid)
+        public IEnumerable<WatchList> GetWatchListByUserId(int userid)
         {
-            /*List<WatchList> MyWatchList =_context.WatchLists
+           List<WatchList> MyWatchList =_context.WatchLists
                 .Where(js => js.UserId == userid)
-                .ToList();*/
-
-            List<WatchListMovieId> MyWatchList = _context.WatchListMovieId
-                .Where(js => js.WatchListId == userid)
-            .Include(js => js.Movie)             
-                .Include(js => js.WatchList)
                 .ToList();
+
             return MyWatchList;
+
+            /*List<WatchListMovieId> MyWatchList = _context.WatchListMovieId
+                .Where(js => js.WatchListId == userid)
+                .Include(js => js.Movie)
+                
+                .ToList();
+            return MyWatchList;*/
+
+           
+
         }
-        //public virtual IEnumerable<WatchList> FindWatchListByUser(int id)
-        //{
-            //return _context.WatchLists
-            //    .Where(js => js.UserId == id)
-            //    .ToList();
-     //   }
+        
     }
 }

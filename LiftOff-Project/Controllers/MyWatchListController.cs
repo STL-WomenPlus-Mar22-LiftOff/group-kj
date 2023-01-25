@@ -26,8 +26,9 @@ namespace LiftOff_Project.Controllers
 
         [HttpGet("{UserId:int}")]
 
-        public IActionResult GetWatchListByUserId(int userId)
+        public Object GetWatchListByUserId(int userId)
         {
+           
             return Ok(_userData.GetWatchListByUserId(userId));
         }
     }

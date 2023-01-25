@@ -1,5 +1,6 @@
 import React from 'react';
 import { Table } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 export class SearchTable extends React.Component {
     render() {
@@ -16,7 +17,7 @@ export class SearchTable extends React.Component {
             <tr>
               <th scope="row">1</th>
               <td>Movie Title</td>
-              <td><a href="">Add</a></td>
+                      <td><Link to="/my-watch-list">Add</Link></td>
             </tr>
             <tr>
               <th scope="row">2</th>

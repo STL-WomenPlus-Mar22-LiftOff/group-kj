@@ -8,7 +8,7 @@ namespace LiftOff_Project.Data
 
         //List<WatchList> GetWatchListByUserId(int userid); // Get the watch list for the user
 
-        IEnumerable<WatchListMovieId> GetWatchListByUserId(int userid);
+        IEnumerable<WatchList> GetWatchListByUserId(int userid);
         User GetUser(int id); //Get a Single User
 
         User AddUser(User user); //Add user to the database
