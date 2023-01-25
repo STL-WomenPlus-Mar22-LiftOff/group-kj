@@ -39,8 +39,10 @@ class NewLogIn extends React.Component {
                 
                 this.state.user = res;
                 if (this.state.user.length > 0) {
+                    console.log(this.state[0]);
                     alert('Login Successful!')
                     this.state.DataLoaded = true;
+
                 }
                 else {
                     alert('Login Failed!!.. User Id or Password does not match.')
