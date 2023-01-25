@@ -35,7 +35,7 @@ export class SearchTable extends React.Component {
     }
     let searchString = "shrek";
 
-    Axios.all([
+    (Axios.all([
       Axios.get(`${apiUrl}${searchMovies}${apiKey}${andQuer}${searchString}${andPage}1`,
         config
       ),
@@ -50,14 +50,14 @@ export class SearchTable extends React.Component {
         });
         return responseArr[0].data
       })
-      .then((movieResponse) => {
+      ).then((movieResponse) => {
         let moviesAndStreamers = [];
         movieResponse.results.forEach(movieForStreamer => {
           Axios.get(`${apiUrl}movie/${movieForStreamer.id}/watch/providers${apiKey}`, config).then((attachment) => {
             moviesAndStreamers.push(attachment.data)
-            this.setState({ moviesAttachedToStreamers: moviesAndStreamers })
           })
         });
+        this.setState({ moviesAttachedToStreamers: moviesAndStreamers })
         return moviesAndStreamers
       })/*.then((response) => {
         console.log(response)
@@ -108,7 +108,7 @@ export class SearchTable extends React.Component {
 
   render() {
 
-    if (this.state.movies === undefined || this.state.genres === undefined) {
+    if (this.state.movies === undefined || this.state.genres === undefined || this.state.moviesAttachedToStreamers) {
       return (
         <div>
           <h1>Loading...</h1>
