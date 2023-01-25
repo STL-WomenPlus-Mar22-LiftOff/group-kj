@@ -25,12 +25,11 @@ export class UserProfile extends React.Component {
                           <h2 className={css.h2}>Hello Username!</h2>
                           <h3 className={css.h3}>Let's find your next favorite movie.</h3>
                       </div>
-                  </Col>
-
-                  <Col>
-
-                      <SearchForm />
-
+                      <br />
+                      <br />
+                      <div className={css.box}>
+                          <SearchForm />
+                      </div>
                   </Col>
 
               </Row>

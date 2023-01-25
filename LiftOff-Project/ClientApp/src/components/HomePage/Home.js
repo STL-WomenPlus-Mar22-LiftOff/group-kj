@@ -6,6 +6,7 @@ import { SearchForm } from "./SearchForm";
 import css from './Home.module.css';
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
+import { LogInModal } from '../LogIn/LogInModal';
 
 const homeBackground = {
   backgroundImage: "url('./movies.jpg;)",
@@ -13,11 +14,28 @@ const homeBackground = {
 }
 
 export class Home extends React.Component {
-  static displayName = Home.name;
+    static displayName = Home.name;
 
-  componentDidMount() {
-    document.body.style = { homeBackground };
-  }
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            isModalOpen: false,
+        };
+
+        this.handleModalOpen = this.handleModalOpen.bind(this);
+
+    }
+
+    componentDidMount() {
+        document.body.style = { homeBackground };
+    }
+
+    handleModalOpen() {
+        this.setState((prevState) => {
+            return { isModalOpen: !prevState.isModalOpen }
+        })
+    }
 
   render() {
     return (
@@ -34,22 +52,16 @@ export class Home extends React.Component {
                 <li><img src="https://www.citypng.com/public/uploads/preview/-11596295859szf5ufbz1h.png" className={css.imgsize} /></li>
               </ul>
               <div>
-                <Link to="/create-account"><Button variant="primary" className={css.click}>Sign Up!</Button>{' '}</Link>
+                            <Link to="/create-account"><Button variant="primary" className={css.click}>Sign Up!</Button>{' '}</Link>
+                            <label>Have an account?  </label><Link to=""><Button variant="primary" onClick={this.handleModalOpen} style={{ cursor: 'pointer' }}>Log in!</Button>{' '}</Link>
               </div>
             </div>
           </Col>
-
-          <Col>
-            <SearchForm />
-          </Col>
-
-          {/*This is going to be moved to a bottom NavBar*/}
-          <div className={css.lowerleft}>
-            <img src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_1-5bdc75aaebeb75dc7ae79426ddd9be3b2be1e342510f8202baf6bffa71d7f5c4.svg" /> <br />
-            <p className={css.clearleft}>Credit: This product uses the TMDB API but is not endorsed or certified by TMDB.</p>
-          </div>
-
-        </Row>
+            </Row>
+            <LogInModal
+                isModalOpen={this.state.isModalOpen}
+                handleModalOpen={this.handleModalOpen}
+            />
       </Container >
     );
   }

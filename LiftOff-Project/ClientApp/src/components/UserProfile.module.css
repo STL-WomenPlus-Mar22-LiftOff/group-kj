@@ -1,4 +1,5 @@
 ﻿body {
+    align-content: center;
 }
 
 .h2 {
@@ -6,6 +7,13 @@
     color: black;
     padding-top: 20px;
     padding-bottom: 20px;
+    text-align: center;
+}
+
+.h3 {
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    color: black;
+    text-align: center;
 }
 
 .imgsize {
@@ -17,9 +25,12 @@
 .box {
     background-color: lightgray;
     border: 2px solid black;
-    border-radius: 10px;
-    padding-bottom: 30px;
-    padding-left: 40px;
+    border-radius: 6px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .click {

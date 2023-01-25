@@ -2,10 +2,10 @@
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: auto;
-    grid-gap: 6px;
+    grid-gap: 15px;
     list-style-type: none;
-    padding-left: 0;
-    padding-bottom: 20px;
+    padding-left: 125px;
+    padding-bottom: 5px;
     align-items: center;
 }
 
@@ -18,9 +18,9 @@
 
 
 .imgsize {
-    max-width: 85%;
+    max-width: 50%;
     height: auto;
-    border-radius: 95%;
+    border-radius: 50%;
 }
 
 body {
@@ -34,7 +34,7 @@ body {
     border: 6px solid black;
     border-radius: 10px;
     padding-bottom: 30px;
-    padding-left: 40px;
+    padding-left: 30px;
 }
 
 .click {
