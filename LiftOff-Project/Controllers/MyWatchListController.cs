@@ -11,6 +11,7 @@ namespace LiftOff_Project.Controllers
     {
         
         private IUserData _userData;
+        private NWDbContext _context;
         public MyWatchListController(IUserData userdata)
         {
             _userData = userdata;
@@ -26,7 +27,7 @@ namespace LiftOff_Project.Controllers
 
         [HttpGet("{UserId:int}")]
 
-        public Object GetWatchListByUserId(int userId)
+        public IActionResult GetWatchListByUserId(int userId)
         {
            
             return Ok(_userData.GetWatchListByUserId(userId));

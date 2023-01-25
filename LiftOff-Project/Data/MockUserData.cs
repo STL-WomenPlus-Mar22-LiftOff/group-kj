@@ -42,11 +42,38 @@ namespace LiftOff_Project.Data
             
             //return users;
         }
+        public IEnumerable<User> GetUserbyID(int userid)
+        {
+
+            //This is pulling the data from the database.
+            IEnumerable<User> User =_context.Users
+                  .Where(js => js.UserName == "Priyanka")
+                  .Where(js => js.Password == "1235")
+                  .ToList();
+            return User;
+                //return users;
+        }
 
         public IEnumerable<WatchList> GetWatchListByUserId(int userid)
         {
-           List<WatchList> MyWatchList =_context.WatchLists
-                .Where(js => js.UserId == userid)
+            /* List<WatchList> MyWatchList =_context.WatchLists
+                  .Where(js => js.UserId == userid)
+                  .ToList();
+
+              return MyWatchList;*/
+            userid = 1;
+
+            List<WatchList> MyWatchList = _context.WatchLists
+                .Join(_context.WatchListMovieId,
+                        wl => wl.Id,
+                        wm => wm.WatchListId,
+                        (wl, wm) => new { wl, wm })
+                .Join(_context.Movie,
+                        wlwm => wlwm.wm.MovieId,
+                        m => m.Id,
+                        (wlwm, m) => new { wlwm.wl, m })
+                .Where(js => js.wl.UserId == userid)
+                .Select(x => x.wl)
                 .ToList();
 
             return MyWatchList;
@@ -58,7 +85,7 @@ namespace LiftOff_Project.Data
                 .ToList();
             return MyWatchList;*/
 
-           
+
 
         }
         

@@ -7,6 +7,7 @@ import { SearchResults } from "./components/SearchResultsPage/SearchResults";
 import MyWatchList from "./components/MyWatchList";
 import { UserProfile } from "./components/UserProfile";
 import Users from "./components/Users";
+import NewLogIn from "./components/NewLogin";
 
 const AppRoutes = [
   {
@@ -44,6 +45,10 @@ const AppRoutes = [
     {
         path: '/my-watch-list',
         element: <MyWatchList />
+    },
+    {
+        path: '/new-log-in',
+        element: <NewLogIn />
     }
 
 ];
