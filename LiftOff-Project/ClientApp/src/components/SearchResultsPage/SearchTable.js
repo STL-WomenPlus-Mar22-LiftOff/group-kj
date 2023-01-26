@@ -2,6 +2,7 @@ import React from 'react';
 import { Table } from 'reactstrap';
 import Axios from 'axios';
 
+
 export class SearchTable extends React.Component {
 
   constructor(props) {
@@ -11,6 +12,11 @@ export class SearchTable extends React.Component {
     this.state = { moviesAttachedToStreamers: [] }
     this.state = { streamers: [] }
   }
+  //Users ID
+  //GET from our databse : UserWatchlist && watchlistmovieid
+  //Loop with axios to 
+
+  //
 
   async componentDidMount() {
     //const [Post, setPost] = React.useState(null);
@@ -45,14 +51,22 @@ export class SearchTable extends React.Component {
     ])
     const streamingResponse = function (){
         let moviesAndStreamers = [];
+        let moviesAndStreamersData = [];
         movieResponse.data.results.forEach(movieForStreamer => {
-          Axios.get(`${apiUrl}movie/${movieForStreamer.id}/watch/providers${apiKey}`, config).then((attachment) => {
-            moviesAndStreamers.push(attachment.data);
+          moviesAndStreamers.push(Axios.get(`${apiUrl}movie/${movieForStreamer.id}/watch/providers${apiKey}`, config))
           })
-        });
-        return moviesAndStreamers
-      }
+           Axios.all(moviesAndStreamers).then(resp => {
+              resp.forEach(service => {
+                moviesAndStreamersData.push(service.data)
+              })
+              return(resp);
+          })
+          console.log(moviesAndStreamersData)
+          return moviesAndStreamersData;
+        }
+      
       const streamingResponseOccured = streamingResponse();
+      //console.log(streamingResponseOccured)
       this.setState({
         movies: movieResponse.data,
         genres: genreResponse.data,
@@ -77,13 +91,13 @@ export class SearchTable extends React.Component {
     }
 
     else {
-      console.log(this.state.genres)
-      console.log(this.state.movies);
-      console.log(this.state.moviesAttachedToStreamers)
-      console.log(this.state.moviesAttachedToStreamers[1])
-      //console.log(this.state.streamers)
+      // console.log(this.state.genres)
+      // console.log(this.state.movies);
+      // console.log(this.state.moviesAttachedToStreamers)
+      // console.log(this.state.moviesAttachedToStreamers[0])
+      // //console.log(this.state.streamers)
       
-      console.log(this.state.movies.results)
+      // console.log(this.state.movies.results)
 
 
       return (
@@ -111,13 +125,13 @@ export class SearchTable extends React.Component {
                   }
                 }
                 for (let i = 0; i < this.state.moviesAttachedToStreamers.length; i++) {
-                  console.log(this.state.moviesAttachedToStreamers[i].id)
+                  //console.log(this.state.moviesAttachedToStreamers[i].id)
                 }
                 this.state.moviesAttachedToStreamers.forEach(test => {
-                  console.log(test.id)
+                  //console.log(test.id)
                 })
                 this.state.moviesAttachedToStreamers.forEach(serviceFull => {
-                  console.log(serviceFull.id)
+                  //console.log(serviceFull.id)
                   if (serviceFull.id === movieHit.id) {
                     if (serviceFull.results === {}) {
                       thisHitsStreamingServices.push("No streaming found");
