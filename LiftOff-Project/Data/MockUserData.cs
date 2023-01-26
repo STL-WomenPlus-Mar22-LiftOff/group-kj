@@ -63,7 +63,17 @@ namespace LiftOff_Project.Data
             return User;
             //return users;
         }
-        public IEnumerable<WatchList> GetWatchListByUserId(int userid)
+        public IEnumerable<User> GetUserbyUserName(string username) 
+        {
+
+            //This is pulling the data from the database.
+            IEnumerable<User> User = _context.Users
+                  .Where(js => js.UserName == username)
+                  .ToList();
+            return User;
+            //return users;
+        }
+    public IEnumerable<WatchList> GetWatchListByUserId(int userid)
         {
             /* List<WatchList> MyWatchList =_context.WatchLists
                   .Where(js => js.UserId == userid)

@@ -17,17 +17,8 @@ class NewLogIn extends React.Component {
     };
 
     onSubmit = () => {
-         /*fetch(`login/?UserName=${this.refs.userid.value}&password=${this.refs.password.value}`, {
-            method: 'GET',
-            headers: { 'Content-type': 'application/json' },
-            
-
-        }).then(r => r.json()).then(res => {
-            console.log(res); //This returns array with a length > 0 or = 0
-            if (res) {
-                alert("Record found");
-            }
-        })*/
+         
+        const navigate = useNavigate();
         fetch(`login/${this.refs.userid.value}`, {
             method: 'GET',
             headers: { 'Content-type': 'application/json' },
@@ -39,8 +30,13 @@ class NewLogIn extends React.Component {
                 
                 this.state.user = res;
                 if (this.state.user.length > 0) {
-                    alert('Login Successful!')
-                    this.state.DataLoaded = true;
+                    if (this.state.user[0]['password'] === this.refs.password.value) {
+                        console.log(this.state.user[0]['password']);
+                        this.state.DataLoaded = true;
+                        alert('Login Successful');
+                        navigate("/user-profile");
+                    }
+                    
                 }
                 else {
                     alert('Login Failed!!.. User Id or Password does not match.')

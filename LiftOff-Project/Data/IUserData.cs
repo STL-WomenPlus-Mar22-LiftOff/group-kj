@@ -11,6 +11,7 @@ namespace LiftOff_Project.Data
         IEnumerable<WatchList> GetWatchListByUserId(int userid);
       //  IEnumerable<User> GetUserbyID(string username, string password); //Get a Single User
         IEnumerable<User> GetUserbyID(int id);
+        IEnumerable<User> GetUserbyUserName(string username);
         User AddUser(User user); //Add user to the database
 
         void DeleteUser(User user); // Delete the user.

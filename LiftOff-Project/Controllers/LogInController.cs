@@ -17,12 +17,12 @@ namespace LiftOff_Project.Controllers
         }
 
 
-        [HttpGet("{UserId:int}")]
-        public IActionResult GetUsers(int userid)
+        [HttpGet("{UserName}")]
+        public IActionResult GetUsers(string username)
         {
 
             //This is pulling the data from the database.
-            return Ok(_userData.GetUserbyID(userid));
+            return Ok(_userData.GetUserbyUserName(username));
             //return users;
         }
     }
