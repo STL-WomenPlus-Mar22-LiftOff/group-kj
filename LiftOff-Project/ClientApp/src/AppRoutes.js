@@ -5,7 +5,7 @@ import { CreateAccount } from "./components/CreateAccountsPage/CreateAccount";
 import { SearchResults } from "./components/SearchResultsPage/SearchResults";
 import MyWatchList from "./components/MyWatchList";
 import { UserProfile } from "./components/UserProfile";
-import Users from "./components/Users";
+
 
 const AppRoutes = [
   {
