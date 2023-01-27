@@ -18,7 +18,7 @@ class NewLogIn extends React.Component {
 
     onSubmit = () => {
          
-        const navigate = useNavigate();
+        
         fetch(`login/${this.refs.userid.value}`, {
             method: 'GET',
             headers: { 'Content-type': 'application/json' },
@@ -34,7 +34,7 @@ class NewLogIn extends React.Component {
                         console.log(this.state.user[0]['password']);
                         this.state.DataLoaded = true;
                         alert('Login Successful');
-                        navigate("/user-profile");
+                        
                     }
                     
                 }
