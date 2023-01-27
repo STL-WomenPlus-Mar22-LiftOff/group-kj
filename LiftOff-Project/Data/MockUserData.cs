@@ -31,6 +31,17 @@ namespace LiftOff_Project.Data
             throw new NotImplementedException();
         }
 
+        public IEnumerable<User> GetUserbyUserName(string username)
+        {
+
+            //This is pulling the data from the database.
+            IEnumerable<User> User = _context.Users
+                  .Where(js => js.UserName == username)
+                  .ToList();
+            return User;
+            //return users;
+        }
+
         public List<User> GetUsers()
         {
 

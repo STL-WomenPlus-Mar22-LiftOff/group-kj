@@ -13,6 +13,8 @@ namespace LiftOff_Project.Data
         void DeleteUser(User user); // Delete the user.
 
         User EditUser(User user); //Edit the user data.
+        IEnumerable<User> GetUserbyUserName(string username);
+
 
     }
 }
