@@ -24,10 +24,10 @@ const AppRoutes = [
     path: '/create-account',
     element: <CreateAccount />
   },
-  {
+  /*{
     path: '/user',
     element: <Users />
-  },
+  },*/
   {
     path: '/my-watch-list',
     element: <MyWatchList />

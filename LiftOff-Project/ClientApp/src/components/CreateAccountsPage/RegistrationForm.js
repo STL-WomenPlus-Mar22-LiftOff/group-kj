@@ -35,7 +35,6 @@ export function RegistrationForm() {
         //alert(JSON.stringify(data));
 
         const url = 'https://localhost:44413/user';
-        //https://localhost:44413/create-account URL doesn't work
 
         let userInfo = {
             UserName: firstName + ' ' + lastName,

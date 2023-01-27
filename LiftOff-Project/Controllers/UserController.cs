@@ -17,7 +17,7 @@ namespace LiftOff_Project.Controllers
         }
 
 
-        [HttpGet]
+        /*[HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
             if (_userContext.Users == null)
@@ -42,7 +42,7 @@ namespace LiftOff_Project.Controllers
                 return NotFound();
             }
             return user;
-        }
+        }*/
 
         [HttpPost]
 
@@ -59,7 +59,7 @@ namespace LiftOff_Project.Controllers
 
         }
 
-        [HttpPut("{ID}")]
+        /*[HttpPut("{ID}")]
         public async Task<ActionResult> PutUser(int id, User user)
         {
             if(id != user.Id)
@@ -77,9 +77,9 @@ namespace LiftOff_Project.Controllers
             }
             return Ok();
 
-        }
+        }*/
 
-        [HttpDelete("{id}")]
+        /*[HttpDelete("{id}")]
         public async Task<ActionResult> DeleteUser(int id)
         {
             if(_userContext.Users == null)
@@ -97,7 +97,7 @@ namespace LiftOff_Project.Controllers
                 await _userContext.SaveChangesAsync();
                 return Ok();
             }
-        }
+        }*/
 
     }
 }
