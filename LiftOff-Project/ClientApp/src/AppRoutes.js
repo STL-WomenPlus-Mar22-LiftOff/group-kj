@@ -5,7 +5,7 @@ import { CreateAccount } from "./components/CreateAccountsPage/CreateAccount";
 import { SearchResults } from "./components/SearchResultsPage/SearchResults";
 import MyWatchList from "./components/MyWatchList";
 import { UserProfile } from "./components/UserProfile";
-import Users from "./components/Users";
+
 
 const AppRoutes = [
   {
@@ -24,10 +24,10 @@ const AppRoutes = [
     path: '/create-account',
     element: <CreateAccount />
   },
-  {
+  /*{
     path: '/user',
     element: <Users />
-  },
+  },*/
   {
     path: '/my-watch-list',
     element: <MyWatchList />

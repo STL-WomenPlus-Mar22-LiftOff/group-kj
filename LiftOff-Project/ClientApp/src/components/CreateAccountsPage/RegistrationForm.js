@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import Button from 'react-bootstrap/Button';
 import css from './CreateAccount.module.css';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const schema = yup.object().shape({
     email: yup.string().email("Please enter a valid email address").required("Please enter a valid email address"),
@@ -20,9 +22,27 @@ export function RegistrationForm() {
         mode: "onBlur",
     });
 
-    const submitRegistrationForm = (data) => {
+    const navigate = useNavigate();
+
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [password, setPassword] = useState("");
+    const [email, setEmail] = useState("");
+
+    const submitRegistrationForm = async (data) => {
+        navigate('/user-profile');
         console.log(data);
-        alert(JSON.stringify(data));
+        //alert(JSON.stringify(data));
+
+        const url = 'https://localhost:44413/user';
+
+        let userInfo = {
+            UserName: firstName + ' ' + lastName,
+            Password: password,
+            Email: email,
+        };
+
+        await axios.post(url, userInfo);
     };
 
     return (
@@ -33,11 +53,11 @@ export function RegistrationForm() {
 
             <form className={css.error} onSubmit={handleSubmit(submitRegistrationForm)}>
                 <div>
-                    <input className={css.input} type="email" name="email" placeholder="Email" {...register("email")} />
+                    <input className={css.input} type="email" name="email" placeholder="Email" {...register("email", { onChange: (e) => { setEmail(e.target.value) } })} />
                     {errors.email && <p>{errors.email.message}</p>}
                 </div>
                 <div>
-                    <input className={css.input} type="password" name="password" placeholder="Password" {...register("password")} />
+                    <input className={css.input} type="password" name="password" placeholder="Password" {...register("password", { onChange: (e) => { setPassword(e.target.value) } })} />
                     {errors.password && <p>{errors.password.message}</p>}
                 </div>
                 <div>
@@ -45,11 +65,11 @@ export function RegistrationForm() {
                     {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
                 </div>
                 <div>
-                    <input className={css.input} type="text" name="firstName" placeholder="First Name" {...register("firstName")} />
+                    <input className={css.input} type="text" name="firstName" placeholder="First Name" {...register("firstName", { onChange: (e) => { setFirstName(e.target.value) } })} />
                     {errors.firstName && <p>{errors.firstName.message}</p>}
                 </div>
                 <div>
-                    <input className={css.input} type="text" name="lastName" placeholder="Last Name" {...register("lastName")} />
+                    <input className={css.input} type="text" name="lastName" placeholder="Last Name" {...register("lastName", { onChange: (e) => { setLastName(e.target.value) } })} />
                     {errors.lastName && <p>{errors.lastName.message}</p>}
                 </div>
                 <div>
