@@ -23,3 +23,7 @@ html {
 input::placeholder {
   color: black;
 }
+
+body {
+  padding-bottom: 100px;
+}
