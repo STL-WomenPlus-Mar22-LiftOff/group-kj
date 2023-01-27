@@ -6,6 +6,7 @@ import { SearchResults } from "./components/SearchResultsPage/SearchResults";
 import MyWatchList from "./components/MyWatchList";
 import { UserProfile } from "./components/UserProfile";
 import Users from "./components/Users";
+import NewLogIn from "./components/LogIn/NewLogIn";
 
 const AppRoutes = [
   {
@@ -39,7 +40,11 @@ const AppRoutes = [
   {
     path: '/user-profile',
     element: <UserProfile />
-  },
+    },
+    {
+        path: '/log-in',
+        element: <NewLogIn />   
+        },
 
 ];
 

@@ -6,6 +6,8 @@
         public string UserName { get; set; }
         //Will have auth in future, simple user exists for testing the User - WatchList hookup
         public string Password { get; set; }
+
+        
         
         public WatchList WatchList { get; set; }
         
