@@ -9,6 +9,7 @@ const context =  [
     "/mywatchlist",
     "/user",
     "/login",
+    "/watchlist",
 ];
 
 module.exports = function(app) {

@@ -18,6 +18,11 @@
         public string Title { get; set; }
         public Movie () { }
 
+        public Movie(string title)
+        {
+            Title = title;
+        }
+        /*
         public Movie (string title, int id)
         {
            Title = title;
@@ -30,6 +35,6 @@
         public override int GetHashCode()
         {
             return base.GetHashCode();
-        }
+        }*/
     }
 }

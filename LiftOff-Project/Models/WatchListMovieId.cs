@@ -9,6 +9,10 @@
 
         public int WatchListId { get; set; }
         public WatchList WatchList { get; set; }
+        public WatchListMovieId()
+        {
+        }
+        /*
         public WatchListMovieId(int id, int movieId, Movie movie, int watchlistid)
         {
             Id = id;
@@ -18,9 +22,7 @@
 
         }
 
-        public WatchListMovieId()
-        {
-        }
+        
         public override bool Equals(object? obj)
         {
             return base.Equals(obj);
@@ -28,6 +30,6 @@
         public override int GetHashCode()
         {
             return base.GetHashCode();  
-        }
+        }*/
     }
 }

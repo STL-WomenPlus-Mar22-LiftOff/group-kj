@@ -12,13 +12,13 @@
         //public List<WatchListMovieId> MovieIds { get; set; }
         //changed the name of the list
         public List<WatchListMovieId> WatchlistMovieIds { get; set; }
-
-        public WatchList(int id, User user, int userId, List<WatchListMovieId> watchlistMovieIds)
+        
+        
+        public WatchList(int id, string name, int userId)
         {
             id = Id;
-            User = user;
+            Name = name;
             UserId = userId;
-            WatchlistMovieIds = watchlistMovieIds;
         }
 
         public WatchList () { }

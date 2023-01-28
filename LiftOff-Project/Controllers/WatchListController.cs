@@ -35,20 +35,37 @@ namespace LiftOff_Project.Controllers
             return await _watchListContext.WatchLists.ToListAsync();
 
         }
+        [HttpGet("{id}")]
+        public async Task<ActionResult<WatchList>> GetUsers(int id)
+        {
+            if (_watchListContext.WatchLists == null)
+            {
+                return NotFound();
+            }
+            var watchlist = await _watchListContext.WatchLists.FindAsync(id);
+            if (watchlist == null)
+            {
+                return NotFound();
+            }
+            return watchlist;
+        }
+
 
         [HttpPost]
         public async Task<ActionResult<WatchList>> PostWatchList(WatchList watchlist)
         {
-            //var user = _userData.GetUser(id);
+            //var user = _watchListContext.WatchLists.AddAsync((watchlist);
             //return Ok(user);
             //_userContext.SaveChanges();
-            // return CreatedAtAction(nameof(GetUsers), new { id = user.Id }, user);
-
-
             _watchListContext.WatchLists.Add(watchlist);
-           
             await _watchListContext.SaveChangesAsync();
+            //return CreatedAtAction(nameof(GetWatchList), new { id = watchlist.Id }, watchlist);
             return Ok();
+
+            //_watchListContext.WatchLists.Add(watchlist);
+
+            // await _watchListContext.SaveChangesAsync();
+            //return Ok();
 
 
         }
