@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
@@ -29,14 +29,14 @@ export function LogInForm() {
         console.log(data);
         //alert(JSON.stringify(data));
 
-        const url = '';  //not sure what the route is since we have a modal and not a full log in page
+        /*const url = '';  //not sure what the route is since we have a modal and not a full log in page
 
         let userInfo = {
             Password: password,
             Email: email,
         };
 
-        await axios.post(url, userInfo);
+        await axios.post(url, userInfo);*/
     };
 
     return (
