@@ -1,11 +1,12 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import Button from 'react-bootstrap/Button';
 import css from './LogInForm.module.css';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { param } from 'jquery';
 
 const schema = yup.object().shape({
     email: yup.string().email("Please enter your email address").required("Please enter your email address"),
@@ -18,25 +19,43 @@ export function LogInForm() {
         resolver: yupResolver(schema),
         mode: "onBlur",
     });
+    const navigate = useNavigate(); //For navigating to the user profile page.
 
-    const navigate = useNavigate();
+    const [user, setUser] = useState([]); //Setting the user array fetched from the controller
+    const [email, setEmail] = useState(""); //Setting the email entered in the textbox
+    const [password, setPassword] = useState(""); //Setting the password entered in password textbox.
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
 
-    const submitLogInForm = async (data) => {
-        navigate('/user-profile');
+    const submitLogInForm = (data) => {
+        console.log(email);
         console.log(data);
-        //alert(JSON.stringify(data));
 
-        const url = '';  //not sure what the route is since we have a modal and not a full log in page
+        fetch(`login/${email}`, {
+            method: 'GET',
+            headers: { 'Content-type': 'application/json' },
 
-        let userInfo = {
-            Password: password,
-            Email: email,
-        };
 
-        await axios.post(url, userInfo);
+        }).then(r => r.json()).then(res => {
+            console.log("The response is ", res.length); //This returns array with a length > 0 or = 0
+            if (res.length > 0) {
+
+                setUser(user);
+            }
+            console.log("The user array after the response is ", user);
+            console.log("The length of user array is", user.length);
+            if (user.length > 0) {
+                if (user[0]['password'] === password) {
+                    console.log(user[0]['password']);
+                    alert('Login Successful');
+                    navigate("/user-profile");
+                }
+
+            }
+            else {
+                console.log("The user array has ", user);
+                alert('Login Failed!!.. User Id or Password does not match.')
+            }
+        });
     };
 
     return (
