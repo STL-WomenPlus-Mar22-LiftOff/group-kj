@@ -9,14 +9,16 @@
         public string Name { get; set; }
         public User User { get; set; }
         public int UserId { get; set; }
-        public List<WatchListMovieId> MovieIds { get; set; }
+        //public List<WatchListMovieId> MovieIds { get; set; }
+        //changed the name of the list
+        public List<WatchListMovieId> WatchlistMovieIds { get; set; }
 
-        public WatchList (int id, User user, int userId, List<WatchListMovieId> movieIds)
+        public WatchList(int id, User user, int userId, List<WatchListMovieId> watchlistMovieIds)
         {
             id = Id;
             User = user;
             UserId = userId;
-            MovieIds = movieIds;
+            WatchlistMovieIds = watchlistMovieIds;
         }
 
         public WatchList () { }

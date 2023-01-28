@@ -18,9 +18,18 @@
         public string Title { get; set; }
         public Movie () { }
 
-        public Movie (string title)
+        public Movie (string title, int id)
         {
            Title = title;
+           Id = id;
+        }
+        public override bool Equals(object? obj)
+        {
+            return base.Equals(obj);
+        }
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
     }
 }
