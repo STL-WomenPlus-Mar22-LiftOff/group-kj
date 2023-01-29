@@ -7,16 +7,18 @@
         public int Id { get; set; }
 
         public string Name { get; set; }
-        public User User { get; set; }
+       //public User User { get; set; }
         public int UserId { get; set; }
         //public List<WatchListMovieId> MovieIds { get; set; }
         //changed the name of the list
-        public List<WatchListMovieId> WatchlistMovieIds { get; set; }
+       //public List<WatchListMovieId> WatchlistMovieIds { get; set; }
+
+        //public List<Movie>Movies { get; set; }
         
         
-        public WatchList(int id, string name, int userId)
+        public WatchList (int id, string name, int userId)
         {
-            id = Id;
+           Id = id;
             Name = name;
             UserId = userId;
         }

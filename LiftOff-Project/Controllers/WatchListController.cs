@@ -54,11 +54,23 @@ namespace LiftOff_Project.Controllers
         [HttpPost]
         public async Task<ActionResult<WatchList>> PostWatchList(WatchList watchlist)
         {
+            // return Ok();
+
             //var user = _watchListContext.WatchLists.AddAsync((watchlist);
             //return Ok(user);
             //_userContext.SaveChanges();
+           /* WatchList watchList = new WatchList
+            {
+                Name = name,
+                UserId = userId,
+                User = _watchListContext.Users.Find(userId),
+                WatchlistMovieIds = new List<WatchListMovieId>()
+
+            };*/
             _watchListContext.WatchLists.Add(watchlist);
             await _watchListContext.SaveChangesAsync();
+
+
             //return CreatedAtAction(nameof(GetWatchList), new { id = watchlist.Id }, watchlist);
             return Ok();
 
