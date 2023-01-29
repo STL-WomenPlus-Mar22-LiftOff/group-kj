@@ -1,6 +1,7 @@
-﻿using LiftOff_Project.Data;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using LiftOff_Project.Data;
+using LiftOff_Project.Models;
 
 namespace LiftOff_Project.Controllers
 {
@@ -16,14 +17,13 @@ namespace LiftOff_Project.Controllers
         }
 
 
-        [HttpGet("{UserName}")]
-        public IActionResult GetUsers(string username)
+        [HttpGet("{userid}")]
+        public IActionResult GetUsers(string userid)
         {
 
             //This is pulling the data from the database.
-            return Ok(_userData.GetUserbyUserName(username));
+            return Ok(_userData.GetUserbyUserName(userid));
             //return users;
         }
-
     }
 }

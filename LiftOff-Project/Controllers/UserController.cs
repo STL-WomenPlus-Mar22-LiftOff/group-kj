@@ -17,7 +17,7 @@ namespace LiftOff_Project.Controllers
         }
 
 
-        /*[HttpGet]
+        [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
             if (_userContext.Users == null)
@@ -29,7 +29,7 @@ namespace LiftOff_Project.Controllers
         }
 
         //get the user in perticular id
-        [HttpGet("{id}")]
+        /*[HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUsers(int id)
         {
             if (_userContext.Users == null)

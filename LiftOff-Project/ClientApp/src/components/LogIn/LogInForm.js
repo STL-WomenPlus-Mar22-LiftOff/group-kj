@@ -1,78 +1,65 @@
-import React, { useState } from 'react';
-import { useForm } from "react-hook-form";
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from "yup";
-import Button from 'react-bootstrap/Button';
-import css from './LogInForm.module.css';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { param } from 'jquery';
-
-const schema = yup.object().shape({
-    email: yup.string().email("Please enter your email address").required("Please enter your email address"),
-    password: yup.string().required("Please enter your password"),
-});
-
-export function LogInForm() {
-
-    const { register, handleSubmit, formState: { errors } } = useForm({
-        resolver: yupResolver(schema),
-        mode: "onBlur",
-    });
-    const navigate = useNavigate(); //For navigating to the user profile page.
-
-    const [user, setUser] = useState([]); //Setting the user array fetched from the controller
-    const [email, setEmail] = useState(""); //Setting the email entered in the textbox
-    const [password, setPassword] = useState(""); //Setting the password entered in password textbox.
+import React from 'react';
 
 
-    const submitLogInForm = (data) => {
-        console.log(email);
-        console.log(data);
+class LogInForm extends React.Component {
 
-        fetch(`login/${email}`, {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            message: '',
+            userid: 1,
+            user: [],
+            DataLoaded: false
+        }
+    };
+
+    onSubmit = () => {
+        console.log("here");
+        console.log(this.refs.userid.value);
+
+        /*fetch(`login/${this.refs.userid.value}`, {
             method: 'GET',
             headers: { 'Content-type': 'application/json' },
 
 
-        }).then(r => r.json()).then(res => {
-            console.log("The response is ", res.length); //This returns array with a length > 0 or = 0
-            if (res.length > 0) {
+        })*/
+        fetch(`user/`).then(r => r.json()).then(res => {
+            console.log(res); //This returns array with a length > 0 or = 0
+            if (res) {
 
-                setUser(user);
-            }
-            console.log("The user array after the response is ", user);
-            console.log("The length of user array is", user.length);
-            if (user.length > 0) {
-                if (user[0]['password'] === password) {
-                    console.log(user[0]['password']);
-                    alert('Login Successful');
-                    navigate("/user-profile");
+                this.state.user = res;
+                if (this.state.user.length > 0) {
+                    if (this.state.user[0]['password'] === this.refs.password.value) {
+                        console.log(this.state.user[0]['password']);
+                        this.state.DataLoaded = true;
+                        alert('Login Successful');
+
+                    }
+
+                }
+                else {
+                    alert('Login Failed!!.. User Id or Password does not match.')
                 }
 
             }
-            else {
-                console.log("The user array has ", user);
-                alert('Login Failed!!.. User Id or Password does not match.')
-            }
-        });
-    };
+        })
+    }
 
-    return (
-        <div>
-            <form className={css.error} onSubmit={handleSubmit(submitLogInForm)}>
-                <div>
-                    <input className={css.input} type="email" name="email" placeholder="Email" {...register("email", { onChange: (e) => { setEmail(e.target.value) } })} />
-                    {errors.email && <p>{errors.email.message}</p>}
-                </div>
-                <div>
-                    <input className={css.input} type="password" name="password" placeholder="Password" {...register("password", { onChange: (e) => { setPassword(e.target.value) } })} />
-                    {errors.password && <p>{errors.password.message}</p>}
-                </div>
-                <div className="text-center">
-                    <Button variant="primary" type="submit" className={css.click}>Log In!</Button>{' '}
-                </div>
-            </form>
-        </div>
-    );
+    render() {
+        return (
+            <div>
+
+                <p>
+                    <label>User ID : <input type="text" ref="userid" /></label>
+                </p>
+                <p>
+                    <label>Password : <input type="text" ref="password" /></label>
+                </p >
+                <button onClick={this.onSubmit}>Login</button>
+
+            </div>
+        )
+    }
 }
+export default LogInForm;

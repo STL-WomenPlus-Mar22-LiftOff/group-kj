@@ -1,7 +1,7 @@
 import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import { Link } from 'react-router-dom';
-import { LogInForm } from './LogInForm';
+import  LogInForm from './LogInForm';
 import css from './LogInModal.module.css';
 
 export function LogInModal(props) {
