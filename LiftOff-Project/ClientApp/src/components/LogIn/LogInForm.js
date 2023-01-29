@@ -5,8 +5,6 @@ import * as yup from "yup";
 import Button from 'react-bootstrap/Button';
 import css from './LogInForm.module.css';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { param } from 'jquery';
 
 const schema = yup.object().shape({
     email: yup.string().email("Please enter your email address").required("Please enter your email address"),
@@ -19,41 +17,45 @@ export function LogInForm() {
         resolver: yupResolver(schema),
         mode: "onBlur",
     });
+
     const navigate = useNavigate(); //For navigating to the user profile page.
 
-    const [user, setUser] = useState([]); //Setting the user array fetched from the controller
     const [email, setEmail] = useState(""); //Setting the email entered in the textbox
     const [password, setPassword] = useState(""); //Setting the password entered in password textbox.
 
+    const submitLogInForm = () => {
+        let emailArray = [];
 
-    const submitLogInForm = (data) => {
-        console.log(email);
-        console.log(data);
-
-        fetch(`login/${email}`, {
+        fetch(`user/`, {  //call the api controller
             method: 'GET',
             headers: { 'Content-type': 'application/json' },
 
+        }).then(response => response.json()).then(response => {
+            //console.log(response); //This returns array with a length > 0 or = 0
+            if (response.length > 0) {
 
-        }).then(r => r.json()).then(res => {
-            console.log("The response is ", res.length); //This returns array with a length > 0 or = 0
-            if (res.length > 0) {
-
-                setUser(user);
-            }
-            console.log("The user array after the response is ", user);
-            console.log("The length of user array is", user.length);
-            if (user.length > 0) {
-                if (user[0]['password'] === password) {
-                    console.log(user[0]['password']);
-                    alert('Login Successful');
-                    navigate("/user-profile");
+                //check if email is included in database (alert user if not found)
+                for (let i = 0; i < response.length; i++) {
+                    emailArray.push(response[i].email);
+                }
+                //console.log(emailArray);
+                if (!emailArray.includes(email)) {
+                    alert("We couldn't log you in. Please check your email and password and try again.");
                 }
 
-            }
-            else {
-                console.log("The user array has ", user);
-                alert('Login Failed!!.. User Id or Password does not match.')
+                //if email is included in database, check password is a match (alert user if password doesn't match)
+                for (let i = 0; i < response.length; i++) {
+                    if (email === response[i].email) {
+                        //console.log("Email is in database");
+                        if (password === response[i].password) {
+                            //console.log("Password matches");
+                            //alert('Login Successful');
+                            navigate("/user-profile");
+                        } else {
+                            alert("We couldn't log you in. Please check your email and password and try again.");
+                        }
+                    }
+                }
             }
         });
     };
