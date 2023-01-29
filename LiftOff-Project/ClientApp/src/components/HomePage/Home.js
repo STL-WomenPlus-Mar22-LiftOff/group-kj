@@ -57,11 +57,15 @@ export class Home extends React.Component {
               </div>
             </div>
           </Col>
+<<<<<<< HEAD
             </Row>
             <LogInModal
                 isModalOpen={this.state.isModalOpen}
                 handleModalOpen={this.handleModalOpen}
             />
+=======
+        </Row>
+>>>>>>> origin
       </Container >
     );
   }

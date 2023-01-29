@@ -2,6 +2,7 @@
 using LiftOff_Project.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LiftOff_Project.Migrations
 {
     [DbContext(typeof(NWDbContext))]
-    partial class NWDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230120005446_addEmailmigration")]
+    partial class addEmailmigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
