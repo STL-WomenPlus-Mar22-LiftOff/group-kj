@@ -1,23 +1,31 @@
-import React, { Component } from 'react';
-import { SearchTable } from "./SearchTable";
-//import { SearchData } from "./SearchData";
-//import Axios from "axios";
+import { useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
 
+export function SearchResults() {
+    const location = useLocation();
+    const searchResults = location.state.searchResults;
 
-
-export class SearchResults extends Component {
-  static displayName = SearchResults.name;
-
-  componentDidMount() {
-    //const [Post, setPost] = React.useState(null);
-    document.body.style.background = "white";
-  }
-
-  render() {
     return (
-      <div>
-        <SearchTable />
-      </div>
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Overview</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {searchResults.map((result) => (
+                        <tr key={result.id}>
+                            <td>{result.title}</td>
+                            <td>{result.overview}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+
+            <Link to="/user-profile"><Button variant="primary">Search again!</Button>{' '}</Link>
+        </div>
     );
-  }
-}
+};

@@ -2,7 +2,7 @@ import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { SearchForm } from "./HomePage/SearchForm";
+import { SearchBar } from "./HomePage/SearchForm";
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import css from './UserProfile.module.css';
@@ -34,7 +34,7 @@ export class UserProfile extends React.Component {
                       <br />
                       <br />
                       <div className={css.box}>
-                          <SearchForm />
+                          <SearchBar />
                       </div>
                   </Col>
 

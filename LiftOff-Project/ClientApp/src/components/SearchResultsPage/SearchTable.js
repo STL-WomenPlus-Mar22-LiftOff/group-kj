@@ -21,8 +21,6 @@ export class SearchTable extends React.Component {
     const apiKey = "?api_key=627127f14caca839ef42d22a23dcefde";
     const genreList = "genre/movie/list";
 
-
-
     const config = {
       headers: { Authorization: `Bearer ${bearer}` }
     }

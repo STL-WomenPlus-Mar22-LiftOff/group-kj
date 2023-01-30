@@ -2,7 +2,6 @@ import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { SearchForm } from "./SearchForm";
 import css from './Home.module.css';
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
@@ -54,19 +53,18 @@ export class Home extends React.Component {
               <div>
                             <Link to="/create-account"><Button variant="primary" className={css.click}>Sign Up!</Button>{' '}</Link>
                             <label>Have an account?  </label><Link to=""><Button variant="primary" onClick={this.handleModalOpen} style={{ cursor: 'pointer' }}>Log in!</Button>{' '}</Link>
-              </div>
-            </div>
-          </Col>
-<<<<<<< HEAD
-            </Row>
+                        </div>
+
+                    </div>
+
+                </Col>
             <LogInModal
                 isModalOpen={this.state.isModalOpen}
                 handleModalOpen={this.handleModalOpen}
             />
-=======
-        </Row>
->>>>>>> origin
-      </Container >
+                </Row>
+
+      </Container>
     );
   }
 }
