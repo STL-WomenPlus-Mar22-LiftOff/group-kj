@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import Button from 'react-bootstrap/Button';
-import css from './LogInForm.module.css';
+import css from 'C:/Users/priya/source/repos/group-kj/LiftOff-Project/ClientApp/src/components/LogIn/LogInModal.module.css';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -25,7 +25,7 @@ export function NewLogIn() {
     const [password, setPassword] = useState("");
     const [user, setUser] = useState([]);
 
-    const submitLogInForm = async (data) => {
+    const submitLogInForm = () => {
 
         fetch(`login/${email}`, {
             method: 'GET',
@@ -33,16 +33,20 @@ export function NewLogIn() {
 
 
         }).then(r => r.json()).then(res => {
-            console.log(res); //This returns array with a length > 0 or = 0
+            
             if (res) {
                 setUser(res);
                 console.log("The user array length is", user.length);
                 if (user.length > 0) {
+                    //This checks if the password also matches the User email that is entered
                     if (user[0]['password'] === password) {
-                        console.log(user[0]['password']);
+                        
+                        window.user = user[0]['userName'];// If yes store the username in a window variable.
+                        window.userid = user[0]['id'];//If yes store the id in a window variable to be passed on the user profile page.
+                        console.log(window.user);
                         alert('Login Successful');
                         navigate('/user-profile');
-
+                        
                     }
 
                 }
@@ -69,14 +73,9 @@ export function NewLogIn() {
                     {errors.password && <p>{errors.password.message}</p>}
                 </div>
                 <div className="text-center">
-                    <Button variant="primary" type="submit" className={css.click}>Log In!</Button>{' '}
+                    <Button variant="primary" type="submit" className={css.click} onClick>Log In!</Button>{' '}
                 </div>
             </form>
         </div>
     );
 }
-
-
-
-
-

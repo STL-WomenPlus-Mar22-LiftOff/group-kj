@@ -11,7 +11,7 @@ export class UserProfile extends Component {
   render() {
     return (
       <div>
-        <h1>This is the user profile page</h1>
+            <h1>Welcome {window.user} !. Your User Id is {window.userid}</h1>
       </div>
     );
   }

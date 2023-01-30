@@ -1,7 +1,7 @@
 //This is function component fine that works fine when clicked the second time. I have no idea how to change this work
 // one time.
 
-/*import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
@@ -28,7 +28,7 @@ export function LogInForm() {
     const [password, setPassword] = useState("");
     const [user, setUser] = useState([]);
 
-    const submitLogInForm = async (data) => {
+    const submitLogInForm = () => {
          
         fetch(`login/${email}`, {
             method: 'GET',
@@ -62,7 +62,7 @@ export function LogInForm() {
 
     return (
         <div>
-            <form className={css.error} >
+            <form className={css.error} onSubmit={handleSubmit(submitLogInForm) }>
                 <div>
                     <input className={css.input} type="email" name="email" placeholder="Email" {...register("email", { onChange: (e) => { setEmail(e.target.value) } })} />
                     {errors.email && <p>{errors.email.message}</p>}
@@ -72,16 +72,16 @@ export function LogInForm() {
                     {errors.password && <p>{errors.password.message}</p>}
                 </div>
                 <div className="text-center">
-                    <Button variant="primary" type="submit" className={css.click} onClick={handleSubmit(submitLogInForm) }>Log In!</Button>{' '}
+                    <Button variant="primary" type="submit" className={css.click} >Log In!</Button>{' '}
                 </div>
             </form>
         </div>
     );
-}*/
+}
 
 
 //This is the class component code working fine. It works the very first time itself.
-import React from 'react';
+/*import React from 'react';
 
 class LogInForm extends React.Component {
 
@@ -143,7 +143,7 @@ class LogInForm extends React.Component {
         )
     }
 }
-export default LogInForm;
+export default LogInForm;*/
 
 
 

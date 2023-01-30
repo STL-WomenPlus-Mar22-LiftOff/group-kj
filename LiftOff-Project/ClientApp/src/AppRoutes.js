@@ -5,6 +5,7 @@ import { CreateAccount } from "./components/CreateAccountsPage/CreateAccount";
 import { SearchResults } from "./components/SearchResultsPage/SearchResults";
 import MyWatchList from "./components/MyWatchList";
 import { UserProfile } from "./components/UserProfile";
+import { NewLogIn } from "./components/NewLogIn";
 
 
 const AppRoutes = [
@@ -39,7 +40,11 @@ const AppRoutes = [
   {
     path: '/user-profile',
     element: <UserProfile />
-  },
+    },
+    {
+        path: '/new-log-in',
+        element: <NewLogIn />
+    },
 
 ];
 
