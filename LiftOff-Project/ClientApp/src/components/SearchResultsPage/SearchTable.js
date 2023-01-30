@@ -39,133 +39,146 @@ export class SearchTable extends React.Component {
     const config = {
       headers: { Authorization: `Bearer ${bearer}` }
     }
-    let searchString = "shrek";
+    let searchString = "horror";
 
-    const [movieResponse, genreResponse] = await Axios.all([
-      Axios.get(`${apiUrl}${searchMovies}${apiKey}${andQuer}${searchString}${andPage}1`,
-        config
-      ),
-      Axios.get(`${apiUrl}${genreList}${apiKey}`,
+    // 
+    //   Change to just get movies.then do the big axios request
+    //     
+    let awaitStreamResponse = [];
+    let movieResponse;
+    let genreResponse;
+
+    const getAll = async () => {
+      let promises = [];
+      let movieGet = await Axios.get(
+        `${apiUrl}${searchMovies}${apiKey}${andQuer}${searchString}${andPage}1`,
         config
       )
-    ])
-    const streamingResponse = function (){
-        let moviesAndStreamers = [];
-        let moviesAndStreamersData = [];
-        movieResponse.data.results.forEach(movieForStreamer => {
-          moviesAndStreamers.push(Axios.get(`${apiUrl}movie/${movieForStreamer.id}/watch/providers${apiKey}`, config))
-          })
-           Axios.all(moviesAndStreamers).then(resp => {
-              resp.forEach(service => {
-                moviesAndStreamersData.push(service.data)
-              })
-              return(resp);
-          })
-          console.log(moviesAndStreamersData)
-          return moviesAndStreamersData;
-        }
-      
-      const streamingResponseOccured = streamingResponse();
-      //console.log(streamingResponseOccured)
-      this.setState({
-        movies: movieResponse.data,
-        genres: genreResponse.data,
-        moviesAttachedToStreamers: streamingResponseOccured
+      let movieResults = movieGet.data
+      movieResponse = movieResults;
+      let moviesAndStreamers = [Axios.get(`${apiUrl}${genreList}${apiKey}`, config)];
+      let movieStreamerData = [];
+      movieResponse.results.forEach(movieForStreamer => {
+        moviesAndStreamers.push(Axios.get(`${apiUrl}movie/${movieForStreamer.id}/watch/providers${apiKey}`, config))
       })
-
-    //https://api.themoviedb.org/3/movie/550/watch/providers?api_key={{TMDB_API_KEY}}&append_to_response=watch/providers/
-    if (!this.state.movies || !this.state.genres || !this.state.moviesAttachedToStreamers) { return null }
+      let genreAndStreamResp = await Axios.all(moviesAndStreamers).then(finalResp => {
+        //console.log(finalResp)
+        genreResponse = finalResp[0].data;
+        for (let i = 1; i < finalResp.length; i++) {
+          movieStreamerData.push(finalResp[i].data)
+        }
+        awaitStreamResponse = movieStreamerData;
+        // console.log(movieResponse)
+        // console.log(genreResponse)
+        // console.log(awaitStreamResponse)
+        return movieStreamerData;
+      })
+      this.setState({
+        movies: movieResponse,
+        genres: genreResponse,
+        moviesAttachedToStreamers: awaitStreamResponse
+      })
+    }
+      console.log(movieResponse, genreResponse, awaitStreamResponse)
+    //const streamingResponseOccured = streamingResponse();
+    //if(awaitStreamResponse.length !== 0) {
+      getAll();
+    
+  //}
+    
+  //https://api.themoviedb.org/3/movie/550/watch/providers?api_key={{TMDB_API_KEY}}&append_to_response=watch/providers/
+  if(!this.state.movies || !this.state.genres || !this.state.moviesAttachedToStreamers) { return null }
 
   }
 
 
 
-  render() {
+render() {
 
-    if (this.state.movies === undefined || this.state.genres === undefined || this.state.moviesAttachedToStreamers === null) {
-      return (
-        <div>
-          <h1>Loading...</h1>
-        </div>
-      )
-    }
+  if (this.state.movies === undefined || this.state.genres === undefined /*|| this.state.moviesAttachedToStreamers === null*/) {
+    return (
+      <div>
+        <h1>Loading...</h1>
+      </div>
+    )
+  }
 
-    else {
-      // console.log(this.state.genres)
-      // console.log(this.state.movies);
-      // console.log(this.state.moviesAttachedToStreamers)
-      // console.log(this.state.moviesAttachedToStreamers[0])
-      // //console.log(this.state.streamers)
-      
-      // console.log(this.state.movies.results)
+  else {
+    // console.log(this.state.genres)
+    console.log(this.state.movies);
+    console.log(this.state.moviesAttachedToStreamers)
+    console.log(this.state.moviesAttachedToStreamers[0])
+    // //console.log(this.state.streamers)
+
+    // console.log(this.state.movies.results)
 
 
-      return (
-        <div>
-          <Table striped bordered hover>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Genre</th>
-                <th>Streaming</th>
-                <th>Rent</th>
-              </tr>
-            </thead>
-            <tbody>
+    return (
+      <div>
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Genre</th>
+              <th>Streaming</th>
+              <th>Rent</th>
+            </tr>
+          </thead>
+          <tbody>
 
-              {this.state.movies.results.map(movieHit => {
-                let thisHitsGenres = [];
-                let thisHitsStreamingServices = [];
-                let thisHitsRentals = [];
-                for (let i = 0; i < movieHit.genre_ids.length; i++) {
-                  for (let j = 0; j < this.state.genres.genres.length; j++) {
-                    if (movieHit.genre_ids[i] === this.state.genres.genres[j].id) {
-                      thisHitsGenres.push(`${this.state.genres.genres[j].name} `);
-                    }
+            {this.state.movies.results.map(movieHit => {
+              let thisHitsGenres = [];
+              let thisHitsStreamingServices = [];
+              let thisHitsRentals = [];
+              for (let i = 0; i < movieHit.genre_ids.length; i++) {
+                for (let j = 0; j < this.state.genres.genres.length; j++) {
+                  if (movieHit.genre_ids[i] === this.state.genres.genres[j].id) {
+                    thisHitsGenres.push(`${this.state.genres.genres[j].name} `);
                   }
                 }
-                for (let i = 0; i < this.state.moviesAttachedToStreamers.length; i++) {
-                  //console.log(this.state.moviesAttachedToStreamers[i].id)
-                }
-                this.state.moviesAttachedToStreamers.forEach(test => {
-                  //console.log(test.id)
-                })
-                this.state.moviesAttachedToStreamers.forEach(serviceFull => {
-                  //console.log(serviceFull.id)
-                  if (serviceFull.id === movieHit.id) {
-                    if (serviceFull.results === {}) {
+              }
+              for (let i = 0; i < this.state.moviesAttachedToStreamers.length; i++) {
+                //console.log(this.state.moviesAttachedToStreamers[i].id)
+              }
+              this.state.moviesAttachedToStreamers.forEach(test => {
+                //console.log(test.id)
+              })
+              this.state.moviesAttachedToStreamers.forEach(serviceFull => {
+                //console.log(serviceFull.id)
+                if (serviceFull.id === movieHit.id) {
+                  if (!serviceFull.results.US) {
+                    thisHitsStreamingServices.push("No streaming found");
+                    thisHitsRentals.push("No rentals found");
+                  } else if (serviceFull.results.US && (serviceFull.results.US.flatrate || serviceFull.results.US.rent)) {
+                    if (serviceFull.results.US.flatrate) {
+                      serviceFull.results.US.flatrate.forEach(service => {
+                        thisHitsStreamingServices.push(service.provider_name);
+                      })
+                    } if (!serviceFull.results.US.flatrate) {
                       thisHitsStreamingServices.push("No streaming found");
-                      thisHitsRentals.push("No rentals found");
-                    } else if (serviceFull.results.US && (serviceFull.results.US.flatrate || serviceFull.results.US.rent)) {
-                      if (serviceFull.results.US.flatrate) {
-                        serviceFull.results.US.flatrate.forEach(service => {
-                          thisHitsStreamingServices.push(service.provider_name);
-                        })
-                      } if (!serviceFull.results.US.flatrate) {
-                        thisHitsStreamingServices.push("No streaming found");
-                      } if (serviceFull.results.US.rent) {
-                        for (let i = 0; i < 3 && i < serviceFull.results.US.rent.length; i++) {
-                          thisHitsRentals.push(serviceFull.results.US.rent[i].provider_name);
-                        }
-                      } if (!serviceFull.results.US.rent) {
-                        thisHitsRentals.push("No rentals available");
+                    } if (serviceFull.results.US.rent) {
+                      for (let i = 0; i < 3 && i < serviceFull.results.US.rent.length; i++) {
+                        thisHitsRentals.push(serviceFull.results.US.rent[i].provider_name);
                       }
+                    } if (!serviceFull.results.US.rent) {
+                      thisHitsRentals.push("No rentals available");
                     }
                   }
-                })
-                return (
-                  <tr key={movieHit.id}>
-                    <td key={`${movieHit.id}title`}>{movieHit.title}</td>
-                    <td key={`${movieHit.id}genre`}>{thisHitsGenres}</td>
-                    <td key={`${movieHit.id}stream`}>{thisHitsStreamingServices}</td>
-                    <td key={`${movieHit.id}rent`}>{thisHitsRentals}</td>
-                  </tr>
-                )
-              })}
-            </tbody>
-          </Table>
-        </div>
-      )
-    }
+                }
+              })
+              return (
+                <tr key={movieHit.id}>
+                  <td key={`${movieHit.id}title`}>{movieHit.title}</td>
+                  <td key={`${movieHit.id}genre`}>{thisHitsGenres}</td>
+                  <td key={`${movieHit.id}stream`}>{thisHitsStreamingServices}</td>
+                  <td key={`${movieHit.id}rent`}>{thisHitsRentals}</td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </Table>
+      </div>
+    )
   }
+}
 }
