@@ -35,8 +35,6 @@ export class SearchTable extends React.Component {
     //Gets genre data to add to movie data
     const genreList = "genre/movie/list";
 
-
-
     const config = {
       headers: { Authorization: `Bearer ${bearer}` }
     }
