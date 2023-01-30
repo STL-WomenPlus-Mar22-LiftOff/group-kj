@@ -1,5 +1,6 @@
 ﻿import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import css from './SearchForm.module.css';
 
 
 export function SearchBar() {
@@ -17,27 +18,30 @@ export function SearchBar() {
         const response = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${searchTerm}`);
         const data = await response.json();
         setSearchResults(data.results);
-        navigate('/search-results', { state: { searchResults: data.results } });
+        const streamServices = await getStreamServices(data.results);
+        navigate('/search-results', { state: { searchResults: data.results, streamServices } });
     };
 
+    const getStreamServices = async (results) => {
+        let streamServices = {};
+        for (const result of results) {
+            const response = await fetch(`https://api.themoviedb.org/3/movie/${result.id}/watch/providers?api_key=${apiKey}`);
+            const data = await response.json();
+            streamServices[result.id] = data.providers;
+        }
+        return streamServices;
+    }
+
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className={css.searchbox}>
             <input
+                className={css.inputbox}
                 type="text"
                 value={searchTerm}
                 onChange={handleChange}
-                placeholder="Search movie titles"
+                placeholder="Search by movie title..."
             />
             <button type="submit">Submit</button>
-            {searchResults && searchResults.results && searchResults.results.length > 0 ? (
-                <ul>
-                    {searchResults.results.map((result) => (
-                        <li key={result.id}>{result.title}</li>
-                    ))}
-                </ul>
-            ) : (
-                    <p>No results found</p>
-                )}
         </form>
     );
 };
