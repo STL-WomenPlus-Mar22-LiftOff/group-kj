@@ -24,40 +24,27 @@ export function LogInForm() {
     const [password, setPassword] = useState(""); //Setting the password entered in password textbox.
 
     const submitLogInForm = () => {
-        let emailArray = [];
 
-        fetch('https://localhost:44413/user', {
+        fetch(`login/${email}`, {  //this is fetching from the Login API controller to pull a specific user for the email entered
             method: 'GET',
             headers: { 'Content-type': 'application/json' },
 
-        }).then(response => response.json()).then(response => {
-            //console.log(response); //This returns array with a length > 0 or = 0
-            if (response.length > 0) {
-
-                //check if email is included in database (alert user if not found)
-                for (let i = 0; i < response.length; i++) {
-                    emailArray.push(response[i].email);
-                }
-                //console.log(emailArray);
-                if (!emailArray.includes(email)) {
+        }).then(r => r.json()).then(res => {
+            if (res) {
+                if (res.length > 0) {
+                    //This checks if the password entered matches the password for that email in the database
+                    if (res[0]['password'] === password) {
+                        window.user = res[0]['userName'];  // If yes, store the username in a window variable to pass to user profile page.
+                        window.userid = res[0]['id'];  //If yes, store the id in a window variable to pass to user profile page.
+                        navigate('/user-profile');
+                    } else {
+                        alert("We couldn't log you in. Please check your email and password and try again.");
+                    }
+                } else {
                     alert("We couldn't log you in. Please check your email and password and try again.");
                 }
-
-                //if email is included in database, check password is a match (alert user if password doesn't match)
-                for (let i = 0; i < response.length; i++) {
-                    if (email === response[i].email) {
-                        //console.log("Email is in database");
-                        if (password === response[i].password) {
-                            //console.log("Password matches");
-                            //alert('Login Successful');
-                            navigate("/user-profile");
-                        } else {
-                            alert("We couldn't log you in. Please check your email and password and try again.");
-                        }
-                    }
-                }
             }
-        });
+        })
     };
 
     return (
