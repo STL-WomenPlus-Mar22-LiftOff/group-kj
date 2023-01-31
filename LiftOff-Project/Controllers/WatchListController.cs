@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LiftOff_Project.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class WatchListController : ControllerBase
     {
@@ -14,6 +14,15 @@ namespace LiftOff_Project.Controllers
         public WatchListController(NWDbContext watchListContext)
         {
             _watchListContext = watchListContext;
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<WatchListMovieId>> PostWatchList(WatchListMovieId watchlistmovieid)
+        {
+
+            _watchListContext.WatchListMovieId.Add(watchlistmovieid);
+            await _watchListContext.SaveChangesAsync();
+            return Ok();
         }
         [HttpGet]
         public async Task<ActionResult<IEnumerable<WatchList>>> GetWatchList()
@@ -26,7 +35,7 @@ namespace LiftOff_Project.Controllers
 
         }
 
-        [HttpGet("{id}")]
+        /*[HttpGet("{id}")]
         public async Task<ActionResult<WatchList>> GetUsers(int id)
         {
             if (_watchListContext.WatchLists == null)
@@ -39,15 +48,12 @@ namespace LiftOff_Project.Controllers
                 return NotFound();
             }
             return watchlist;
-        }
+        }*/
 
-        [HttpPost]
-        public async Task<ActionResult<WatchList>> PostWatchList(WatchList watchlist)
-        {
-            
-            _watchListContext.WatchLists.Add(watchlist);
-            await _watchListContext.SaveChangesAsync();
-            return Ok();
-        }
+
+        //This is going to add to the watchlistmovieids table. The entry will be for the userid and the movie id.
+
+
+
     }
 }

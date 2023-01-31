@@ -48,49 +48,24 @@ export class SearchTable extends React.Component {
 
     if (!this.state.movies || !this.state.genres) { return null }
 
-  }
-   addToWatchlist = (name) => {
-    //const url = 'https://localhost:44413/watchlist';
-  
-    /*Axios(url, userInfo)
-        .then((result) => {
-            if (result) {
-                this.setState({ message: 'Added!' })
-            }
-        })*/
-      const url = 'https://localhost:44413/watchlist';
-  
-    let userInfo = {
+    }
 
-      name: "",
-      movieId: 0,
+     
+    addToWatchlist = async (movieid) => {
+        alert(movieid);
+
+       const url = 'https://localhost:44413/watchlist';
+  
+    let movieInfo = {
+
+        MovieId: 808,
+        WatchListId : 1,
     };
-    Axios(url, userInfo)
-        .then((result) => {
-            if (result) {
-                this.setState({ message: 'Added!' })
-            }
-        })
-       //var array = [];
-        //array = name.split(',');
-        /*const movie = {
-          title: 'Shrek Stories',
-          genres: ['Family']
-        };
-        fetch('/watchlist', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(movie)
-        })
-          .then(response => response.json())
-          .then(data => console.log(data))
-          .catch(error => console.error(error));*/
 
-
-      alert(name);
-      //alert(movieId);
+       await Axios.post(url, movieInfo);
+        
+       
+      
     }
   render() {
 
@@ -134,7 +109,7 @@ export class SearchTable extends React.Component {
                     <td key={`${movieHit.id}genre`}>{thisHitsGenres}</td>
                     <td hidden="true" key={`{movieHit.id}moviedid`}> {movieHit.id}</td>
                     <td>
-                    <button onClick={() => this.addToWatchlist(`${movieHit.title}, ${movieHit.id}`)}>
+                    <button onClick={() => this.addToWatchlist(`${movieHit.id}`)}>
                       Save
                     </button>
                     </td>
