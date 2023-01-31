@@ -2,12 +2,14 @@ import React from 'react';
 import { Table } from 'reactstrap';
 import Axios from 'axios';
 
+
 export class SearchTable extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = { movies: [] }
     this.state = { genres: [] }
+  
   }
 
   async componentDidMount() {
@@ -47,9 +49,49 @@ export class SearchTable extends React.Component {
     if (!this.state.movies || !this.state.genres) { return null }
 
   }
+   addToWatchlist = (name) => {
+    //const url = 'https://localhost:44413/watchlist';
+  
+    /*Axios(url, userInfo)
+        .then((result) => {
+            if (result) {
+                this.setState({ message: 'Added!' })
+            }
+        })*/
+      const url = 'https://localhost:44413/watchlist';
+  
+    let userInfo = {
+
+      name: "",
+      movieId: 0,
+    };
+    Axios(url, userInfo)
+        .then((result) => {
+            if (result) {
+                this.setState({ message: 'Added!' })
+            }
+        })
+       //var array = [];
+        //array = name.split(',');
+        /*const movie = {
+          title: 'Shrek Stories',
+          genres: ['Family']
+        };
+        fetch('/watchlist', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(movie)
+        })
+          .then(response => response.json())
+          .then(data => console.log(data))
+          .catch(error => console.error(error));*/
 
 
-
+      alert(name);
+      //alert(movieId);
+    }
   render() {
 
     if (this.state.movies === undefined || this.state.genres === undefined) {
@@ -71,6 +113,7 @@ export class SearchTable extends React.Component {
               <tr>
                 <th>Name</th>
                 <th>Genre</th>
+                <th>Add to watchlist</th>
               </tr>
             </thead>
             <tbody>
@@ -89,9 +132,17 @@ export class SearchTable extends React.Component {
                   <tr key={movieHit.id}>
                     <td key={`${movieHit.id}title`}>{movieHit.title}</td>
                     <td key={`${movieHit.id}genre`}>{thisHitsGenres}</td>
+                    <td hidden="true" key={`{movieHit.id}moviedid`}> {movieHit.id}</td>
+                    <td>
+                    <button onClick={() => this.addToWatchlist(`${movieHit.title}, ${movieHit.id}`)}>
+                      Save
+                    </button>
+                    </td>
                   </tr>
+                  
                 )
               })}
+              
             </tbody>
           </Table>
         </div>

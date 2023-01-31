@@ -8,16 +8,14 @@
 
         public string Name { get; set; }
         //A watchlist points to the User, when user clicks "my watch list" it will query for watchlist WHERE userId = etc.
-        public User User { get; set; }
+        //public User User { get; set; }
         public int UserId { get; set; }
-        public List<WatchListMovieId> MovieIds { get; set; }
+        //public List<WatchListMovieId> MovieIds { get; set; }
 
-        public WatchList (int id, User user, int userId, List<WatchListMovieId> movieIds)
+        public WatchList (int userId, string name)
         {
-            id = Id;
-            User = user;
             UserId = userId;
-            MovieIds = movieIds;
+            Name = name;
         }
 
         public WatchList () { }
