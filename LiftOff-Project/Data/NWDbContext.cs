@@ -18,6 +18,8 @@ namespace LiftOff_Project.Data
         //Testing Models will be defunct post-API
         public DbSet<MyWatchListModel> MyWatchListModels { get; set; }
         public DbSet<TestingModel> TestingModels { get; set; }
+
+        public DbSet<UserMovieId> UserMovies { get; set; }
         public NWDbContext(DbContextOptions<NWDbContext> options) : base(options)
         {
 
@@ -26,6 +28,9 @@ namespace LiftOff_Project.Data
         {
             modelBuilder.Entity<WatchListMovieId>()
                 .HasKey(j => new { j.MovieId, j.WatchListId });
+
+            modelBuilder.Entity<UserMovieId>()
+                .HasKey(j => new { j.UserId, j.APIMovieId });
         }
 
     }
