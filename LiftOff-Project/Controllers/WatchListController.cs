@@ -21,17 +21,18 @@ namespace LiftOff_Project.Controllers
         {
 
             _watchListContext.WatchListMovieId.Add(watchlistmovieid);
+
             await _watchListContext.SaveChangesAsync();
             return Ok();
         }
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<WatchList>>> GetWatchList()
+        public async Task<ActionResult<IEnumerable<WatchListMovieId>>> GetWatchList()
         {
-            if (_watchListContext.WatchLists == null)
+            if (_watchListContext.WatchListMovieId == null)
             {
                 return NotFound();
             }
-            return await _watchListContext.WatchLists.ToListAsync();
+            return await _watchListContext.WatchListMovieId.ToListAsync();
 
         }
 

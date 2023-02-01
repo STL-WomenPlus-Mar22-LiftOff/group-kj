@@ -52,18 +52,30 @@ export class SearchTable extends React.Component {
 
      
     addToWatchlist = async (movieid) => {
-        alert(movieid);
+    //    alert(movieid);
 
-       const url = 'https://localhost:44413/watchlist';
+    //   const url = 'https://localhost:44413/watchlist';
   
-    let movieInfo = {
+    //let movieInfo = {
 
-        MovieId: 808,
-        WatchListId : 1,
-    };
+    //    MovieId: 808,
+    //    WatchListId : 1,
+    //};
 
-       await Axios.post(url, movieInfo);
-        
+    //   await Axios.post(url, movieInfo);
+        Axios.post('https://localhost:44413/watchlist',
+                {
+                    "data": {
+                        movieid: '808',
+                        watchlistid: '1',
+                        
+                    }
+                }
+            )
+            .then(response => {
+                console.log(response);
+            });
+
        
       
     }
