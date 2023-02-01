@@ -25,6 +25,7 @@ namespace LiftOff_Project.Controllers
             await _watchListContext.SaveChangesAsync();
             return Ok();
         }
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<WatchListMovieId>>> GetWatchList()
         {
