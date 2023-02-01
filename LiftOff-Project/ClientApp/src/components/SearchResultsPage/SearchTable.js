@@ -46,7 +46,26 @@ export class SearchTable extends React.Component {
 
     if (!this.state.movies || !this.state.genres) { return null }
 
-  }
+    }
+
+    addToWatchlist = async (movieid) => {
+        
+        Axios.post('https://localhost:44413/usermovieid',
+            {
+                "data": {
+                    userid: '4',
+                    apimovieid: '800',
+
+                }
+            }
+        )
+            .then(response => {
+                console.log(response);
+            });
+
+        alert(movieid);
+
+    }
 
 
 
@@ -89,6 +108,10 @@ export class SearchTable extends React.Component {
                   <tr key={movieHit.id}>
                     <td key={`${movieHit.id}title`}>{movieHit.title}</td>
                     <td key={`${movieHit.id}genre`}>{thisHitsGenres}</td>
+                    <td>
+                       <button onClick={() => this.addToWatchlist(`${movieHit.id}`)}>Add</button>
+                    </td>
+
                   </tr>
                 )
               })}
