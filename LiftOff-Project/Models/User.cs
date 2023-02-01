@@ -3,21 +3,24 @@
     public class User
     {
         public int Id { get; set; }
-        public string UserName { get; set; }
+        public string? UserName { get; set; }
         //Will have auth in future, simple user exists for testing the User - WatchList hookup
-        public string Password { get; set; }
-        
+        public string? Password { get; set; }
+        //we need password to save login
+        public string? Email { get; set; }
+
         //public WatchList WatchList { get; set; }
-        
-        public User (int id, string userName, string password, WatchList watchList, int watchListId)
+
+        public User(int id, string userName, string email, string password)
         {
             Id = id;
             UserName = userName;
+            Email = email;
             Password = password;
-          //  WatchList = watchList;
+            //WatchList = watchList;
         }
 
-        public User () { }
+        public User() { }
 
         public override bool Equals(object? obj)
         {

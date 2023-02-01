@@ -8,8 +8,10 @@
         public int WatchListId { get; set; }
 //        public WatchList WatchList { get; set; }
 
-        public WatchListMovieId()
+        public WatchListMovieId(int movieid,int watchlistid)
         {
+            MovieId = movieid;  
+            WatchListId = watchlistid;
         }
     }
 }
