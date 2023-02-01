@@ -48,22 +48,42 @@ export class SearchTable extends React.Component {
 
     }
 
-    addToWatchlist = async (movieid) => {
+    addToWatchlist = async (movieid,userid) => {
+        const url = `usermovieid/`;  //API controller URL
+        var ifExists = false;
+        fetch(`usermovieid/${userid}`, {  //this is fetching from the Login API controller to pull a specific user for the email entered
+            method: 'GET',
+            headers: { 'Content-type': 'application/json' },
+
+        }).then(r => r.json()).then(res => {
+            //console.log(res[0]['apiMovieId']);
+            if (res.length > 0) {
+                console.log("here");
+                for (var i = 0; i < res.length; i++) {
+                    //console.log(i);
+              //      console.log("inside for", i);
+                //    console.log(res[i]['apiMovieId']); 
+                  //  console.log(movieid);
+                    if (res[i]['apiMovieId'] == movieid) {
+                        ifExists = true;
+                            alert('This already exists!!');
+
+                        }
+                    }
+                } 
+            
+        })
         
-        Axios.post('https://localhost:44413/usermovieid',
-            {
-                "data": {
-                    userid: '4',
-                    apimovieid: '800',
+        if (!ifExists) {
+            let movieinfo = {
+            UserId: userid,
+            APIMovieId: movieid
+        };
 
-                }
-            }
-        )
-            .then(response => {
-                console.log(response);
-            });
-
-        alert(movieid);
+        await Axios.post(url, movieinfo);  //this is adding the newly created user to the database
+        alert("Added to the watchlist");
+        }
+        
 
     }
 
@@ -109,7 +129,7 @@ export class SearchTable extends React.Component {
                     <td key={`${movieHit.id}title`}>{movieHit.title}</td>
                     <td key={`${movieHit.id}genre`}>{thisHitsGenres}</td>
                     <td>
-                       <button onClick={() => this.addToWatchlist(`${movieHit.id}`)}>Add</button>
+                            <button onClick={() => this.addToWatchlist(`${movieHit.id}`,`${window.userid}`)}>Add</button>
                     </td>
 
                   </tr>
@@ -122,3 +142,26 @@ export class SearchTable extends React.Component {
     }
   }
 }
+
+
+//I worked on searchtable.js
+//Usermovieidcontroller.
+// [HttpGet("{userid}")]
+/*       public IEnumerable < UserMovieId > GetMovieIdForUser(int userid)
+{
+
+    IEnumerable < UserMovieId > UserMovie = _userMovieIdContext.UserMovies
+        .Where(js => js.UserId == userid)
+        .ToList();
+    return UserMovie;
+}
+
+[HttpPost]
+        public async Task < ActionResult < UserMovieId >> PostUserMovieId(UserMovieId userMovieid)
+{
+
+    _userMovieIdContext.UserMovies.Add(userMovieid);
+
+    await _userMovieIdContext.SaveChangesAsync();
+    return Ok();
+}*/

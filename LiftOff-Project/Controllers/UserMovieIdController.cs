@@ -26,6 +26,16 @@ namespace LiftOff_Project.Controllers
             return await _userMovieIdContext.UserMovies.ToListAsync();
 
         }
+        [HttpGet("{userid}")]
+        public IEnumerable<UserMovieId> GetMovieIdForUser(int userid)
+        {
+
+            IEnumerable<UserMovieId> UserMovie = _userMovieIdContext.UserMovies
+                  .Where(js => js.UserId == userid)
+                  .ToList();
+            return UserMovie;
+        }
+        
         [HttpPost]
         public async Task<ActionResult<UserMovieId>> PostUserMovieId(UserMovieId userMovieid)
         {
