@@ -29,8 +29,8 @@ namespace LiftOff_Project.Controllers
                 .ToListAsync();
         }
 
-        [HttpGet("{id}")]
-        public async Task<List<UserMovieId>> GetUserMovieIdsByUserId(int id)
+        [HttpGet("{userid}")]
+        public async Task<List<UserMovieId>> GetUserMovieIdsByUserId(int userid)
         {
             //if (_userMovieIdContext.UserMovies == null)
             //{
@@ -40,12 +40,12 @@ namespace LiftOff_Project.Controllers
 
             List<UserMovieId> myMovieResponse = await _userMovieIdContext.UserMovies
                 .ToAsyncEnumerable()
-                .Where(x => x.UserId == id)
+                .Where(x => x.UserId == userid)
                 .ToListAsync();
  
             foreach (var movie in myMovieResponse)
             {
-                if (movie.UserId == id)
+                if (movie.UserId == userid)
                 {
                     myMovieIds.Add(movie);
                 }

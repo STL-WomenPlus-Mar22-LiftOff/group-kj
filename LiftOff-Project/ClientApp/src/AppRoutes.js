@@ -6,7 +6,7 @@ import { SearchResults } from "./components/SearchResultsPage/SearchResults";
 import MyWatchList from "./components/MyWatchList";
 import { UserProfile } from "./components/UserProfile";
 import { Users } from "./components/Users";
-import { WatchList } from "./components/WatchList"
+import WatchList from "./components/WatchList"
 
 const AppRoutes = [
   {
