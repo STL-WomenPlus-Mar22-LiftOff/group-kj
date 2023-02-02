@@ -59,45 +59,7 @@ namespace LiftOff_Project.Controllers
 
         }
 
-        /*[HttpPut("{ID}")]
-        public async Task<ActionResult> PutUser(int id, User user)
-        {
-            if(id != user.Id)
-            {
-                return BadRequest();
-            }
-            _userContext.Entry(user).State = EntityState.Modified;
-            try
-            {
-                await _userContext.SaveChangesAsync();
-            }
-            catch(DbUpdateConcurrencyException)
-            {
-                throw;
-            }
-            return Ok();
-
-        }*/
-
-        /*[HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteUser(int id)
-        {
-            if(_userContext.Users == null)
-            {
-                return NotFound();
-            }
-            //var user = await _userContext.Users.FindAsync(id);
-            var user = await _userContext.Users.FindAsync(id);
-            {
-                if(user == null)
-                {
-                    return NotFound();
-                }
-                _userContext.Users.Remove(user);
-                await _userContext.SaveChangesAsync();
-                return Ok();
-            }
-        }*/
+        
 
     }
 }

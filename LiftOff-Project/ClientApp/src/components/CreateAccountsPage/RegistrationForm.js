@@ -7,6 +7,7 @@ import css from './CreateAccount.module.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+
 const schema = yup.object().shape({
     email: yup.string().email("Please enter a valid email address").required("Please enter a valid email address"),
     password: yup.string().required("Password is required").min(6, "Password must be at least 6 characters").max(15, "Password can only be 15 characters max"),
@@ -14,6 +15,9 @@ const schema = yup.object().shape({
     firstName: yup.string().required("Please enter your first name"),
     lastName: yup.string().required("Please enter your last name"),
 });
+
+var bcrypt = require('bcryptjs');
+var salt = bcrypt.genSaltSync(10);
 
 export function RegistrationForm() {
 
@@ -32,12 +36,15 @@ export function RegistrationForm() {
     const submitRegistrationForm = async () => {
 
         const url = `user/`;  //API controller URL
+        var hash = bcrypt.hashSync(password, salt);
 
         let userInfo = {
             UserName: firstName + ' ' + lastName,
-            Password: password,
+            Password: hash,
             Email: email,
         };
+
+        
 
         await axios.post(url, userInfo);  //this is adding the newly created user to the database
 

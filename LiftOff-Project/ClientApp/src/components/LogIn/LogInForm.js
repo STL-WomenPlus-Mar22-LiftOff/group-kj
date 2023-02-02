@@ -5,6 +5,7 @@ import * as yup from "yup";
 import Button from 'react-bootstrap/Button';
 import css from './LogInForm.module.css';
 import { useNavigate } from 'react-router-dom';
+import bcrypt from "bcryptjs";
 
 const schema = yup.object().shape({
     email: yup.string().email("Please enter your email address").required("Please enter your email address"),
@@ -30,10 +31,11 @@ export function LogInForm() {
             headers: { 'Content-type': 'application/json' },
 
         }).then(r => r.json()).then(res => {
+            let hash = res.data[0].columns.password;
             if (res) {
                 if (res.length > 0) {
                     //This checks if the password entered matches the password for that email in the database
-                    if (res[0]['password'] === password) {
+                    if (bcrypt.compareSync(password, hash)) {
                         window.user = res[0]['userName'];  // If yes, store the username in a window variable to pass to user profile page.
                         window.userid = res[0]['id'];  //If yes, store the id in a window variable to pass to user profile page.
                         navigate('/user-profile');
