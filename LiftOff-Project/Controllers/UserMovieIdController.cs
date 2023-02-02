@@ -30,17 +30,30 @@ namespace LiftOff_Project.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<UserMovieId>>> GetUserMovieIdsByUserId(int userId)
+        public async Task<List<UserMovieId>> GetUserMovieIdsByUserId(int id)
         {
-            if (_userMovieIdContext.UserMovies == null)
+            //if (_userMovieIdContext.UserMovies == null)
+            //{
+            // //   return NotFound();
+            //}
+            List<UserMovieId> myMovieIds = new List<UserMovieId>();
+
+            List<UserMovieId> myMovieResponse = await _userMovieIdContext.UserMovies
+                .ToAsyncEnumerable()
+                .Where(x => x.UserId == id)
+                .ToListAsync();
+ 
+            foreach (var movie in myMovieResponse)
             {
-                return NotFound();
+                if (movie.UserId == id)
+                {
+                    myMovieIds.Add(movie);
+                }
             }
 
-            return await _userMovieIdContext.UserMovies
-                .Where(x => x.UserId == userId)
-                .ToListAsync();
+            return myMovieResponse;
         }
+            
         
     }
 }
