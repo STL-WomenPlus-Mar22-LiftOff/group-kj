@@ -5,6 +5,7 @@ import { CreateAccount } from "./components/CreateAccountsPage/CreateAccount";
 import { SearchResults } from "./components/SearchResultsPage/SearchResults";
 import MyWatchList from "./components/MyWatchList";
 import { UserProfile } from "./components/UserProfile";
+import { SearchTable } from "./components/SearchResultsPage/SearchTable";
 
 
 const AppRoutes = [
@@ -40,7 +41,10 @@ const AppRoutes = [
     path: '/user-profile',
     element: <UserProfile />
   },
-
+  {
+        path: '/search-table',
+        element: <SearchTable />
+  },
 ];
 
 export default AppRoutes;

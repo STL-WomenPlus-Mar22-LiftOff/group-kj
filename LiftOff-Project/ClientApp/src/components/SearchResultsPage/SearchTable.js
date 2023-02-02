@@ -32,7 +32,7 @@ export class SearchTable extends React.Component {
 
 
     //Gets genre data to add to movie data
-    const  = "genre/movie/list";
+    const genreList = "genre/movie/list";
 
 
 
