@@ -32,14 +32,14 @@ export class SearchTable extends React.Component {
 
 
     //Gets genre data to add to movie data
-    const genreList = "genre/movie/list";
+    const  = "genre/movie/list";
 
 
 
     const config = {
       headers: { Authorization: `Bearer ${bearer}` }
     }
-    let searchString = "horror";
+    let searchString = window.searchTerm;
 
     // 
     //   Change to just get movies.then do the big axios request
