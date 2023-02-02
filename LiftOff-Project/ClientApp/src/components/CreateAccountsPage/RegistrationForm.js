@@ -29,12 +29,9 @@ export function RegistrationForm() {
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
 
-    const submitRegistrationForm = async (data) => {
-        navigate('/user-profile');
-        console.log(data);
-        //alert(JSON.stringify(data));
+    const submitRegistrationForm = async () => {
 
-        const url = 'https://localhost:44413/user';
+        const url = `user/`;  //API controller URL
 
         let userInfo = {
             UserName: firstName + ' ' + lastName,
@@ -42,7 +39,22 @@ export function RegistrationForm() {
             Email: email,
         };
 
-        await axios.post(url, userInfo);
+        await axios.post(url, userInfo);  //this is adding the newly created user to the database
+
+        //This is fetching the newly created user's information to store in window variables to pass to the user profile page
+        fetch(`login/${email}`, {
+            method: 'GET',
+            headers: { 'Content-type': 'application/json' },
+
+        }).then(r => r.json()).then(res => {
+            if (res) {
+                if (res.length > 0) {
+                    window.user = res[0]['userName'];  // If yes, store the username in a window variable to pass to user profile page.
+                    window.userid = res[0]['id'];  //If yes, store the id in a window variable to pass to user profile page.
+                    navigate('/user-profile');
+                }
+            }
+        })
     };
 
     return (

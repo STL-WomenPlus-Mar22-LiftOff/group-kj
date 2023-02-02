@@ -1,10 +1,9 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import Button from 'react-bootstrap/Button';
 import css from './LogInForm.module.css';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const schema = yup.object().shape({
@@ -19,24 +18,33 @@ export function LogInForm() {
         mode: "onBlur",
     });
 
-    const navigate = useNavigate();
+    const navigate = useNavigate(); //For navigating to the user profile page.
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [email, setEmail] = useState(""); //Setting the email entered in the textbox
+    const [password, setPassword] = useState(""); //Setting the password entered in password textbox.
 
-    const submitLogInForm = async (data) => {
-        navigate('/user-profile');
-        console.log(data);
-        //alert(JSON.stringify(data));
+    const submitLogInForm = () => {
 
-        const url = '';  //not sure what the route is since we have a modal and not a full log in page
+        fetch(`login/${email}`, {  //this is fetching from the Login API controller to pull a specific user for the email entered
+            method: 'GET',
+            headers: { 'Content-type': 'application/json' },
 
-        let userInfo = {
-            Password: password,
-            Email: email,
-        };
-
-        await axios.post(url, userInfo);
+        }).then(r => r.json()).then(res => {
+            if (res) {
+                if (res.length > 0) {
+                    //This checks if the password entered matches the password for that email in the database
+                    if (res[0]['password'] === password) {
+                        window.user = res[0]['userName'];  // If yes, store the username in a window variable to pass to user profile page.
+                        window.userid = res[0]['id'];  //If yes, store the id in a window variable to pass to user profile page.
+                        navigate('/user-profile');
+                    } else {
+                        alert("We couldn't log you in. Please check your email and password and try again.");
+                    }
+                } else {
+                    alert("We couldn't log you in. Please check your email and password and try again.");
+                }
+            }
+        })
     };
 
     return (

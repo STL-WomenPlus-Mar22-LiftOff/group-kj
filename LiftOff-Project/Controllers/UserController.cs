@@ -17,7 +17,7 @@ namespace LiftOff_Project.Controllers
         }
 
 
-        /*[HttpGet]
+        [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
             if (_userContext.Users == null)
@@ -42,7 +42,7 @@ namespace LiftOff_Project.Controllers
                 return NotFound();
             }
             return user;
-        }*/
+        }
 
         [HttpPost]
 
