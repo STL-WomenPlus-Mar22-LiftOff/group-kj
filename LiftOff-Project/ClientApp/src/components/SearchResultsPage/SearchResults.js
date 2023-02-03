@@ -5,6 +5,9 @@ import Button from 'react-bootstrap/Button';
 export function SearchResults() {
     const location = useLocation();
     const searchResults = location.state.searchResults;
+    const streamServices = location.state.streamServices;
+
+    console.log(streamServices);
 
     return (
         <div>
@@ -12,7 +15,8 @@ export function SearchResults() {
                 <thead>
                     <tr>
                         <th>Title</th>
-                        <th>Overview</th>
+                        <th>Description</th>
+                        <th>Where to stream</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -20,6 +24,13 @@ export function SearchResults() {
                         <tr key={result.id}>
                             <td>{result.title}</td>
                             <td>{result.overview}</td>
+                            <td>
+                                <ul>
+                                    {streamServices[result.id] && Array.isArray(streamServices[result.id]) ? streamServices[result.id].map((service) => (
+                                        <li key={service.id}>{service.name}</li>
+                                    )) : <li>Not available</li>}
+                                </ul>
+                            </td>
                         </tr>
                     ))}
                 </tbody>
