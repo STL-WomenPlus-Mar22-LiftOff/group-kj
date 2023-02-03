@@ -15,6 +15,7 @@ namespace LiftOff_Project.Data
         //Testing Models will be defunct post-API
         public DbSet<MyWatchListModel> MyWatchListModels { get; set; }
 
+
         public DbSet<UserMovieId> UserMovies { get; set; }
         public NWDbContext(DbContextOptions<NWDbContext> options) : base(options)
         {

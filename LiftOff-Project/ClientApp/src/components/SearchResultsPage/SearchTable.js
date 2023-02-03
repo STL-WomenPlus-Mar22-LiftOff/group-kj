@@ -172,13 +172,46 @@ render() {
                   }
                 }
               })
+                addToWatchlist = async (movieid) => {
+                    //    alert(movieid);
+
+                    //   const url = 'https://localhost:44413/watchlist';
+
+                    //let movieInfo = {
+
+                    //    MovieId: 808,
+                    //    WatchListId : 1,
+                    //};
+
+                    //   await Axios.post(url, movieInfo);
+                    Axios.post('https://localhost:44413/watchlist',
+                        {
+                            "data": {
+                                movieid: '808',
+                                watchlistid: '1',
+
+                            }
+                        }
+                    )
+                        .then(response => {
+                            console.log(response);
+                        });
+
+
+
+                }
               return (
                 <tr key={movieHit.id}>
                   <td key={`${movieHit.id}title`}>{movieHit.title}</td>
                   <td key={`${movieHit.id}genre`}>{thisHitsGenres}</td>
                   <td key={`${movieHit.id}stream`}>{thisHitsStreamingServices}</td>
                   <td key={`${movieHit.id}rent`}>{thisHitsRentals}</td>
-                </tr>
+                  <td>
+                    <button onClick={() => this.addToWatchlist(`${movieHit.id}`)}>
+                              Add
+                    </button>
+                  </td>  
+                  </tr>
               )
             })}
           </tbody>
