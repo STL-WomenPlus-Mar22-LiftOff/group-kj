@@ -26,7 +26,7 @@ export function LogInForm() {
     const submitLogInForm = () => {
         let emailArray = [];
 
-        fetch(`user/`, {  //call the api controller
+        fetch('https://localhost:44413/user', {
             method: 'GET',
             headers: { 'Content-type': 'application/json' },
 

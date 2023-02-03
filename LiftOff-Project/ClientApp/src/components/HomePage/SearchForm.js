@@ -1,10 +1,7 @@
 ﻿import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import css from './SearchForm.module.css';
-<<<<<<< HEAD
 import { Table } from 'reactstrap';
-=======
->>>>>>> bd41698 (added some css for the search field and removed the text that said no results found before a search was completed)
 
 if (!window.searchTerm) {
     window.searchTerm = '';
@@ -21,18 +18,8 @@ export function SearchBar() {
         window.searchTerm = e.target.value;
     };
 
-<<<<<<< HEAD
     const handleSubmit = (input) => {
         navigate('/search-table', );
-=======
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        const response = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${searchTerm}`);
-        const data = await response.json();
-        setSearchResults(data.results);
-        const streamServices = await getStreamServices(data.results);
-        navigate('/search-results', { state: { searchResults: data.results, streamServices } });
->>>>>>> bd41698 (added some css for the search field and removed the text that said no results found before a search was completed)
     };
 
     const getStreamServices = async (results) => {
