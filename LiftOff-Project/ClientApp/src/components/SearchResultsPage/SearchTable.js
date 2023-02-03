@@ -3,6 +3,7 @@ import { Table } from 'reactstrap';
 import Axios from 'axios';
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
+import css from '../HomePage/Home.module.css';
 
 const homeBackground = {
     backgroundImage: "url('./movies.jpg')",
@@ -118,7 +119,8 @@ render() {
 
 
     return (
-      <div>
+        <div>
+            <h1 className={css.h1}>Here are your search results:</h1>
         <Table striped bordered hover>
           <thead>
             <tr>
