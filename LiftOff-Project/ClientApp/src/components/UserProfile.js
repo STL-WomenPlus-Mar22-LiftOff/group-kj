@@ -31,6 +31,7 @@ export class UserProfile extends React.Component {
                           <h2 className={css.h2}>Hello {window.user}!</h2>
                           <h3 className={css.h3}>Let's find your next favorite movie.</h3>
                       </div>
+<<<<<<< HEAD
                       <br />
                       <br />
                       <div className={css.box}>
@@ -42,6 +43,14 @@ export class UserProfile extends React.Component {
                       <div className={css.box}>
                           <Link to="/my-watch-list">Check out your watch list</Link>
                       </div>
+=======
+                  </Col>
+
+                  <Col>
+
+                      <SearchForm />
+
+>>>>>>> a1c5160 (started working on user profile page)
                   </Col>
 
               </Row>
