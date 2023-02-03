@@ -1,6 +1,7 @@
-﻿using LiftOff_Project.Data;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using LiftOff_Project.Data;
+using LiftOff_Project.Models;
 
 namespace LiftOff_Project.Controllers
 {
@@ -8,22 +9,31 @@ namespace LiftOff_Project.Controllers
     [ApiController]
     public class LogInController : ControllerBase
     {
-        private IUserData _userData;
+        private readonly NWDbContext _userContext;
 
-        public LogInController(IUserData userdata)
+        public LogInController(NWDbContext userdata)
         {
-            _userData = userdata;
+            _userContext = userdata;
         }
 
-
-        [HttpGet("{UserName}")]
-        public IActionResult GetUsers(string username)
+        [HttpGet]
+        public IEnumerable<User> GetUsers()
         {
 
-            //This is pulling the data from the database.
-            return Ok(_userData.GetUserbyUserName(username));
-            //return users;
+
+            IEnumerable<User> User = _userContext.Users                
+                  .ToList();
+            return User;
         }
 
+        [HttpGet("{userid}")]
+        public IEnumerable<User> GetUsers(string userid)
+        {
+
+            IEnumerable<User> User = _userContext.Users
+                  .Where(js => js.Email == userid)
+                  .ToList();
+            return User;
+        }
     }
 }
