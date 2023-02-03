@@ -8,6 +8,7 @@ if (!window.searchTerm) {
 }
 export function SearchBar() {
     const [searchTerm, setSearchTerm] = useState(window.searchTerm);
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         setSearchTerm(e.target.value);
@@ -17,16 +18,6 @@ export function SearchBar() {
     const handleSubmit = (input) => {
         navigate('/search-table', );
     };
-
-    const getStreamServices = async (results) => {
-        let streamServices = {};
-        for (const result of results) {
-            const response = await fetch(`https://api.themoviedb.org/3/movie/${result.id}/watch/providers?api_key=${apiKey}`);
-            const data = await response.json();
-            streamServices[result.id] = data.providers;
-        }
-        return streamServices;
-    }
 
     return (
         <form onSubmit={handleSubmit} className={css.searchbox}>

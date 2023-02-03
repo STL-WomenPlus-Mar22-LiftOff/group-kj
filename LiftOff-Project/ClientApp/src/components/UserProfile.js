@@ -17,7 +17,7 @@ export class UserProfile extends React.Component {
 
 
   componentDidMount() {
-    document.body.style.background = "white";
+      document.body.style = { homeBackground };
   }
 
   render() {

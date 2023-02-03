@@ -4,6 +4,11 @@ import Axios from 'axios';
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 
+const homeBackground = {
+    backgroundImage: "url('./movies.jpg')",
+    backgroundSize: 'cover',
+}
+
 export class SearchTable extends React.Component {
 
   constructor(props) {
