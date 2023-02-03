@@ -1,7 +1,8 @@
 import React from 'react';
 import { Table } from 'reactstrap';
 import Axios from 'axios';
-
+import { Link } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
 
 export class SearchTable extends React.Component {
 
@@ -176,7 +177,8 @@ render() {
               )
             })}
           </tbody>
-        </Table>
+            </Table>
+            <Link to="/user-profile"><Button variant="primary">Search again!</Button>{' '}</Link>
       </div>
     )
   }

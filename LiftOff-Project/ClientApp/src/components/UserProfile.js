@@ -28,7 +28,7 @@ export class UserProfile extends React.Component {
 
                   <Col>
                       <div className={css.box}>
-                          <h2 className={css.h2}>Hello Username!</h2>
+                          <h2 className={css.h2}>Hello {window.user}!</h2>
                           <h3 className={css.h3}>Let's find your next favorite movie.</h3>
                       </div>
                       <br />

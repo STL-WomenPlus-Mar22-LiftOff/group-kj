@@ -55,10 +55,6 @@ export class NavMenu extends Component {
               <NavItem>
                 <NavLink className="text-dark" onClick={this.handleModalOpen} style={{cursor: 'pointer'}}>Log In</NavLink>
               </NavItem>
-              
-              <NavItem>
-                <NavLink tag={Link} className="text-dark" to="/search-results">Search Results</NavLink>
-              </NavItem>
               <NavItem>
                 <NavLink tag={Link} className="text-dark" to="/user-profile">User Profile</NavLink>
               </NavItem>

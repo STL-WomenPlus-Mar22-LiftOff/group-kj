@@ -2,7 +2,6 @@ import { Counter } from "./components/Counter";
 import { FetchData } from "./components/FetchData";
 import { Home } from "./components/HomePage/Home";
 import { CreateAccount } from "./components/CreateAccountsPage/CreateAccount";
-import { SearchResults } from "./components/SearchResultsPage/SearchResults";
 import MyWatchList from "./components/MyWatchList";
 import { UserProfile } from "./components/UserProfile";
 import { SearchTable } from "./components/SearchResultsPage/SearchTable";
@@ -32,10 +31,6 @@ const AppRoutes = [
   {
     path: '/my-watch-list',
     element: <MyWatchList />
-  },
-  {
-    path: '/search-results',
-    element: <SearchResults />
   },
   {
     path: '/user-profile',
