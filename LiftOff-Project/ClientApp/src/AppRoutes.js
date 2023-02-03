@@ -6,6 +6,7 @@ import { SearchResults } from "./components/SearchResultsPage/SearchResults";
 import MyWatchList from "./components/MyWatchList";
 import { UserProfile } from "./components/UserProfile";
 import { Users } from "./components/Users";
+import { SearchTable } from "./components/SearchResultsPage/SearchTable";
 
 const AppRoutes = [
   {
@@ -33,8 +34,8 @@ const AppRoutes = [
     element: <MyWatchList />
   },
   {
-    path: '/search-results',
-    element: <SearchResults />
+    path: '/search-table',
+    element: <SearchTable />
   },
   {
     path: '/user-profile',
