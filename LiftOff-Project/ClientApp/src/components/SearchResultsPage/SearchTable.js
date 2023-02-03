@@ -120,7 +120,7 @@ render() {
 
     return (
         <div>
-            <h1 className={css.h1}>Here are your search results:</h1>
+            <h1 className={css.h1}>Here are your search results: <Link to="/user-profile"><Button variant="primary">Search again!</Button>{' '}</Link></h1>
         <Table striped bordered hover>
           <thead>
             <tr>
@@ -183,7 +183,6 @@ render() {
             })}
           </tbody>
             </Table>
-            <Link to="/user-profile"><Button variant="primary">Search again!</Button>{' '}</Link>
       </div>
     )
   }
