@@ -32,36 +32,57 @@ export function RegistrationForm() {
     const [lastName, setLastName] = useState("");
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
+    
 
     const submitRegistrationForm = async () => {
 
         const url = `user/`;  //API controller URL
         var hash = bcrypt.hashSync(password, salt);
-
+        var userExists = 0;
         let userInfo = {
             UserName: firstName + ' ' + lastName,
             Password: hash,
             Email: email,
         };
-
-
-
-        await axios.post(url, userInfo);  //this is adding the newly created user to the database
-
-        //This is fetching the newly created user's information to store in window variables to pass to the user profile page
+        //Check if the user exists already
         fetch(`login/${email}`, {
             method: 'GET',
             headers: { 'Content-type': 'application/json' },
 
         }).then(r => r.json()).then(res => {
             if (res) {
+                console.log(res.length);
                 if (res.length > 0) {
-                    window.user = res[0]['userName'];  // If yes, store the username in a window variable to pass to user profile page.
-                    window.userid = res[0]['id'];  //If yes, store the id in a window variable to pass to user profile page.
-                    navigate('/user-profile');
+                    userExists = 1;
+                    alert("User exists");
+                    console.log("user existing");
+                    
+                }
+                else {
+                    console.log(userExists);
+                    if (userExists == 0) {
+                        console.log("Posting the record");
+                        axios.post(url, userInfo);
+                        fetch(`login/${email}`, {
+                            method: 'GET',
+                            headers: { 'Content-type': 'application/json' },
+
+                        }).then(r => r.json()).then(res => {
+                            if (res) {
+                                if (res.length > 0) {
+                                    window.user = res[0]['userName'];  // If yes, store the username in a window variable to pass to user profile page.
+                                    window.userid = res[0]['id'];  //If yes, store the id in a window variable to pass to user profile page.
+                                    navigate('/user-profile');
+                                }
+                            }
+                        })
+                    }
                 }
             }
-        })
+            
+            }
+        )
+        
     };
 
     return (
