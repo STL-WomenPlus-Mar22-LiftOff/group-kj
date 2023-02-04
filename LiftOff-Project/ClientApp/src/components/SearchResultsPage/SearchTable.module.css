@@ -1,0 +1,14 @@
+﻿.h2 {
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+
+.click {
+    float: right;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+    .click:hover {
+        background-color: rgb(31, 172, 31);
+        border-color: rgb(31, 172, 31);
+    }

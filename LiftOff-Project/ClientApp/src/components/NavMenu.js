@@ -30,21 +30,21 @@ export class NavMenu extends Component {
           <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
           <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={!this.state.collapsed} navbar>
             <ul className="navbar-nav flex-grow">
-              <NavItem>
-                <NavLink tag={Link} className="text-dark" to="/">Home</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink tag={Link} className="text-dark" to="/create-account">Create Account</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink tag={Link} className="text-dark" to="/search-results">Search Results</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink tag={Link} className="text-dark" to="/user-profile">User Profile</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink tag={Link} className="text-dark" to="/my-watch-list">My Watch List</NavLink>
-              </NavItem>
+            {/*  <NavItem>*/}
+            {/*    <NavLink tag={Link} className="text-dark" to="/">Home</NavLink>*/}
+            {/*  </NavItem>*/}
+            {/*  <NavItem>*/}
+            {/*    <NavLink tag={Link} className="text-dark" to="/create-account">Create Account</NavLink>*/}
+            {/*  </NavItem>*/}
+            {/*  <NavItem>*/}
+            {/*    <NavLink tag={Link} className="text-dark" to="/search-results">Search Results</NavLink>*/}
+            {/*  </NavItem>*/}
+            {/*  <NavItem>*/}
+            {/*    <NavLink tag={Link} className="text-dark" to="/user-profile">User Profile</NavLink>*/}
+            {/*  </NavItem>*/}
+            {/*  <NavItem>*/}
+            {/*    <NavLink tag={Link} className="text-dark" to="/my-watch-list">My Watch List</NavLink>*/}
+            {/*  </NavItem>*/}
             </ul>
           </Collapse>
         </Navbar>

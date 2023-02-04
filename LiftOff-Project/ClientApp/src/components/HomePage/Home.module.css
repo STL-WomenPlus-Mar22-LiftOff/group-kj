@@ -1,12 +1,13 @@
-﻿.gallery {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: auto;
-    grid-gap: 6px;
-    list-style-type: none;
-    padding-left: 0;
-    padding-bottom: 20px;
+﻿.row {
+    display: flex;
     align-items: center;
+    padding-bottom: 40px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.column {
+    flex: 20%;
 }
 
 .h2 {
@@ -14,25 +15,14 @@
     color: black;
     padding-top: 20px;
     padding-bottom: 20px;
-}
-
-.lowerleft {
-    float: left;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    max-width: 8%;
-    height: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align: center;
 }
 
 .imgsize {
-    max-width: 85%;
-    height: auto;
-    border-radius: 95%;
-}
-
-.clearleft {
-    clear: left;
+    max-width: 65%;
+    border-radius: 50%;
 }
 
 body {
@@ -41,12 +31,29 @@ body {
 }
 
 .box {
-    margin-top: 50px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     background-color: rgb(190, 224, 255);
     border: 6px solid black;
     border-radius: 10px;
     padding-bottom: 30px;
-    padding-left: 40px;
+    text-align: center;
+}
+
+.rowbuttons {
+    display: flex;
+    justify-content: center;
+}
+
+.columnbuttons {
+    flex: 50%;
+}
+
+.click:hover {
+    background-color: rgb(31, 172, 31);
+    border-color: rgb(31, 172, 31);
 }
 
 .click {
