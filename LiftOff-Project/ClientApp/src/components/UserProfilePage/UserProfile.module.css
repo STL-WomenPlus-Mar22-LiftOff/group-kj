@@ -17,17 +17,16 @@
 
 .h2 {
     padding-top: 10px;
-    padding-bottom: 20px;
+    padding-bottom: 30px;
 }
 
 .rowbuttons {
     display: flex;
     justify-content: center;
-    padding-top: 80px;
+    padding-top: 50px;
 }
 
 .columnbuttons {
-    /*flex: 50%;*/
     margin-right: 10px;
 }
 

@@ -22,7 +22,11 @@ export const WatchList = () => {
 
     const navigate = useNavigate();
 
-    const onClick = () => {
+    const searchResultsClick = () => {
+        navigate("/search-table");
+    };
+
+    const userProfileClick = () => {
         navigate("/user-profile");
     };
 
@@ -134,7 +138,8 @@ export const WatchList = () => {
                     <h2 className={css.h2}>{window.user}'s Watch List:</h2>
                 </div>
                 <div className={css.right}>
-                    <Button variant="primary" className={css.btn} onClick={onClick}>My Profile</Button>{' '}
+                <Button variant="primary" className={css.btn} onClick={searchResultsClick}>Search Results</Button>{' '}
+                    <Button variant="primary" className={css.btn} onClick={userProfileClick}>My Profile</Button>{' '}
                     <LogOut />
                 </div>
 
