@@ -38,6 +38,7 @@
     line-height: 1;
     width: 80%;
     border-radius: 5px;
+    border-color: black;
 }
 
 .click:hover {
