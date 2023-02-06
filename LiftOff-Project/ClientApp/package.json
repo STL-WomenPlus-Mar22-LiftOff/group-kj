@@ -6,6 +6,7 @@
     "@hookform/resolvers": "^2.9.10",
     "axios": "^1.2.4",
     "bootstrap": "^5.2.3",
+    "dotenv": "^16.0.3",
     "http-proxy-middleware": "^2.0.6",
     "jquery": "^3.6.0",
     "merge": "^2.1.1",
