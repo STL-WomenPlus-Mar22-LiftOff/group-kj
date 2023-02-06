@@ -1,10 +1,14 @@
 ﻿import React, { useState, useEffect } from 'react';
 import { Table } from 'reactstrap';
+import { Link } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
+import css from './HomePage/Home.module.css';
+
 const MyWatchList = () => {
     const [mywatchlist, setItems] = useState([]); //setting it to empty array.
     const dataType = 1;
 
-      useEffect(() => {
+    useEffect(() => {
         document.body.style.backgroundColor = "white";
 
         fetch(`mywatchlist/${dataType}`)
@@ -18,6 +22,7 @@ const MyWatchList = () => {
 
     return (
         <main>
+            <Link to="/user-profile"><Button className={css.click} variant="primary">Back to your profile</Button>{' '}</Link>
             {
                 (mywatchlist.length > 0) ? mywatchlist.map((item) =>
                     <div>
