@@ -3,13 +3,8 @@ import { Table } from 'reactstrap';
 import Axios from 'axios';
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
-//import css from '../HomePage/Home.module.css';
 import css from './SearchTable.module.css';
 
-const homeBackground = {
-    backgroundImage: "url('./movies.jpg')",
-    backgroundSize: 'cover',
-}
 
 export class SearchTable extends React.Component {
 
@@ -98,7 +93,7 @@ export class SearchTable extends React.Component {
     }
 
     addToWatchlist = async (movieid, userid) => {
-        
+
         const url = `usermovieid/`;  //API controller URL
         var ifExists = false;
         fetch(`usermovieid/${userid}`, {  //this is fetching from the Login API controller to pull a specific user for the email entered
@@ -117,11 +112,9 @@ export class SearchTable extends React.Component {
                     if (res[i]['apiMovieId'] == movieid) {
                         ifExists = true;
                         alert('This already exists!!');
-
                     }
                 }
             }
-
         })
 
         if (!ifExists) {
@@ -129,13 +122,15 @@ export class SearchTable extends React.Component {
                 UserId: userid,
                 APIMovieId: movieid
             };
-
             await Axios.post(url, movieinfo);  //this is adding the newly created user to the database
             alert("Added to the watchlist");
         }
-
-
     }
+
+    clickLogOut = () => {
+        window.user = null;
+        window.userid = null;
+    };
 
     render() {
 
@@ -155,11 +150,20 @@ export class SearchTable extends React.Component {
             // //console.log(this.state.streamers)
 
             // console.log(this.state.movies.results)
-            
 
             return (
                 <div>
-                    <h2 className={css.h2}>Here are your search results: <Link to="/user-profile"><Button className={css.click} variant="primary">Search again!</Button>{' '}</Link></h2>
+                    <h2 className={css.h2}>Here are your search results:
+                        <Link to="/">
+                            <Button className={css.click} variant="primary" onClick={() => this.clickLogOut()}>Log Out</Button>{' '}
+                        </Link>
+                        <Link to="/watch-list">
+                            <Button className={css.click} variant="primary">My Watch List</Button>{' '}
+                        </Link>
+                        <Link to="/user-profile">
+                            <Button className={css.click} variant="primary">Search Again</Button>{' '}
+                        </Link>
+                    </h2>
                     <Table striped bordered hover>
                         <thead>
                             <tr>
