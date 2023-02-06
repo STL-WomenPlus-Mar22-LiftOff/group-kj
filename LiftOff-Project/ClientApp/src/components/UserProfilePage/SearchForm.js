@@ -1,10 +1,12 @@
 ﻿import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import css from './SearchForm.module.css';
+import Button from 'react-bootstrap/Button';
 
 if (!window.searchTerm) {
     window.searchTerm = '';
 }
+
 export function SearchBar() {
     const [searchTerm, setSearchTerm] = useState(window.searchTerm);
     const navigate = useNavigate();
@@ -14,20 +16,20 @@ export function SearchBar() {
         window.searchTerm = e.target.value;
     };
 
-    const handleSubmit = (input) => {
+    const handleSubmit = () => {
         navigate('/search-table',);
     };
 
     return (
-        <form onSubmit={handleSubmit} className={css.searchbox}>
+        <form onSubmit={handleSubmit}>
             <input
-                className={css.inputbox}
+                className={css.input}
                 type="text"
                 value={searchTerm}
                 onChange={handleChange}
                 placeholder="Search by movie title..."
             />
-            <button type="submit">Submit</button>
+            <Button variant="primary" type="submit" className={css.click} disabled={!searchTerm}>Search</Button>{' '}
         </form>
     );
 };
