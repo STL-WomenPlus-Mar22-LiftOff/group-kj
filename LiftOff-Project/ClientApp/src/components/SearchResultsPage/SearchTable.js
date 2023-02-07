@@ -153,8 +153,17 @@ export class SearchTable extends React.Component {
 
             return (
                 <div>
-                    <p>{console.log(process.env.REACT_APP_AUTH)}</p>
-                    <h2 className={css.h2}>Here are your search results: <Link to="/user-profile"><Button className={css.click} variant="primary">Search again!</Button>{' '}</Link></h2>
+                    <h2 className={css.h2}>Here are your search results:
+                        <Link to="/">
+                            <Button className={css.click} variant="primary" onClick={() => this.clickLogOut()}>Log Out</Button>{' '}
+                        </Link>
+                        <Link to="/watch-list">
+                            <Button className={css.click} variant="primary">My Watch List</Button>{' '}
+                        </Link>
+                        <Link to="/user-profile">
+                            <Button className={css.click} variant="primary">Search Again</Button>{' '}
+                        </Link>
+                    </h2>
                     <Table striped bordered hover>
                         <thead>
                             <tr>
