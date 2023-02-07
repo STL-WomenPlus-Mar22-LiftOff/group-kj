@@ -1,0 +1,22 @@
+.input {
+    font-size: 20px;
+    font-weight: 300;
+    padding: 10px;
+    margin-right: 10px;
+    line-height: 1;
+    width: 70%;
+    border-radius: 5px;
+    border-color: black;
+}
+
+.click:hover {
+    background-color: rgb(31, 172, 31);
+    border-color: rgb(31, 172, 31);
+}
+
+.click {
+    font-weight: bold;
+    font-size: 20px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
