@@ -7,7 +7,6 @@ import css from './CreateAccount.module.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-
 const schema = yup.object().shape({
     email: yup.string().email("Please enter a valid email address").required("Please enter a valid email address"),
     password: yup.string().required("Password is required").min(6, "Password must be at least 6 characters").max(15, "Password can only be 15 characters max"),
@@ -32,14 +31,11 @@ export function RegistrationForm() {
     const [lastName, setLastName] = useState("");
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
-    
-    
 
     const submitRegistrationForm = async () => {
 
         const url = `user/`;  //API controller URL
         var hash = bcrypt.hashSync(password, salt);
-        var userExists = 0;
 
         let userInfo = {
             UserName: firstName + ' ' + lastName,
@@ -53,44 +49,28 @@ export function RegistrationForm() {
 
         }).then(r => r.json()).then(res => {
             if (res) {
-                console.log(res.length);
-                if (res.length > 0)
-                {
-                    console.log("The record already exists for the given email id", email);
-                    alert("User exists");
-                }
-                else if (res.length == 0)
-                    {
-                        console.log("The record for the given email id doesnt exist");
-                        axios.post(url, userInfo);
-                        
+                if (res.length > 0) {
+                    alert("A NextWatch account already exists with this email address.");
+                } else if (res.length === 0) {
+                    axios.post(url, userInfo);  //this is adding the newly created user to the database
 
-                        //Fetching the newly added record.
-                        fetch(`login/${email}`, {
-                            method: 'GET',
-                            headers: { 'Content-type': 'application/json' },
+                    //Fetching the newly created user's information
+                    fetch(`login/${email}`, {
+                        method: 'GET',
+                        headers: { 'Content-type': 'application/json' },
 
-                        }).then(c => c.json()).then(result => {
-                            if (result) {
-                                console.log(result);
-                                if (result.length > 0) {
-                                    console.log("Newly added ")
-                                    window.user = result[0]['userName'];  // If yes, store the username in a window variable to pass to user profile page.
-                                    window.userid = result[0]['id'];  //If yes, store the id in a window variable to pass to user profile page.
+                    }).then(c => c.json()).then(result => {
+                        if (result) {
+                            if (result.length > 0) {
+                                window.user = result[0]['userName'];  // If yes, store the username in a window variable to pass to other pages.
+                                window.userid = result[0]['id'];  //If yes, store the id in a window variable to pass to other pages.
                                 navigate('/user-profile');
                             }
-
                         }
                     })
-
                 }
-                    
             }
-        }
-            
-        )
-        
-        
+        })
     };
 
     return (
@@ -99,7 +79,7 @@ export function RegistrationForm() {
             <h1 className={css.h1}>Welcome</h1>
             <h3 className={css.h3}>Create Your Account!</h3>
 
-            <form className={css.error} >
+            <form className={css.error} onSubmit={handleSubmit(submitRegistrationForm)}>
                 <div>
                     <input className={css.input} type="email" name="email" placeholder="Email" {...register("email", { onChange: (e) => { setEmail(e.target.value) } })} />
                     {errors.email && <p>{errors.email.message}</p>}
@@ -121,7 +101,7 @@ export function RegistrationForm() {
                     {errors.lastName && <p>{errors.lastName.message}</p>}
                 </div>
                 <div>
-                    <Button variant="primary" type="submit" className={css.click} onClick={handleSubmit(submitRegistrationForm)}>Sign Up!</Button>{' '}
+                    <Button variant="primary" type="submit" className={css.click}>Sign Up!</Button>{' '}
                 </div>
             </form>
         </div>
