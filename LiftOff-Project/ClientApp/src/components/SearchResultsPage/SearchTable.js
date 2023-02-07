@@ -27,11 +27,7 @@ export class SearchTable extends React.Component {
         //these will be in every request
         const bearer = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2MjcxMjdmMTRjYWNhODM5ZWY0MmQyMmEyM2RjZWZkZSIsInN1YiI6IjYzYWI5MTU3Njk5ZmI3MDBhNzU0NDEyNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.wMsItq5wH6JD3RkfdsW-zCVPjOCrLjY-NcQXfkirVD4";
         const apiUrl = "https://api.themoviedb.org/3/";
-<<<<<<< HEAD
         const apiAuth = process.env.REACT_APP_AUTH;
-=======
-        const apiKey = process.env.REACT_APP_AUTH;
->>>>>>> 9b24052 (rebase pt 1)
         //this is the setup for the search results
         const searchMovies = "search/movie";
         const andQuer = "&query=";
