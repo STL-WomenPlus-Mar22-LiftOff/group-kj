@@ -33,18 +33,20 @@ export function RegistrationForm() {
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
     
+    
 
     const submitRegistrationForm = async () => {
 
         const url = `user/`;  //API controller URL
         var hash = bcrypt.hashSync(password, salt);
         var userExists = 0;
+
         let userInfo = {
             UserName: firstName + ' ' + lastName,
             Password: hash,
             Email: email,
         };
-        //Check if the user exists already
+
         fetch(`login/${email}`, {
             method: 'GET',
             headers: { 'Content-type': 'application/json' },
@@ -52,36 +54,42 @@ export function RegistrationForm() {
         }).then(r => r.json()).then(res => {
             if (res) {
                 console.log(res.length);
-                if (res.length > 0) {
-                    userExists = 1;
+                if (res.length > 0)
+                {
+                    console.log("The record already exists for the given email id", email);
                     alert("User exists");
-                    console.log("user existing");
-                    
                 }
-                else {
-                    console.log(userExists);
-                    if (userExists == 0) {
-                        console.log("Posting the record");
+                else if (res.length == 0)
+                    {
+                        console.log("The record for the given email id doesnt exist");
                         axios.post(url, userInfo);
+                        
+
+                        //Fetching the newly added record.
                         fetch(`login/${email}`, {
                             method: 'GET',
                             headers: { 'Content-type': 'application/json' },
 
-                        }).then(r => r.json()).then(res => {
-                            if (res) {
-                                if (res.length > 0) {
-                                    window.user = res[0]['userName'];  // If yes, store the username in a window variable to pass to user profile page.
-                                    window.userid = res[0]['id'];  //If yes, store the id in a window variable to pass to user profile page.
-                                    navigate('/user-profile');
-                                }
+                        }).then(c => c.json()).then(result => {
+                            if (result) {
+                                console.log(result);
+                                if (result.length > 0) {
+                                    console.log("Newly added ")
+                                    window.user = result[0]['userName'];  // If yes, store the username in a window variable to pass to user profile page.
+                                    window.userid = result[0]['id'];  //If yes, store the id in a window variable to pass to user profile page.
+                                navigate('/user-profile');
                             }
-                        })
-                    }
+
+                        }
+                    })
+
                 }
+                    
             }
+        }
             
-            }
         )
+        
         
     };
 
@@ -91,7 +99,7 @@ export function RegistrationForm() {
             <h1 className={css.h1}>Welcome</h1>
             <h3 className={css.h3}>Create Your Account!</h3>
 
-            <form className={css.error} onSubmit={handleSubmit(submitRegistrationForm)}>
+            <form className={css.error} >
                 <div>
                     <input className={css.input} type="email" name="email" placeholder="Email" {...register("email", { onChange: (e) => { setEmail(e.target.value) } })} />
                     {errors.email && <p>{errors.email.message}</p>}
@@ -113,7 +121,7 @@ export function RegistrationForm() {
                     {errors.lastName && <p>{errors.lastName.message}</p>}
                 </div>
                 <div>
-                    <Button variant="primary" type="submit" className={css.click}>Sign Up!</Button>{' '}
+                    <Button variant="primary" type="submit" className={css.click} onClick={handleSubmit(submitRegistrationForm)}>Sign Up!</Button>{' '}
                 </div>
             </form>
         </div>
