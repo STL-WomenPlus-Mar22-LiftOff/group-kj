@@ -12,9 +12,9 @@ export const WatchList = () => {
     const [userStreamers, setUserStreamers] = useState([])
 
     //console.log(window.userid)
-    const bearer = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2MjcxMjdmMTRjYWNhODM5ZWY0MmQyMmEyM2RjZWZkZSIsInN1YiI6IjYzYWI5MTU3Njk5ZmI3MDBhNzU0NDEyNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.wMsItq5wH6JD3RkfdsW-zCVPjOCrLjY-NcQXfkirVD4";
+    const bearer = process.env.REACT_APP_BEARER;
     const apiUrl = "https://api.themoviedb.org/3/";
-    const apiKey = "?api_key=627127f14caca839ef42d22a23dcefde";
+    const apiKey = process.env.REACT_APP_AUTH;
     const genreList = "genre/movie/list";
     const config = {
         headers: { Authorization: `Bearer ${bearer}` }
@@ -45,8 +45,8 @@ export const WatchList = () => {
             .then(data => {
                 const movieData = data;
                 for (let i = 0; i < movieData.length; i++) {
-                    movieRequests.push(axios.get(`${apiUrl}movie/${movieData[i].apiMovieId}${apiKey}`, config))
-                    streamerRequests.push(axios.get(`${apiUrl}movie/${movieData[i].apiMovieId}/watch/providers${apiKey}`, config))
+                    movieRequests.push(axios.get(`${apiUrl}movie/${movieData[i].apiMovieId}?api_key=${apiKey}`, config))
+                    streamerRequests.push(axios.get(`${apiUrl}movie/${movieData[i].apiMovieId}/watch/providers?api_key=${apiKey}`, config))
                 }
                 axios.all(movieRequests).then(movieResults => {
                     userMovieData = movieResults;
