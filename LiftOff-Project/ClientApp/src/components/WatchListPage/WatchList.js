@@ -11,7 +11,6 @@ export const WatchList = () => {
     const [userMovieList, setUserMovies] = useState([]);
     const [userStreamers, setUserStreamers] = useState([])
 
-    //console.log(window.userid)
     const bearer = process.env.REACT_APP_BEARER;
     const apiUrl = "https://api.themoviedb.org/3/";
     const apiKey = process.env.REACT_APP_AUTH;
@@ -48,7 +47,6 @@ export const WatchList = () => {
                     movieRequests.push(axios.get(`${apiUrl}movie/${movieData[i].apiMovieId}?api_key=${apiKey}`, config))
                     streamerRequests.push(axios.get(`${apiUrl}movie/${movieData[i].apiMovieId}/watch/providers?api_key=${apiKey}`, config))
                 }
-                console.log(movieRequests)
                 axios.all(movieRequests).then(movieResults => {
                     userMovieData = movieResults;
                     setUserMovies(userMovieData);
@@ -74,7 +72,6 @@ export const WatchList = () => {
         )
 
     } else {
-        console.log(userMovieList);
         let renderItems = [];
         for (let i = 0; i < userMovieList.length; i++) {
             let streamResponseEach;
@@ -132,7 +129,6 @@ export const WatchList = () => {
         }
 
         return (
-            console.log(userMovieList),
             <div>
 
                 <div className={css.left}>

@@ -31,7 +31,7 @@ export class SearchTable extends React.Component {
         //const [Post, setPost] = React.useState(null);
         document.body.style.background = "white";
         //these will be in every request
-        const bearer = process.env.REACT_APP_BEARER;
+        const bearer = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2MjcxMjdmMTRjYWNhODM5ZWY0MmQyMmEyM2RjZWZkZSIsInN1YiI6IjYzYWI5MTU3Njk5ZmI3MDBhNzU0NDEyNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.wMsItq5wH6JD3RkfdsW-zCVPjOCrLjY-NcQXfkirVD4";
         const apiUrl = "https://api.themoviedb.org/3/";
         const apiKey = process.env.REACT_APP_AUTH;
         //this is the setup for the search results
