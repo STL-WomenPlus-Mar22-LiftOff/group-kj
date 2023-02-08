@@ -31,9 +31,9 @@ export class SearchTable extends React.Component {
         //const [Post, setPost] = React.useState(null);
         document.body.style.background = "white";
         //these will be in every request
-        const bearer = process.bearer.env.REACT_APP_BEARER;
+        const bearer = process.env.REACT_APP_BEARER;
         const apiUrl = "https://api.themoviedb.org/3/";
-        const apiKey = process.key.env.REACT_APP_AUTH;
+        const apiKey = process.env.REACT_APP_AUTH;
         //this is the setup for the search results
         const searchMovies = "search/movie";
         const andQuer = "&query=";
