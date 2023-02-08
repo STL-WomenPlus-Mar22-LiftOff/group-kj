@@ -3,8 +3,14 @@ import { Table } from 'reactstrap';
 import Axios from 'axios';
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
+import { useHistory } from 'react-router-dom';
+//import css from '../HomePage/Home.module.css';
 import css from './SearchTable.module.css';
 
+const homeBackground = {
+    backgroundImage: "url('./movies.jpg')",
+    backgroundSize: 'cover',
+}
 
 export class SearchTable extends React.Component {
 
@@ -13,7 +19,7 @@ export class SearchTable extends React.Component {
         this.state = { movies: [] }
         this.state = { genres: [] }
         this.state = { moviesAttachedToStreamers: [] }
-        this.state = { streamers: [] }
+        this.state = { pageOn: window.pageNum }
     }
     //Users ID
     //GET from our databse : UserWatchlist && watchlistmovieid
@@ -27,7 +33,7 @@ export class SearchTable extends React.Component {
         //these will be in every request
         const bearer = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2MjcxMjdmMTRjYWNhODM5ZWY0MmQyMmEyM2RjZWZkZSIsInN1YiI6IjYzYWI5MTU3Njk5ZmI3MDBhNzU0NDEyNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.wMsItq5wH6JD3RkfdsW-zCVPjOCrLjY-NcQXfkirVD4";
         const apiUrl = "https://api.themoviedb.org/3/";
-        const apiAuth = process.env.REACT_APP_AUTH;
+        const apiKey = "?api_key=627127f14caca839ef42d22a23dcefde";
         //this is the setup for the search results
         const searchMovies = "search/movie";
         const andQuer = "&query=";
@@ -52,15 +58,15 @@ export class SearchTable extends React.Component {
         const getAll = async () => {
             let promises = [];
             let movieGet = await Axios.get(
-                `${apiUrl}${searchMovies}?api_key=${apiAuth}${andQuer}${searchString}${andPage}1`,
+                `${apiUrl}${searchMovies}${apiKey}${andQuer}${searchString}${andPage}${window.pageNum}`,
                 config
             )
             let movieResults = movieGet.data
             movieResponse = movieResults;
-            let moviesAndStreamers = [Axios.get(`${apiUrl}${genreList}?api_key=${apiAuth}`, config)];
+            let moviesAndStreamers = [Axios.get(`${apiUrl}${genreList}${apiKey}`, config)];
             let movieStreamerData = [];
             movieResponse.results.forEach(movieForStreamer => {
-                moviesAndStreamers.push(Axios.get(`${apiUrl}movie/${movieForStreamer.id}/watch/providers?api_key=${apiAuth}`, config))
+                moviesAndStreamers.push(Axios.get(`${apiUrl}movie/${movieForStreamer.id}/watch/providers${apiKey}`, config))
             })
             let genreAndStreamResp = await Axios.all(moviesAndStreamers).then(finalResp => {
                 //console.log(finalResp)
@@ -112,9 +118,11 @@ export class SearchTable extends React.Component {
                     if (res[i]['apiMovieId'] == movieid) {
                         ifExists = true;
                         alert('This already exists!!');
+
                     }
                 }
             }
+
         })
 
         if (!ifExists) {
@@ -122,15 +130,30 @@ export class SearchTable extends React.Component {
                 UserId: userid,
                 APIMovieId: movieid
             };
+
             await Axios.post(url, movieinfo);  //this is adding the newly created user to the database
             alert("Added to the watchlist");
         }
+
+
     }
 
     clickLogOut = () => {
         window.user = null;
         window.userid = null;
     };
+
+    clickNextPage = () => {
+        window.pageNum++;
+        this.pageOn = window.pageNum;
+        this.componentDidMount();
+    }
+
+    clickLastPage = () => {
+        window.pageNum--;
+        this.pageOn = window.pageNum;
+        this.componentDidMount();
+    }
 
     render() {
 
@@ -143,13 +166,36 @@ export class SearchTable extends React.Component {
         }
 
         else {
+            console.log(this.state.movies.total_pages);
+            console.log(this.state.pageOn);
+            console.log(window.pageNum);
+
+            //The following determines whether to show or allow users to use the page buttons (if there is no further page, no nextpage, if on page one, no previous)
+            let previousPageButton;
+            let nextPageButton;
+            if (window.pageNum === 1) {
+                previousPageButton = <Button disabled className={css.click}>Previous Page</Button>
+            } else {
+                previousPageButton = <Link to="/search-table">
+                    <Button className={css.click} variant="primary" onClick={() => this.clickLastPage()}>Previous Page</Button>{' '}
+                </Link>
+            }
+            if (window.pageNum < this.state.movies.total_pages) {
+                nextPageButton = <Link to="/search-table">
+                    <Button className={css.click} variant="primary" onClick={() => this.clickNextPage()}>Next Page</Button>{' '}
+                </Link>
+            } else {
+                nextPageButton = <Button disabled className={css.click}>Next Page</Button>
+            }
+
             // console.log(this.state.genres)
-            console.log(this.state.movies);
-            console.log(this.state.moviesAttachedToStreamers)
-            console.log(this.state.moviesAttachedToStreamers[0])
+            //console.log(this.state.movies);
+            //console.log(this.state.moviesAttachedToStreamers)
+            //console.log(this.state.moviesAttachedToStreamers[0])
             // //console.log(this.state.streamers)
 
             // console.log(this.state.movies.results)
+
 
             return (
                 <div>
@@ -164,6 +210,7 @@ export class SearchTable extends React.Component {
                             <Button className={css.click} variant="primary">Search Again</Button>{' '}
                         </Link>
                     </h2>
+                    <h4>Page Number: {window.pageNum} out of {this.state.movies.total_pages}</h4>
                     <Table striped bordered hover>
                         <thead>
                             <tr>
@@ -201,14 +248,22 @@ export class SearchTable extends React.Component {
                                             thisHitsRentals.push("No rentals found");
                                         } else if (serviceFull.results.US && (serviceFull.results.US.flatrate || serviceFull.results.US.rent)) {
                                             if (serviceFull.results.US.flatrate) {
-                                                serviceFull.results.US.flatrate.forEach(service => {
-                                                    thisHitsStreamingServices.push(service.provider_name);
-                                                })
+                                                for (let f = 0; f < serviceFull.results.US.flatrate.length; f++) {
+                                                    if (f < serviceFull.results.US.flatrate.length - 1) {
+                                                        thisHitsStreamingServices.push(`${serviceFull.results.US.flatrate[f].provider_name}, `);
+                                                    } else {
+                                                        thisHitsStreamingServices.push(serviceFull.results.US.flatrate[f].provider_name)
+                                                    }
+                                                }
                                             } if (!serviceFull.results.US.flatrate) {
                                                 thisHitsStreamingServices.push("No streaming found");
                                             } if (serviceFull.results.US.rent) {
                                                 for (let i = 0; i < 3 && i < serviceFull.results.US.rent.length; i++) {
-                                                    thisHitsRentals.push(serviceFull.results.US.rent[i].provider_name);
+                                                    if (i < serviceFull.results.US.rent.length - 1 && i < 2) {
+                                                        thisHitsRentals.push(`${serviceFull.results.US.rent[i].provider_name}, `);
+                                                    } else {
+                                                        thisHitsRentals.push(`${serviceFull.results.US.rent[i].provider_name}`)
+                                                    }
                                                 }
                                             } if (!serviceFull.results.US.rent) {
                                                 thisHitsRentals.push("No rentals available");
@@ -230,7 +285,10 @@ export class SearchTable extends React.Component {
                             })}
                         </tbody>
                     </Table>
-                </div>
+                    <p>Page Number: {window.pageNum} out of {this.state.movies.total_pages}</p>
+                    {nextPageButton}
+                    {previousPageButton}
+                </div >
             )
         }
     }
