@@ -3,7 +3,6 @@ import css from './Home.module.css';
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import { LogInModal } from '../LogIn/LogInModal';
-
 const homeBackground = {
     backgroundImage: "url('./movies.jpg')",
     backgroundSize: 'cover',
