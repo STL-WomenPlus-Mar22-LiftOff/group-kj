@@ -28,6 +28,7 @@ export class SearchTable extends React.Component {
     //
 
     async componentDidMount() {
+        console.log(window.pageNum)
         //const [Post, setPost] = React.useState(null);
         document.body.style.background = "white";
         //these will be in every request
