@@ -5,31 +5,24 @@ import css from './WatchList.module.css'
 import { LogOut } from '../LogOut/LogOut';
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom';
-
 export const WatchList = () => {
-
     const [userMovieList, setUserMovies] = useState([]);
     const [userStreamers, setUserStreamers] = useState([])
-
     //console.log(window.userid)
     const bearer = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2MjcxMjdmMTRjYWNhODM5ZWY0MmQyMmEyM2RjZWZkZSIsInN1YiI6IjYzYWI5MTU3Njk5ZmI3MDBhNzU0NDEyNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.wMsItq5wH6JD3RkfdsW-zCVPjOCrLjY-NcQXfkirVD4";
     const apiUrl = "https://api.themoviedb.org/3/";
-    const apiKey = "?api_key=627127f14caca839ef42d22a23dcefde";
+    const apiKey = `?api_key=${process.env.REACT_APP_AUTH}`;
     const genreList = "genre/movie/list";
     const config = {
         headers: { Authorization: `Bearer ${bearer}` }
     }
-
     const navigate = useNavigate();
-
     const searchResultsClick = () => {
         navigate("/search-table");
     };
-
     const userProfileClick = () => {
         navigate("/user-profile");
     };
-
     useEffect(() => {
         document.body.style.background = "white";
         const movieRequests = [];
@@ -37,7 +30,6 @@ export const WatchList = () => {
         let userMovieData = [];
         let userStreamerData = [];
         let userGenreData = [];
-
         axios.get(`usermovieid/${window.userid}`)
             .then((results) => {
                 return results.data;
@@ -58,12 +50,8 @@ export const WatchList = () => {
                     setUserStreamers(userStreamerData);
                     return userStreamerData;
                 })
-
             })
     }, [])
-
-
-
     if (userMovieList.length === 0 || userStreamers.length === 0) {
         return (
             <div>
@@ -71,14 +59,12 @@ export const WatchList = () => {
                 <h2>It appears there is no watchlist...</h2>
             </div>
         )
-
     } else {
         console.log(userMovieList);
         let renderItems = [];
         for (let i = 0; i < userMovieList.length; i++) {
             let streamResponseEach;
             let genreResponseEach = "";
-
             if (!userStreamers[i].data.results.US) {
                 streamResponseEach = "No streamers found"
             } else {
@@ -93,20 +79,19 @@ export const WatchList = () => {
                     }
                     if (userStreamers[i].data.results.US.rent) {
                         streamResponseEach += "\nRent at:";
-                        for (let j = 0; j < 3; j++) {
+                        for (let j = 0; j < 3 && (j < userStreamers[i].data.results.US.rent.length); j++) {
                             streamResponseEach += ` ${userStreamers[i].data.results.US.rent[j].provider_name},`;
                         }
                     }
                 } else if (userStreamers[i].data.results.US.rent && !userStreamers[i].data.results.US.flatrate) {
                     streamResponseEach = "Rent at:"
-                    for (let j = 0; j < 5; j++) {
+                    for (let j = 0; j < 5 && (j < userStreamers[i].data.results.US.rent.length); j++) {
                         streamResponseEach += ` ${userStreamers[i].data.results.US.rent[j].provider_name},`;
                     }
                 } else {
                     streamResponseEach = "Only available for purchase"
                 }
             }
-
             for (let g = 0; g < userMovieList[i].data.genres.length; g++) {
                 if (g === userMovieList[i].data.genres.length - 1) {
                     genreResponseEach += userMovieList[i].data.genres[g].name;
@@ -117,8 +102,6 @@ export const WatchList = () => {
             if (!genreResponseEach) {
                 genreResponseEach = "No genre data found."
             }
-
-
             renderItems.push(
                 <tr key={`${userMovieList[i].data.id}`}>
                     <td key={`${userMovieList[i].data.id}name`}>{userMovieList[i].data.title}</td>
@@ -129,20 +112,17 @@ export const WatchList = () => {
                 </tr>
             )
         }
-
         return (
             console.log(userMovieList),
             <div>
-                
                 <div className={css.left}>
                     <h2 className={css.h2}>{window.user}'s Watch List:</h2>
                 </div>
                 <div className={css.right}>
-                <Button variant="primary" className={css.btn} onClick={searchResultsClick}>Search Results</Button>{' '}
+                    <Button variant="primary" className={css.btn} onClick={searchResultsClick}>Search Results</Button>{' '}
                     <Button variant="primary" className={css.btn} onClick={userProfileClick}>My Profile</Button>{' '}
                     <LogOut />
                 </div>
-
                 <Table striped bordered hover>
                     <thead>
                         <tr>
@@ -161,3 +141,9 @@ export const WatchList = () => {
         )
     }
 }
+
+
+
+
+
+
