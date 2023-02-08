@@ -93,13 +93,13 @@ export const WatchList = () => {
                     }
                     if (userStreamers[i].data.results.US.rent) {
                         streamResponseEach += "\nRent at:";
-                        for (let j = 0; j < 3; j++) {
+                        for (let j = 0; j < 3 && (j < userStreamers[i].data.results.US.rent.length); j++) {
                             streamResponseEach += ` ${userStreamers[i].data.results.US.rent[j].provider_name},`;
                         }
                     }
                 } else if (userStreamers[i].data.results.US.rent && !userStreamers[i].data.results.US.flatrate) {
                     streamResponseEach = "Rent at:"
-                    for (let j = 0; j < 5; j++) {
+                    for (let j = 0; j < 5 && (j < userStreamers[i].data.results.US.rent.length); j++) {
                         streamResponseEach += ` ${userStreamers[i].data.results.US.rent[j].provider_name},`;
                     }
                 } else {
@@ -133,12 +133,12 @@ export const WatchList = () => {
         return (
             console.log(userMovieList),
             <div>
-                
+
                 <div className={css.left}>
                     <h2 className={css.h2}>{window.user}'s Watch List:</h2>
                 </div>
                 <div className={css.right}>
-                <Button variant="primary" className={css.btn} onClick={searchResultsClick}>Search Results</Button>{' '}
+                    <Button variant="primary" className={css.btn} onClick={searchResultsClick}>Search Results</Button>{' '}
                     <Button variant="primary" className={css.btn} onClick={userProfileClick}>My Profile</Button>{' '}
                     <LogOut />
                 </div>
