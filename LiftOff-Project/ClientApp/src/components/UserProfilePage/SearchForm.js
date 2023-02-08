@@ -17,6 +17,7 @@ export function SearchBar() {
     };
 
     const handleSubmit = () => {
+        window.pageNum = 1;
         navigate('/search-table',);
     };
 
