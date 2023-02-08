@@ -27,8 +27,10 @@ export class SearchTable extends React.Component {
         //these will be in every request
         const bearer = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2MjcxMjdmMTRjYWNhODM5ZWY0MmQyMmEyM2RjZWZkZSIsInN1YiI6IjYzYWI5MTU3Njk5ZmI3MDBhNzU0NDEyNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.wMsItq5wH6JD3RkfdsW-zCVPjOCrLjY-NcQXfkirVD4";
         const apiUrl = "https://api.themoviedb.org/3/";
-        const apiKey = "?api_key=627127f14caca839ef42d22a23dcefde";
+        const apiKey = process.env.REACT_APP_AUTH;
+
         //this is the setup for the search results
+
         const searchMovies = "search/movie";
         const andQuer = "&query=";
         const andPage = "&page=";
@@ -52,15 +54,15 @@ export class SearchTable extends React.Component {
         const getAll = async () => {
             let promises = [];
             let movieGet = await Axios.get(
-                `${apiUrl}${searchMovies}${apiKey}${andQuer}${searchString}${andPage}1`,
+                `${apiUrl}${searchMovies}?api_key=${apiKey}${andQuer}${searchString}${andPage}1`,
                 config
             )
             let movieResults = movieGet.data
             movieResponse = movieResults;
-            let moviesAndStreamers = [Axios.get(`${apiUrl}${genreList}${apiKey}`, config)];
+            let moviesAndStreamers = [Axios.get(`${apiUrl}${genreList}?api_key=${apiKey}`, config)];
             let movieStreamerData = [];
             movieResponse.results.forEach(movieForStreamer => {
-                moviesAndStreamers.push(Axios.get(`${apiUrl}movie/${movieForStreamer.id}/watch/providers${apiKey}`, config))
+                moviesAndStreamers.push(Axios.get(`${apiUrl}movie/${movieForStreamer.id}/watch/providers?api_key=${apiKey}`, config))
             })
             let genreAndStreamResp = await Axios.all(moviesAndStreamers).then(finalResp => {
                 //console.log(finalResp)
