@@ -48,6 +48,7 @@ export const WatchList = () => {
                     movieRequests.push(axios.get(`${apiUrl}movie/${movieData[i].apiMovieId}?api_key=${apiKey}`, config))
                     streamerRequests.push(axios.get(`${apiUrl}movie/${movieData[i].apiMovieId}/watch/providers?api_key=${apiKey}`, config))
                 }
+                console.log(movieRequests)
                 axios.all(movieRequests).then(movieResults => {
                     userMovieData = movieResults;
                     setUserMovies(userMovieData);
